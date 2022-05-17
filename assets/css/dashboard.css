@@ -1,7 +1,10 @@
 body {
    font-size: .875rem;
 }
-
+a{
+   text-decoration: none;
+   color:#0a54a4;
+}
 .feather {
    width: 16px;
    height: 16px;
@@ -113,13 +116,30 @@ body {
    -moz-user-select: none;
    -ms-user-select: none;
    user-select: none;
- }
+}
 
- @media (min-width: 768px) {
+@media (min-width: 768px) {
    .bd-placeholder-img-lg {
-     font-size: 3.5rem;
+      font-size: 3.5rem;
    }
- }
+}
 
 
- 
+/* Actors */
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; display: flex;flex-wrap: wrap;width: 100%;}
+#sortable li { margin: 0 3px 3px 3px; font-size: 1em; height: 50px; width: 250px; border: solid #e6e4e4 1px;cursor: move; display: flex;}
+#sortable li.red { border: solid red 1px;}
+#sortable li img{ height: 100%; width: 40px;}
+#sortable li a { padding-left: 8px; align-self: center;}
+#sortable li span { padding-left: 8px; align-self: center;margin-left: auto; font-size: .8rem; font-weight: 400;}
+#sortable li span i { margin-right: 4px;}
+
+
+
+
+
+
+
+
+
+

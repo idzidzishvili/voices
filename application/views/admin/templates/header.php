@@ -8,6 +8,7 @@
    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
    <title>voices.ge | Dashboard</title>
    <link href="<?= base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css" />
+   <link href="<?= base_url('assets/css/fontawesome-all.min.css'); ?>" rel="stylesheet" type="text/css" />
    <link href="<?= base_url('assets/css/dashboard.css'); ?>" rel="stylesheet" type="text/css" />
 </head>
 
@@ -33,80 +34,69 @@
                   <li class="nav-item">
                      <a class="nav-link active" href="#">
                         <span data-feather="home"></span>
-                        Dashboard 
+                        მსახიობები 
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">
                         <span data-feather="file"></span>
-                        Orders
+                        მსახიობის კატეგორიები
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">
                         <span data-feather="shopping-cart"></span>
-                        Products
+                        ხმის კატეგორიები
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">
                         <span data-feather="users"></span>
-                        Customers
+                        ხმის ენები
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">
                         <span data-feather="bar-chart-2"></span>
-                        Reports
+                        ბანერი
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">
                         <span data-feather="layers"></span>
-                        Integrations
-                     </a>
-                  </li>
-               </ul>
-
-               <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                  <span>Saved reports</span>
-                  <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-                     <span data-feather="plus-circle"></span>
-                  </a>
-               </h6>
-               <ul class="nav flex-column mb-2">
-                  <li class="nav-item">
-                     <a class="nav-link" href="#">
-                        <span data-feather="file-text"></span>
-                        Current month
+                        სლაიდერი
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">
-                        <span data-feather="file-text"></span>
-                        Last quarter
+                        <span data-feather="layers"></span>
+                        სერვისები
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">
-                        <span data-feather="file-text"></span>
-                        Social engagement
+                        <span data-feather="layers"></span>
+                        პარტნიორები
                      </a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="#">
-                        <span data-feather="file-text"></span>
-                        Year-end sale
+                        <span data-feather="layers"></span>
+                        ფასის კალკულატორი
                      </a>
                   </li>
-               </ul>
+                  <li class="nav-item">
+                     <a class="nav-link" href="#">
+                        <span data-feather="layers"></span>
+                        კონტაქტი
+                     </a>
+                  </li>
+               </ul>               
             </div>
          </nav>
 
          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-               <h1 class="h2">Dashboard</h1>
-            </div>
+            
 
             
 
