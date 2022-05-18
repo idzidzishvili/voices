@@ -13,6 +13,10 @@ $lang['pageNotFound'] = "Страница не найдена";
 $lang['back2Home'] = "Вернуться домой";
 
 // Home
+$lang['priceCalculator'] = "Калькулятор цен";
+
+
+
 $lang['searchMoreThen'] = "Search Between More Then";
 $lang['openListings'] = "Open Listings";
 $lang['JobTitleKeywordPhrase'] = "Job Title, Keyword or Phrase";

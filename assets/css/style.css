@@ -1,5 +1,120 @@
-@import "https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap";
-@import "https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;display=swap";
+/* @import "https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap";
+@import "https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&amp;display=swap"; */
+/* @import "https://fonts.googleapis.com/css?family=Istok+Web@400;500;600;700;800&display=swap"; */
+
+
+@font-face {
+   font-family: 'Mark GEO CAPS';
+   src: url('../fonts/MarkGEOCAPS-Regular.eot');
+   src: url('../fonts/MarkGEOCAPS-Regular.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/MarkGEOCAPS-Regular.woff2') format('woff2'),
+       url('../fonts/MarkGEOCAPS-Regular.woff') format('woff'),
+       url('../fonts/MarkGEOCAPS-Regular.ttf') format('truetype'),
+       url('../fonts/MarkGEOCAPS-Regular.svg#MarkGEOCAPS-Regular') format('svg');
+   font-weight: normal;
+   font-style: normal;
+   font-display: swap;
+}
+@font-face {
+   font-family: 'Mark GEO CAPS';
+   src: url('../fonts/MarkGEOCAPS-Medium.eot');
+   src: url('../fonts/MarkGEOCAPS-Medium.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/MarkGEOCAPS-Medium.woff2') format('woff2'),
+       url('../fonts/MarkGEOCAPS-Medium.woff') format('woff'),
+       url('../fonts/MarkGEOCAPS-Medium.ttf') format('truetype'),
+       url('../fonts/MarkGEOCAPS-Medium.svg#MarkGEOCAPS-Medium') format('svg');
+   font-weight: 500;
+   font-style: normal;
+   font-display: swap;
+}
+@font-face {
+   font-family: 'Mark GEO CAPS';
+   src: url('../fonts/MarkGEOCAPS-SemiBold.eot');
+   src: url('../fonts/MarkGEOCAPS-SemiBold.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/MarkGEOCAPS-SemiBold.woff2') format('woff2'),
+       url('../fonts/MarkGEOCAPS-SemiBold.woff') format('woff'),
+       url('../fonts/MarkGEOCAPS-SemiBold.ttf') format('truetype'),
+       url('../fonts/MarkGEOCAPS-SemiBold.svg#MarkGEOCAPS-SemiBold') format('svg');
+   font-weight: 600;
+   font-style: normal;
+   font-display: swap;
+}
+@font-face {
+   font-family: 'Mark GEO CAPS';
+   src: url('../fonts/MarkGEOCAPS-Bold.eot');
+   src: url('../fonts/MarkGEOCAPS-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/MarkGEOCAPS-Bold.woff2') format('woff2'),
+       url('../fonts/MarkGEOCAPS-Bold.woff') format('woff'),
+       url('../fonts/MarkGEOCAPS-Bold.ttf') format('truetype'),
+       url('../fonts/MarkGEOCAPS-Bold.svg#MarkGEOCAPS-Bold') format('svg');
+   font-weight: bold;
+   font-style: normal;
+   font-display: swap;
+}
+
+
+@font-face {
+   font-family: 'Mark GEO';
+   src: url('../fonts/MarkGEO-Regular.eot');
+   src: url('../fonts/MarkGEO-Regular.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/MarkGEO-Regular.woff2') format('woff2'),
+       url('../fonts/MarkGEO-Regular.woff') format('woff'),
+       url('../fonts/MarkGEO-Regular.ttf') format('truetype'),
+       url('../fonts/MarkGEO-Regular.svg#MarkGEO-Regular') format('svg');
+   font-weight: normal;
+   font-style: normal;
+   font-display: swap;
+}
+@font-face {
+   font-family: 'Mark GEO';
+   src: url('../fonts/MarkGEO-Medium.eot');
+   src: url('../fonts/MarkGEO-Medium.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/MarkGEO-Medium.woff2') format('woff2'),
+       url('../fonts/MarkGEO-Medium.woff') format('woff'),
+       url('../fonts/MarkGEO-Medium.ttf') format('truetype'),
+       url('../fonts/MarkGEO-Medium.svg#MarkGEO-Medium') format('svg');
+   font-weight: 500;
+   font-style: normal;
+   font-display: swap;
+}
+@font-face {
+   font-family: 'Mark GEO';
+   src: url('../fonts/MarkGEO-SemiBold.eot');
+   src: url('../fonts/MarkGEO-SemiBold.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/MarkGEO-SemiBold.woff2') format('woff2'),
+       url('../fonts/MarkGEO-SemiBold.woff') format('woff'),
+       url('../fonts/MarkGEO-SemiBold.ttf') format('truetype'),
+       url('../fonts/MarkGEO-SemiBold.svg#MarkGEO-SemiBold') format('svg');
+   font-weight: 600;
+   font-style: normal;
+   font-display: swap;
+}
+@font-face {
+   font-family: 'Mark GEO';
+   src: url('../fonts/MarkGEO-Bold.eot');
+   src: url('../fonts/MarkGEO-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/MarkGEO-Bold.woff2') format('woff2'),
+       url('../fonts/MarkGEO-Bold.woff') format('woff'),
+       url('../fonts/MarkGEO-Bold.ttf') format('truetype'),
+       url('../fonts/MarkGEO-Bold.svg#MarkGEO-Bold') format('svg');
+   font-weight: bold;
+   font-style: normal;
+   font-display: swap;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 :root {
    --h1size: 50px;
@@ -8,15 +123,15 @@
    --h4size: 20px;
    --h5size: 18px;
    --h6size: 15px;
-   --bodysize: 16px;
+   /* --bodysize: 16px; */
    --rweight: 400;
    --mweight: 500;
    --sweight: 600;
    --bweight: 700;
    --eweight: 800;
    --bcweight: 900;
-   --pfamily: 'Roboto', sans-serif;
-   --sfamily: 'Oswald', sans-serif;
+   /* --pfamily: 'Roboto', sans-serif;
+   --sfamily: 'Oswald', sans-serif; */
    --text: #555555;
    --dark: #282A35;
    --white: #ffffff;
@@ -87,12 +202,32 @@ body {
 
 body {
    line-height: 28px;
-   color: var(--text);
-   font-size: var(--bodysize);
-   font-weight: var(--rweight);
-   font-family: var(--pfamily);
+   color: var(--text);   
    background-color: #16151a
 }
+
+
+.body-ge, .body-en{
+   font-size: 16px;
+   font-family: 'Mark GEO';
+}
+/*.body-ru{
+   font-size: 17px;
+   font-family: 'Mark GEO';
+}  */
+.caps-ge{
+   font-family: 'Mark GEO CAPS';
+}
+.caps-en, .caps-ru{
+   text-transform: uppercase;
+}
+.fw-400{font-weight: 400;}
+.fw-500{font-weight: 500;}
+.fw-600{font-weight: 600;}
+.fw-700{font-weight: 700;}
+
+
+
 
 p {
    margin-bottom: 0
@@ -512,7 +647,10 @@ h6 {
 }
 
 .lang-flag img{
-   height: 48px;
+   height: 36px;
+}
+.lang-flag.active{
+   opacity: 0.5;
 }
 
 .header-content {
@@ -531,6 +669,16 @@ h6 {
 
 .header-part {
    padding: 20px 0
+}
+
+.navbar-list a.social span{
+   width: 32px;
+   height: 32px;
+   border-radius: 50%;
+   background-color: #4f7a3b4d;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 
@@ -603,21 +751,17 @@ h6 {
    align-items: center;
    -webkit-box-pack: center;
    -ms-flex-pack: center;
-   justify-content: center
+   justify-content: center;
+   
 }
 
 .navbar-link:hover {
    color: #282a35
 }
 
-.navbar-link:hover i {
-   -webkit-transform: rotate(20deg);
-   transform: rotate(20deg)
-}
 
-.navbar-link i {
-   margin-right: 5px;
-   margin-top: -2px;
+
+.navbar-link {
    transition: all linear .3s;
    -webkit-transition: all linear .3s;
    -moz-transition: all linear .3s;
@@ -1311,7 +1455,7 @@ h6 {
 }
 
 .show-card {
-   margin-bottom: 30px;
+   margin-bottom: 20px;
    background-color: #fff;
    padding: 10px;
    border-radius: 10px
@@ -1328,12 +1472,16 @@ h6 {
 
 .show-content {
    position: relative;
-   margin-bottom: 38px
+   margin-bottom: 10px
 }
 
 .show-bg {
    overflow: hidden;
-   border-radius: 10px
+   border-radius: 10px;
+   height: 300px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 .show-bg img {
@@ -1431,6 +1579,19 @@ h6 {
    -webkit-box-pack: center;
    -ms-flex-pack: center;
    justify-content: center
+}
+
+div.actors>div{
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+.card-footer {
+   width: 100%;
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   justify-content: space-between
 }
 
 .team-card:hover .team-overlay {
@@ -2834,6 +2995,13 @@ h6 {
    overflow: hidden
 }
 
+.banner {
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+   overflow: hidden
+}
+
 .banner-oly {
    padding: 180px 0;
    background: linear-gradient(to top, rgba(0, 168, 107, 0.2), rgba(0, 0, 0, 0.1))
@@ -3018,6 +3186,28 @@ h6 {
    height: 3px;
    border-radius: 30px;
    background: #00a86b
+}
+
+.lang-menu{
+   
+}
+.lang-menu a, .lang-menu button{
+   color: #fefefe;
+   background-color: #333;
+   min-width: 120px;
+   height: 45px;
+   padding-left: 5px;
+   padding-right: 5px;
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 4px;
+   border:none;
+   transition-duration: .3s;
+}
+.lang-menu a.active, .lang-menu a:hover,
+.lang-menu button.active, .lang-menu button:hover{
+   background-color: #00cbff
 }
 
 @media(max-width:1199px) {
@@ -4224,5 +4414,20 @@ h6 {
 @media(min-width:768px) and (max-width:991px) {
    .contact-part {
       padding: 80px 0
+   }
+}
+
+
+.container-w{
+   width: 100%;
+   max-width: 1480px;
+} 
+
+
+@media (min-width: 1200px){
+   .col-xl-20p {
+      -ms-flex: 0 0 20%;
+      flex: 0 0 20%;
+      max-width: 20%;
    }
 }

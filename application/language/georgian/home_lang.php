@@ -13,6 +13,14 @@ $lang['pageNotFound'] = "გვერდი არ მოიძებნა";
 $lang['back2Home'] = "უკან დაბრუნება";
 
 // Home
+$lang['priceCalculator'] = "ფასის გამომთვლელი";
+
+
+
+
+
+
+
 $lang['searchMoreThen'] = "Search Between More Then";
 $lang['openListings'] = "Open Listings";
 $lang['JobTitleKeywordPhrase'] = "Job Title, Keyword or Phrase";

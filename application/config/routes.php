@@ -38,6 +38,15 @@ $route['translate_uri_dashes'] = FALSE;
 $route['404_override'] = 'error404';
 $route['home/add-application'] = 'home/addApplication';
 
+
+$route['^(ge|en|ru)/services'] = "home/services";
+$route['^(ge|en|ru)/about-us'] = "home/aboutus";
+$route['^(ge|en|ru)/blog']     = "home/blog";
+$route['^(ge|en|ru)/contact']  = "home/contact";
+$route['^(ge|en|ru)/test']  = "home/test";
+
+
+
 // example: '/en/about' -> use controller 'about'
 $route['^ge/(.+)$'] = "$1";
 $route['^en/(.+)$'] = "$1";

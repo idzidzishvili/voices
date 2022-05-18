@@ -1,68 +1,34 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Actor extends CI_Model
+class Mainmodel extends CI_Model
 {
 
 
-   public function getActors()
+   public function getLanguagesArr()
 	{
-      $query = "SELECT actors.*, COUNT(voices.actor_id) as voicesQty
-					FROM actors
-					LEFT JOIN voices ON actors.id=voices.actor_id 
-					GROUP BY actors.id 
-					ORDER BY sort";
+      $query = "SELECT * FROM voice_languages";
 		return $this->db->query($query)->result();
 	}
 
-
-
-
-	public function getActorsVoicesLangByLangID($id, $lang)
+	public function getSliderImages($lang)
 	{
-      $q = "SELECT 
-					actors.*, 
-					COUNT(voices.actor_id) as voicesQty, 
-					actor_language_prices.price as langPrice, 
-					actor_genders.name_$lang as gender
-				FROM actors
-				LEFT JOIN voices ON actors.id=voices.actor_id AND voices.voice_language_id=$id
-				LEFT JOIN actor_language_prices ON actors.id=actor_language_prices.actor_id AND actor_language_prices.language_id=$id
-				LEFT JOIN actor_genders ON actors.gender_id=actor_genders.id
-				GROUP BY actors.id, langPrice
-				HAVING voicesQty>0
-				ORDER BY sort";
-		$actors = $this->db->query($q)->result();
-
-		$q = "SELECT voices.*, voice_categories.name_$lang as voicecat
-				FROM voices
-				LEFT JOIN voice_categories ON voices.voice_category_id=voice_categories.id
-				WHERE voices.voice_language_id=$id";	
-		$voices = $this->db->query($q)->result();
-
-		$q = "SELECT actors.*,	GROUP_CONCAT(DISTINCT voice_languages.dom SEPARATOR ',') AS langs
-				FROM actors 
-				LEFT JOIN voices ON voices.actor_id=actors.id
-				LEFT JOIN voice_languages ON voices.voice_language_id=voice_languages.id
-				GROUP BY actors.id";
-		$diffLangs = $this->db->query($q)->result();
-
-		foreach($actors as $actor){
-			$actor->voices = [];
-			foreach($voices as $voice){
-				if($actor->id == $voice->actor_id)
-					array_push($actor->voices, $voice);
-			}
-			foreach($diffLangs as $diffLang){
-				if($actor->id == $diffLang->id){
-					$actor->diffLangs = $diffLang->langs;
-					break;
-				}
-			}
-		}
-
-		return $actors;
+		$query = "SELECT img_$lang FROM slider";
+		return $this->db->query($query)->result();
 	}
+
+	public function getActiveLanguages($lang)
+	{
+		$query = "SELECT name_$lang lang, dom FROM voice_languages WHERE active=1";
+		return $this->db->query($query)->result();
+	}
+
+	public function getGenders($lang)
+	{
+		$query = "SELECT id, name_$lang gender FROM actor_genders";
+		return $this->db->query($query)->result();
+	}
+
 
 
 
