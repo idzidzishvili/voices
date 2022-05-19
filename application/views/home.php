@@ -87,15 +87,15 @@
             <div class="col-lg-12 d-flex">
                <div class="lang-menu mr-3">                  
                   <?php foreach($voiceLanguages as $voiceLang): ?>                       
-                        <a href="<?= site_url('?voicelang='.$voiceLang->dom)?>" class="<?= $currentLanguage==$voiceLang->dom?'active':''?>" >
+                        <a href="<?= site_url('?voicelang='.$voiceLang->dom)?>" class="<?= $voiceLanguageId==$voiceLang->id?'active':''?>" >
                            <span><?=$voiceLang->lang?></span>
                         </a>                   
                   <?php endforeach;?> 
                </div>
                <div class="lang-menu controls ml-auto">                  
                   <?php foreach($genders as $gender): ?>                       
-                        <button type="button" href="#" class="" data-filter=".gender<?= $gender->id ?>">
-                           <span><?=$gender->gender?></span>
+                        <button type="button" class="gender-button" data-genderid="<?= $gender->id ?>" data-filter=".gender<?= $gender->id ?>">
+                           <?=$gender->gender?>
                         </button>                   
                   <?php endforeach;?> 
                </div>

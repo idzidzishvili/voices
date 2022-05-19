@@ -37,11 +37,21 @@ $(document).ready(function () {
         arrows: false
     });
 
-    var mixer = mixitup('#mixitupcontainer', {
-        controls: {
-            toggleDefault: 'none'
+    
+    var mixer = mixitup('#mixitupcontainer');
+    var lastGender = 0;
+    $('.gender-button').on('click', function(e){
+        var genderid = $(e.target).data('genderid');
+        if(lastGender == genderid){
+            $(e.target).removeClass('mixitup-control-active');
+            mixer.filter('all');
+            lastGender = 0;
+        }else{
+            lastGender = genderid;
         }
     });
+
+    
 
 
 });

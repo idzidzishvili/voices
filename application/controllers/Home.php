@@ -33,6 +33,7 @@ class Home extends CI_Controller
 		$data['sliders'] = $this->mainmodel->getSliderImages($this->currLang);
 		$data['voiceLanguages'] = $this->mainmodel->getActiveLanguages($this->currLang);
 		$data['currentLanguage'] = $this->currLang;
+		$data['voiceLanguageId'] = $langId;
 		$data['genders'] = $this->mainmodel->getGenders($this->currLang);
 
 

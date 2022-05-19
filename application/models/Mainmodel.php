@@ -19,7 +19,7 @@ class Mainmodel extends CI_Model
 
 	public function getActiveLanguages($lang)
 	{
-		$query = "SELECT name_$lang lang, dom FROM voice_languages WHERE active=1";
+		$query = "SELECT id, name_$lang lang, dom FROM voice_languages WHERE active=1";
 		return $this->db->query($query)->result();
 	}
 

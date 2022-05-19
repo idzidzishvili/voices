@@ -3204,9 +3204,10 @@ div.actors>div{
    border-radius: 4px;
    border:none;
    transition-duration: .3s;
+   font-size: .9rem;
 }
 .lang-menu a.active, .lang-menu a:hover,
-.lang-menu button.active, .lang-menu button:hover{
+.lang-menu button.mixitup-control-active, .lang-menu button:hover{
    background-color: #00cbff
 }
 
