@@ -7,46 +7,49 @@
    font-family: 'Mark GEO CAPS';
    src: url('../fonts/MarkGEOCAPS-Regular.eot');
    src: url('../fonts/MarkGEOCAPS-Regular.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/MarkGEOCAPS-Regular.woff2') format('woff2'),
-       url('../fonts/MarkGEOCAPS-Regular.woff') format('woff'),
-       url('../fonts/MarkGEOCAPS-Regular.ttf') format('truetype'),
-       url('../fonts/MarkGEOCAPS-Regular.svg#MarkGEOCAPS-Regular') format('svg');
+      url('../fonts/MarkGEOCAPS-Regular.woff2') format('woff2'),
+      url('../fonts/MarkGEOCAPS-Regular.woff') format('woff'),
+      url('../fonts/MarkGEOCAPS-Regular.ttf') format('truetype'),
+      url('../fonts/MarkGEOCAPS-Regular.svg#MarkGEOCAPS-Regular') format('svg');
    font-weight: normal;
    font-style: normal;
    font-display: swap;
 }
+
 @font-face {
    font-family: 'Mark GEO CAPS';
    src: url('../fonts/MarkGEOCAPS-Medium.eot');
    src: url('../fonts/MarkGEOCAPS-Medium.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/MarkGEOCAPS-Medium.woff2') format('woff2'),
-       url('../fonts/MarkGEOCAPS-Medium.woff') format('woff'),
-       url('../fonts/MarkGEOCAPS-Medium.ttf') format('truetype'),
-       url('../fonts/MarkGEOCAPS-Medium.svg#MarkGEOCAPS-Medium') format('svg');
+      url('../fonts/MarkGEOCAPS-Medium.woff2') format('woff2'),
+      url('../fonts/MarkGEOCAPS-Medium.woff') format('woff'),
+      url('../fonts/MarkGEOCAPS-Medium.ttf') format('truetype'),
+      url('../fonts/MarkGEOCAPS-Medium.svg#MarkGEOCAPS-Medium') format('svg');
    font-weight: 500;
    font-style: normal;
    font-display: swap;
 }
+
 @font-face {
    font-family: 'Mark GEO CAPS';
    src: url('../fonts/MarkGEOCAPS-SemiBold.eot');
    src: url('../fonts/MarkGEOCAPS-SemiBold.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/MarkGEOCAPS-SemiBold.woff2') format('woff2'),
-       url('../fonts/MarkGEOCAPS-SemiBold.woff') format('woff'),
-       url('../fonts/MarkGEOCAPS-SemiBold.ttf') format('truetype'),
-       url('../fonts/MarkGEOCAPS-SemiBold.svg#MarkGEOCAPS-SemiBold') format('svg');
+      url('../fonts/MarkGEOCAPS-SemiBold.woff2') format('woff2'),
+      url('../fonts/MarkGEOCAPS-SemiBold.woff') format('woff'),
+      url('../fonts/MarkGEOCAPS-SemiBold.ttf') format('truetype'),
+      url('../fonts/MarkGEOCAPS-SemiBold.svg#MarkGEOCAPS-SemiBold') format('svg');
    font-weight: 600;
    font-style: normal;
    font-display: swap;
 }
+
 @font-face {
    font-family: 'Mark GEO CAPS';
    src: url('../fonts/MarkGEOCAPS-Bold.eot');
    src: url('../fonts/MarkGEOCAPS-Bold.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/MarkGEOCAPS-Bold.woff2') format('woff2'),
-       url('../fonts/MarkGEOCAPS-Bold.woff') format('woff'),
-       url('../fonts/MarkGEOCAPS-Bold.ttf') format('truetype'),
-       url('../fonts/MarkGEOCAPS-Bold.svg#MarkGEOCAPS-Bold') format('svg');
+      url('../fonts/MarkGEOCAPS-Bold.woff2') format('woff2'),
+      url('../fonts/MarkGEOCAPS-Bold.woff') format('woff'),
+      url('../fonts/MarkGEOCAPS-Bold.ttf') format('truetype'),
+      url('../fonts/MarkGEOCAPS-Bold.svg#MarkGEOCAPS-Bold') format('svg');
    font-weight: bold;
    font-style: normal;
    font-display: swap;
@@ -57,46 +60,49 @@
    font-family: 'Mark GEO';
    src: url('../fonts/MarkGEO-Regular.eot');
    src: url('../fonts/MarkGEO-Regular.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/MarkGEO-Regular.woff2') format('woff2'),
-       url('../fonts/MarkGEO-Regular.woff') format('woff'),
-       url('../fonts/MarkGEO-Regular.ttf') format('truetype'),
-       url('../fonts/MarkGEO-Regular.svg#MarkGEO-Regular') format('svg');
+      url('../fonts/MarkGEO-Regular.woff2') format('woff2'),
+      url('../fonts/MarkGEO-Regular.woff') format('woff'),
+      url('../fonts/MarkGEO-Regular.ttf') format('truetype'),
+      url('../fonts/MarkGEO-Regular.svg#MarkGEO-Regular') format('svg');
    font-weight: normal;
    font-style: normal;
    font-display: swap;
 }
+
 @font-face {
    font-family: 'Mark GEO';
    src: url('../fonts/MarkGEO-Medium.eot');
    src: url('../fonts/MarkGEO-Medium.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/MarkGEO-Medium.woff2') format('woff2'),
-       url('../fonts/MarkGEO-Medium.woff') format('woff'),
-       url('../fonts/MarkGEO-Medium.ttf') format('truetype'),
-       url('../fonts/MarkGEO-Medium.svg#MarkGEO-Medium') format('svg');
+      url('../fonts/MarkGEO-Medium.woff2') format('woff2'),
+      url('../fonts/MarkGEO-Medium.woff') format('woff'),
+      url('../fonts/MarkGEO-Medium.ttf') format('truetype'),
+      url('../fonts/MarkGEO-Medium.svg#MarkGEO-Medium') format('svg');
    font-weight: 500;
    font-style: normal;
    font-display: swap;
 }
+
 @font-face {
    font-family: 'Mark GEO';
    src: url('../fonts/MarkGEO-SemiBold.eot');
    src: url('../fonts/MarkGEO-SemiBold.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/MarkGEO-SemiBold.woff2') format('woff2'),
-       url('../fonts/MarkGEO-SemiBold.woff') format('woff'),
-       url('../fonts/MarkGEO-SemiBold.ttf') format('truetype'),
-       url('../fonts/MarkGEO-SemiBold.svg#MarkGEO-SemiBold') format('svg');
+      url('../fonts/MarkGEO-SemiBold.woff2') format('woff2'),
+      url('../fonts/MarkGEO-SemiBold.woff') format('woff'),
+      url('../fonts/MarkGEO-SemiBold.ttf') format('truetype'),
+      url('../fonts/MarkGEO-SemiBold.svg#MarkGEO-SemiBold') format('svg');
    font-weight: 600;
    font-style: normal;
    font-display: swap;
 }
+
 @font-face {
    font-family: 'Mark GEO';
    src: url('../fonts/MarkGEO-Bold.eot');
    src: url('../fonts/MarkGEO-Bold.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/MarkGEO-Bold.woff2') format('woff2'),
-       url('../fonts/MarkGEO-Bold.woff') format('woff'),
-       url('../fonts/MarkGEO-Bold.ttf') format('truetype'),
-       url('../fonts/MarkGEO-Bold.svg#MarkGEO-Bold') format('svg');
+      url('../fonts/MarkGEO-Bold.woff2') format('woff2'),
+      url('../fonts/MarkGEO-Bold.woff') format('woff'),
+      url('../fonts/MarkGEO-Bold.ttf') format('truetype'),
+      url('../fonts/MarkGEO-Bold.svg#MarkGEO-Bold') format('svg');
    font-weight: bold;
    font-style: normal;
    font-display: swap;
@@ -202,29 +208,56 @@ body {
 
 body {
    line-height: 28px;
-   color: var(--text);   
+   color: var(--text);
    background-color: #16151a
 }
 
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+   box-shadow: inset 0 -1px 0 #ddd;
+}
 
-.body-ge, .body-en{
+
+.body-ge, .body-en {
    font-size: 16px;
    font-family: 'Mark GEO';
 }
+
 /*.body-ru{
    font-size: 17px;
    font-family: 'Mark GEO';
 }  */
-.caps-ge{
+.caps-ge {
    font-family: 'Mark GEO CAPS';
 }
-.caps-en, .caps-ru{
+
+.caps-en,
+.caps-ru {
    text-transform: uppercase;
 }
-.fw-400{font-weight: 400;}
-.fw-500{font-weight: 500;}
-.fw-600{font-weight: 600;}
-.fw-700{font-weight: 700;}
+
+.fw-400 {
+   font-weight: 400;
+}
+.fw-500 {
+   font-weight: 500;
+}
+.fw-600 {
+   font-weight: 600;
+}
+.fw-700 {
+   font-weight: 700;
+}
 
 
 
@@ -586,7 +619,7 @@ h6 {
 }
 
 .section {
-   padding: 115px 0 0
+   padding: 50px 0 0
 }
 
 .section-heading {
@@ -646,10 +679,11 @@ h6 {
    height: 48px;
 }
 
-.lang-flag img{
+.lang-flag img {
    height: 36px;
 }
-.lang-flag.active{
+
+.lang-flag.active {
    opacity: 0.5;
 }
 
@@ -671,7 +705,7 @@ h6 {
    padding: 20px 0
 }
 
-.navbar-list a.social span{
+.navbar-list a.social span {
    width: 32px;
    height: 32px;
    border-radius: 50%;
@@ -752,7 +786,7 @@ h6 {
    -webkit-box-pack: center;
    -ms-flex-pack: center;
    justify-content: center;
-   
+
 }
 
 .navbar-link:hover {
@@ -1454,28 +1488,28 @@ h6 {
    }
 }
 
-.show-card {
+.actor-card {
    margin-bottom: 20px;
    background-color: #fff;
    padding: 10px;
    border-radius: 10px
 }
 
-.show-card:hover .show-overlay {
-   background: rgba(0, 168, 107, .6)
+.actor-card:hover .actor-overlay {
+   background: rgba(26, 27, 27, 0.6)
 }
 
-.show-card:hover .show-bg img {
+.actor-card:hover .actor-bg img {
    -webkit-transform: scale(1.1);
    transform: scale(1.1)
 }
 
-.show-content {
+.actor-content {
    position: relative;
    margin-bottom: 10px
 }
 
-.show-bg {
+.actor-bg {
    overflow: hidden;
    border-radius: 10px;
    height: 300px;
@@ -1484,7 +1518,7 @@ h6 {
    align-items: center;
 }
 
-.show-bg img {
+.actor-bg img {
    width: 100%;
    border-radius: 10px;
    transition: all linear .3s;
@@ -1494,15 +1528,23 @@ h6 {
    -o-transition: all linear .3s
 }
 
-.show-overlay {
+.actor-overlay {
    position: absolute;
    top: 0;
    left: 0;
    width: 100%;
    height: 100%;
    border-radius: 10px;
-   background: rgba(0, 0, 0, .6)
+   background: rgba(0, 0, 0, .7);
+   transform: scale(0);
+   transition: .4s ease;
+   display: flex;
+   justify-content: center;
 }
+
+ .actor-content:hover .actor-overlay {
+   transform: scale(1);
+ }
 
 .show-active {
    position: absolute;
@@ -1568,7 +1610,7 @@ h6 {
    border: 5px solid #fff
 }
 
-.show-meta {
+.actor-meta {
    width: 100%;
    display: -webkit-box;
    display: -ms-flexbox;
@@ -1581,7 +1623,7 @@ h6 {
    justify-content: center
 }
 
-div.actors>div{
+div.actors>div {
    padding-left: 10px;
    padding-right: 10px;
 }
@@ -3188,10 +3230,10 @@ div.actors>div{
    background: #00a86b
 }
 
-.lang-menu{
-   
-}
-.lang-menu a, .lang-menu button{
+.lang-menu {}
+
+.lang-menu a,
+.lang-menu button {
    color: #fefefe;
    background-color: #333;
    min-width: 120px;
@@ -3202,12 +3244,15 @@ div.actors>div{
    justify-content: center;
    align-items: center;
    border-radius: 4px;
-   border:none;
+   border: none;
    transition-duration: .3s;
    font-size: .9rem;
 }
-.lang-menu a.active, .lang-menu a:hover,
-.lang-menu button.mixitup-control-active, .lang-menu button:hover{
+
+.lang-menu a.active,
+.lang-menu a:hover,
+.lang-menu button.mixitup-control-active,
+.lang-menu button:hover {
    background-color: #00cbff
 }
 
@@ -4419,16 +4464,67 @@ div.actors>div{
 }
 
 
-.container-w{
+.container-w {
    width: 100%;
    max-width: 1480px;
-} 
+}
 
 
-@media (min-width: 1200px){
+@media (min-width: 1200px) {
    .col-xl-20p {
       -ms-flex: 0 0 20%;
       flex: 0 0 20%;
       max-width: 20%;
+   }
+}
+
+/* sound loader */
+.spinner {
+   margin: auto;
+   width: 80px;
+   height: 50px;
+   align-self: center;
+   display: flex;
+   justify-content: center;
+}
+.spinner>div {
+   background: #f5f6f7;
+   height: 100%;
+   width: 5px;
+   float: left;
+   margin: 0 2px;
+   animation: stretch 2s infinite;
+   animation-timing-function: cubic-bezier(.62, .28, .23, .99);
+}
+.spinner .r1 {
+   animation-delay: -1s;
+}
+.spinner .r2 {
+   animation-delay: -.9s;
+}
+.spinner .r3 {
+   animation-delay: -.8s;
+}
+.spinner .r4 {
+   animation-delay: -.7s;
+}
+.spinner .r5 {
+   animation-delay: -.6s;
+}
+@keyframes stretch {
+   0%, 20%, 49% {
+      transform: scaleY(0.4);
+      background-color: #f5f6f7;
+   }
+   10% {
+      transform: scaleY(1.0);
+   }
+   50%, 70%, 100% {
+      transform: scaleY(0.4);
+      background-color: #bad19d;
+   }
+   60% {
+      transform: scaleY(1.0);
+      background-color: #bad19d;
    }
 }

@@ -73,16 +73,8 @@
 
 
 
-
    <section class="section show-part">
       <div class="container container-w">
-         <div class="row">
-            <div class="col-lg-12">
-               <div class="section-heading">
-                  <h2>Show Schedule2</h2>
-               </div>
-            </div>
-         </div>
          <div class="row mb-4">
             <div class="col-lg-12 d-flex">
                <div class="lang-menu mr-3">                  
@@ -94,7 +86,7 @@
                </div>
                <div class="lang-menu controls ml-auto">                  
                   <?php foreach($genders as $gender): ?>                       
-                        <button type="button" class="gender-button" data-genderid="<?= $gender->id ?>" data-filter=".gender<?= $gender->id ?>">
+                        <button type="button" class="gender-button" data-mixitup-control data-genderid="<?= $gender->id ?>" data-filter=".gender<?= $gender->id ?>">
                            <?=$gender->gender?>
                         </button>                   
                   <?php endforeach;?> 
@@ -102,26 +94,32 @@
             </div>
          </div>
 
-
                
          <div class="row actors" id="mixitupcontainer">
             <?php foreach($actors as $actor): ?>
                <div class="col-sm-6 col-md-4 col-lg-3 col-xl-20p mix gender<?= $actor->gender_id ?>">
-                  <div class="show-card">
-                     <div class="show-content">
-                        <div class="show-bg">
+                  <div class="actor-card" data-actorid="<?= $actor->id?>">
+                     <div class="actor-content">
+                        <div class="actor-bg">
                            <img src="<?= base_url('main/actors/Ciko_Inauri.jpg') ?>" alt="show-1">
                         </div>
-                        <div class="show-overlay">
-                           <!-- <div class="show-time">
-                              <p>07:00 - 09:00am</p>
-                              <h4>The Music Time</h4>
-                           </div> -->
+                        <div class="actor-overlay">
+                           <div class="spinner">
+                              <div class="r1"></div>
+                              <div class="r2"></div>
+                              <div class="r3"></div>
+                              <div class="r4"></div>
+                              <div class="r5"></div>
+                           </div>
+
                         </div>
                      </div>
-                     <div class="show-meta">
-                        <span class="pl-1"><?= 'V'.str_pad($actor->id, 3, "0", STR_PAD_LEFT) ?></span>
-                        <button class="bg-transparent border-0 ml-auto pr-1" type="button"data-toggle="modal" data-target="#priceCalcModal" data-actorprice="<?=$actor->langPrice?>">
+                     <div class="actor-meta">
+                        <span class="pl-1">
+                           <!-- <?= 'V'.str_pad($actor->id, 3, "0", STR_PAD_LEFT) ?> -->
+                           <?= $actor->name?>
+                        </span>
+                        <button class="bg-transparent border-0 ml-auto pr-1" type="button" data-toggle="modal" data-target="#priceCalcModal" data-actorprice="<?=$actor->langPrice?>">
                            <i class="fa fa-calculator"></i>
                         </button>
                      </div>
@@ -133,31 +131,61 @@
          <div class="modal fade" id="priceCalcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                <div class="modal-content">
+                  <input type="hidden" id="actor-price">
+                  <input type="hidden" id="lang-id" value="<?= $voiceLanguageId ?>">
                   <div class="modal-header bg-primary py-3">
-                  <h5 class="modal-title text-white"><?= lang('priceCalculator') ?></h5>
-                  <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                     <span aria-hidden="true">&times;</span>
-                  </button>
+                     <h5 class="modal-title text-white"><?= lang('priceCalculator') ?></h5>
+                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
                   </div>
-                  <div class="modal-body">
-                  <form>
-                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
-                     </div>
-                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
-                     </div>
-                  </form>
+                  <div class="modal-body">                 
+                     <label for="voice-text" class="col-form-label w-100 text-center">ერთ წუთამდე ქრონომეტრაჟის ტექსტის საფასური სტანდარტულია:</label>
+                     <textarea class="form-control mb-2" id="voice-text" rows="10"></textarea>
+                     <span id="chrono-results"></span>
                   </div>
                   <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Send message2</button>
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-primary">Send message2</button>
                   </div>
                </div>
             </div>
          </div>
+
+
+         <script>
+            var voiceText = document.getElementById("voice-text");
+            voiceText.addEventListener("keydown", function(e) {
+               var price = document.getElementById("actor-price").value;
+               var words = voiceText.value.trim().match(/(\s+)/g).length;
+               if(voiceText.value.length) {words++;}
+               var sumPrice;
+               var time = (words/2);
+               // console.log(words);
+               if(time<60){
+                  sumPrice = price;
+               }else if(time>=60 && time<120){
+                  sumPrice = parseInt(price) + parseInt(Math.round((time-60)*(price/200)));
+               }else if(time>=120 && time<180){
+                  sumPrice = parseInt(price) + parseInt(Math.round((time-120)*(price/250) + price/200*60));
+               }else if(time>=180 && time<240){
+                  sumPrice = parseInt(price) + parseInt(Math.round((time-180)*(price/333.33) + price/200*60 + price/250*60));
+               }else if(time>=240 && time<300){
+                  sumPrice = parseInt(price) + parseInt(Math.round((time-240)*(price/500) + price/200*60 + price/250*60 + price/333.33*60));
+               }else if(time>=300 && time<=360){
+                  sumPrice = parseInt(price) + parseInt(Math.round((time-300)*(price/1000) + price/200*60 + price/250*60 + price/333.33*60 + price/500*60));
+               }else{
+                  sumPrice = '6 წუთზე მეტი ქრონომეტრაჟის ტექსტის ჩაწერის შემთხვევაში დაგვიკავშირდით პირადად.';
+               }
+               if (time>360){
+                  document.getElementById("chrono-results").innerHTML = sumPrice
+               }else{
+                  var t = '@words@ სიტყვა; @time@ წამი; ფასი: @price@₾';
+                  t = t.replace('@words@', words).replace('@time@', time).replace('@price@', sumPrice);
+                  document.getElementById("chrono-results").innerHTML = t;
+               }
+            });
+         </script>
 
 
             

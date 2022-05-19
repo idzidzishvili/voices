@@ -34,4 +34,8 @@
 	<span class="caps-ru fw-700">Здравствуйте, как поживаете</span><br><br>
 </div>
 
+
+<div><audio controls><source src="/uploads/voices/01_ava_max_kings_and_queens_myzuka - Copy.mp3" type="audio/mpeg"></audio></div>
+<div><audio controls><source src="/uploads/voices/01_ava_max_kings_and_queens_myzuka - Copy.mp3" type="audio/mpeg"></audio></div>
+<div><audio controls><source src="/uploads/voices/01_ava_max_kings_and_queens_myzuka - Copy.mp3" type="audio/mpeg"></audio></div>
 <?php $this->load->view('footer');?>
