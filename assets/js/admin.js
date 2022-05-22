@@ -11,4 +11,9 @@ $(function () {
       }
    });
 
+   $('#deleteModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget);
+      $('#delete-link').attr('href', '/admin/delete'+button.data('page')+'/'+button.data('id'))
+   })
+
 });

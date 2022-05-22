@@ -12,7 +12,7 @@
       <ul id="sortable">
          <?php foreach ($actors as $actor):?>
             <li data-actor="<?= strToLower($actor->name) ?>">
-               <img src="<?= base_url('uploads/actors/'.'3.jpg')?>">
+               <img src="<?= base_url('uploads/actors/'.$actor->image)?>">
                <!-- <span class="ui-icon ui-icon-arrowthick-2-n-s"></span> -->
                <a href="<?= base_url('admin/actor/'.$actor->id)?>">
                   <?= $actor->name ?>

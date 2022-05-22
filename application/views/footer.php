@@ -84,6 +84,7 @@
    <script src="<?= base_url('assets/js/mixitup.min.js'); ?>"></script>
    <script src="<?= base_url('assets/js/venobox.js'); ?>"></script>
    <script src="<?= base_url('assets/js/player.js'); ?>"></script>
+   <script src="<?= base_url('assets/js/mediastyler.js'); ?>"></script>
    <script src="<?= base_url('assets/js/main.js'); ?>"></script>
 
 </body>

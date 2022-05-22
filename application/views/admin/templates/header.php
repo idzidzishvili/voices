@@ -9,7 +9,9 @@
    <title>voices.ge | Dashboard</title>
    <link href="<?= base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet" type="text/css" />
    <link href="<?= base_url('assets/css/fontawesome-all.min.css'); ?>" rel="stylesheet" type="text/css" />
+   <link href="<?= base_url('assets/css/summernote.min.css'); ?>" rel="stylesheet" type="text/css" />
    <link href="<?= base_url('assets/css/dashboard.css'); ?>" rel="stylesheet" type="text/css" />
+   <script src="<?= base_url('assets/js/jquery-3.6.0.min.js'); ?>"></script>
 </head>
 
 <body>
@@ -32,7 +34,7 @@
             <div class="sidebar-sticky pt-3">
                <ul class="nav flex-column">
                   <li class="nav-item">
-                     <a class="nav-link active" href="#">
+                     <a class="nav-link <?= $page=='actors'?'active':''?>" href="<?= base_url('admin/actors')?>">
                         <span data-feather="home"></span>
                         მსახიობები 
                      </a>
@@ -74,7 +76,7 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
+                     <a class="nav-link <?= $page=='partners'?'active':''?>" href="<?= base_url('admin/partners')?>">
                         <span data-feather="layers"></span>
                         პარტნიორები
                      </a>
@@ -86,7 +88,7 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
+                     <a class="nav-link <?= $page=='contact'?'active':''?>" href="<?= base_url('admin/contact')?>">
                         <span data-feather="layers"></span>
                         კონტაქტი
                      </a>

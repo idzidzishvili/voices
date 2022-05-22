@@ -4,3 +4,5 @@
           $lang = array();
 
 $lang['contact'] = "contact";
+$lang['fullName'] = "fullName";
+$lang['email'] = "email";

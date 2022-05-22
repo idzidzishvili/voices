@@ -11,6 +11,8 @@ a{
    vertical-align: text-bottom;
 }
 
+.table td{vertical-align: middle;}
+
 /*
   * Sidebar
   */

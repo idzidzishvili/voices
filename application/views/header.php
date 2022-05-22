@@ -56,17 +56,17 @@
                   <div class="navbar-slide">
                      <div class="slide-head"><a href="index.html#"><img src="<?= base_url('assets/img/logo.png') ?>" alt="logo"></a><button class="cencel"><i class="fas fa-times"></i></button></div>
                      <ul class="navbar-list">
-                        <li class="navbar-item"><a class="navbar-link" href="about.html"><span><i class="far fa-home"></i> <?= lang('home') ?> </span></a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="about.html"><span><i class="far fa-microphone"></i> <?= lang('services') ?> </span></a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="about.html"><span><i class="far fa-microphone"></i> <?= lang('aboutUs') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('/')?>"><span><i class="far fa-home"></i> <?= lang('home') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('services')?>"><span><i class="far fa-microphone"></i> <?= lang('services') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('about-us')?>"><span><i class="far fa-microphone"></i> <?= lang('aboutUs') ?> </span></a></li>
                         <li class="navbar-player">
                            <div class="player"><button class="player-btn" id="play-pause-button"><i class="far fa-play"></i></button></div>
                         </li>
-                        <li class="navbar-item"><a class="navbar-link" href="about.html"><span><i class="far fa-blog"></i> <?= lang('blog') ?> </span></a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="contact.html"><span><i class="far fa-user-headset"></i> <?= lang('contact') ?></span></a></li>
-                        <li class="navbar-item"><a class="navbar-link social" href="contact.html"><span><i class="fab fa-facebook-f"></i></span></a></li>
-                        <li class="navbar-item"><a class="navbar-link social" href="contact.html"><span><i class="fab fa-instagram"></i></span></a></li>
-                        <li class="navbar-item"><a class="navbar-link social" href="contact.html"><span><i class="fab fa-linkedin-in"></i></span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('blog')?>"><span><i class="far fa-blog"></i> <?= lang('blog') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('contact')?>"><span><i class="far fa-user-headset"></i> <?= lang('contact') ?></span></a></li>
+                        <li class="navbar-item"><a class="navbar-link social" href="https://www.facebook.com/Voicesge-106627137411297"><span><i class="fab fa-facebook-f"></i></span></a></li>
+                        <li class="navbar-item"><a class="navbar-link social" href="https://www.instagram.com/voices.ge/?fbclid=IwAR20j31n28k46yWBGTkPY4msUwZpzBeo2Q9_xddNnOwcI3O08TSbM_4pVws"><span><i class="fab fa-instagram"></i></span></a></li>
+                        <li class="navbar-item"><a class="navbar-link social" href="https://www.linkedin.com/company/voices-ge?fbclid=IwAR0VfnCsCbYHbhlx5V5fGSdA5rPBEoL6DgOmiTIRItGX_n-fyN44MjJTBJc"><span><i class="fab fa-linkedin-in"></i></span></a></li>
                      </ul>
                      <!-- <div class="navbar-btn"><a class="btn btn-outline" href="sponsor.html"><i class="far fa-paper-plane"></i><span>Join As A Sponsor</span></a></div> -->
                   </div>

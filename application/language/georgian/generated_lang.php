@@ -6,3 +6,6 @@
 $lang['home'] = "home";
 $lang['services'] = "services";
 $lang['contactUs'] = "contactUs";
+$lang['name'] = "name";
+$lang['email'] = "email";
+$lang['fullName'] = "fullName";

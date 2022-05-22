@@ -54,30 +54,49 @@ class Home extends CI_Controller
 
 	public function services()
 	{
-		// $this->load->view('home2');
+		$this->load->view('services');
 	}
 
 	public function aboutus()
 	{
-		// $this->load->view('home2');
+		$data['partners'] = $this->mainmodel->getPartners();
+		$this->load->view('about', $data);
 	}
 
 	public function blog()
 	{
-		// $this->load->view('home2');
+		$this->load->view('blog');
 	}
 
 	public function contact()
 	{
-		// $this->load->view('home2');
+		$this->load->view('contact');
 	}
+
+	public function send_mail() {       
+		$to_name = $this->input->post('name'); 
+		$to_phone = $this->input->post('phone');
+		$to_status = htmlspecialchars($this->input->post('status'));
+		$to_email = $this->input->post('email');
+ 
+		$this->email->from("info@voices.ge", 'Voices.Ge'); 
+		$this->email->to("info@voices.ge");
+		$this->email->subject('Voices.Ge :: შეტყობინება'); 
+		$this->email->message('სახელი გვარი: '.$to_name.' მობილურის ნომერი: '.$to_phone.'  ელექტრონული ფოსტა: '.$to_email.'  შეტყობინება: '.$to_status.'');  
+		//Send mail 
+		if($this->email->send()) 
+			$msg = "შეტყობინება წარატებით გაიგზავნა."; 
+		else 
+			$msg = "დაფიქსირდა შეცდომა. სცადეთ თავიდან";
+		$this->session->setFlashdata('msg', $msg);
+		$this->load->view('contact', compact('msg')); 
+	} 	
 
 
 	public function getSounds($actor, $voiceLang){
-
 		$sounds = $this->actor->getActorSoundByLangid($actor, $voiceLang, $this->lang->lang());
 		if($sounds)
-			echo json_encode(['status' => 'success', 'sounds' => $sounds ]);
+			echo json_encode(['status' => 'success', 'actor' => $actor, 'sounds' => $sounds ]);
 		else
 			echo json_encode(['status' => 'error' ]);
 		return;

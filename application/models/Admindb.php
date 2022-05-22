@@ -1,39 +1,103 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Mainmodel extends CI_Model
+class Admindb extends CI_Model
 {
 
 
-   public function getLanguagesArr()
+
+   public function getContactDetails(){
+		$q = "SELECT * FROM contact WHERE id=1";
+		return $this->db->query($q)->row();	
+	}
+
+	public function updateContact($address_ge, $address_en, $address_ru, $phone, $email, $location){
+		$this->db->where('id', 1)->update('contact', [
+			'address_ge'	=> $address_ge,
+			'address_en'	=> $address_en,
+			'address_ru'	=> $address_ru,
+			'phone'			=> $phone,
+			'email'			=> $email,
+			'location'		=> $location
+		]);
+		return $this->db->affected_rows();
+	}
+
+   public function getPartners(){
+		$q = "SELECT * FROM partners";
+		return $this->db->query($q)->result();	
+	}
+
+
+
+
+
+
+
+
+
+
+
+   public function getActors()
 	{
-      $query = "SELECT * FROM voice_languages";
+      $query = "SELECT actors.*, COUNT(voices.actor_id) as voicesQty
+					FROM actors
+					LEFT JOIN voices ON actors.id=voices.actor_id 
+					GROUP BY actors.id 
+					ORDER BY sort";
 		return $this->db->query($query)->result();
 	}
 
-	public function getSliderImages($lang)
+
+
+
+	public function getActorsVoicesLangByLangID($id, $lang)
 	{
-		$query = "SELECT img_$lang FROM slider";
-		return $this->db->query($query)->result();
+      $q = "SELECT 
+					actors.*, 
+					COUNT(voices.actor_id) as voicesQty, 
+					actor_language_prices.price as langPrice, 
+					actor_genders.name_$lang as gender
+				FROM actors
+				LEFT JOIN voices ON actors.id=voices.actor_id AND voices.voice_language_id=$id
+				LEFT JOIN actor_language_prices ON actors.id=actor_language_prices.actor_id AND actor_language_prices.language_id=$id
+				LEFT JOIN actor_genders ON actors.gender_id=actor_genders.id
+				GROUP BY actors.id, langPrice
+				HAVING voicesQty>0
+				ORDER BY sort";
+		$actors = $this->db->query($q)->result();
+
+		$q = "SELECT voices.*, voice_categories.name_$lang as voicecat
+				FROM voices
+				LEFT JOIN voice_categories ON voices.voice_category_id=voice_categories.id
+				WHERE voices.voice_language_id=$id";	
+		$voices = $this->db->query($q)->result();
+
+		$q = "SELECT actors.*,	GROUP_CONCAT(DISTINCT voice_languages.dom SEPARATOR ',') AS langs
+				FROM actors 
+				LEFT JOIN voices ON voices.actor_id=actors.id
+				LEFT JOIN voice_languages ON voices.voice_language_id=voice_languages.id
+				GROUP BY actors.id";
+		$diffLangs = $this->db->query($q)->result();
+
+		foreach($actors as $actor){
+			$actor->voices = [];
+			foreach($voices as $voice){
+				if($actor->id == $voice->actor_id)
+					array_push($actor->voices, $voice);
+			}
+			foreach($diffLangs as $diffLang){
+				if($actor->id == $diffLang->id){
+					$actor->diffLangs = $diffLang->langs;
+					break;
+				}
+			}
+		}
+
+		return $actors;
 	}
 
-	public function getActiveLanguages($lang)
-	{
-		$query = "SELECT id, name_$lang AS lang, dom FROM voice_languages WHERE active=1";
-		return $this->db->query($query)->result();
-	}
-
-	public function getGenders($lang)
-	{
-		$query = "SELECT id, name_$lang gender FROM actor_genders";
-		return $this->db->query($query)->result();
-	}
-
-	public function getPartners()
-	{
-		$query = "SELECT * FROM partners";
-		return $this->db->query($query)->result();
-	}
+	
 
 
 

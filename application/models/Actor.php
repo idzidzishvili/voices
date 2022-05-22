@@ -65,7 +65,7 @@ class Actor extends CI_Model
 	}
 
 	public function getActorSoundByLangid($actorId, $voiceLangId, $siteLang){
-		$q = "SELECT voices.voice_category_id, voices.filename, voice_categories.name_$siteLang
+		$q = "SELECT voices.voice_category_id, voices.filename, voice_categories.name_$siteLang as voiceCat
 				FROM voices
 				LEFT JOIN voice_categories ON voice_categories.id = voices.voice_category_id
 				WHERE actor_id = $actorId AND voice_language_id = $voiceLangId

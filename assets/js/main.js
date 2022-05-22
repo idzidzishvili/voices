@@ -24,6 +24,7 @@ $(window).on("scroll", function () {
 $(document).ready(function () {
     $('.venobox').venobox();
 
+    // main page slider
     $('.banner-slider').slick({
         dots: true,
         prevArrow: '<i class="far fa-arrow-right bannerprev"></i>',
@@ -37,24 +38,21 @@ $(document).ready(function () {
         arrows: false
     });
 
-    
-    var mixer = mixitup('#mixitupcontainer', {
-        selectors: {
-            control: '[data-mixitup-control]'
-        }
+    // partners, about-us
+    $('.sponsor-slider').slick({
+        prevArrow: '<i class="far fa-arrow-left bannernext"></i>',
+        nextArrow: '<i class="far fa-arrow-right bannerprev"></i>',
+        slidesToShow: 6,
+        responsive: [
+            {breakpoint: 992, settings: { slidesToShow: 4, slidesToScroll: 2 }},
+            {breakpoint: 800, settings: { slidesToShow: 3, slidesToScroll: 2 }},
+            {breakpoint: 600, settings: { slidesToShow: 2, slidesToScroll: 1 }},
+            {breakpoint: 450, settings: { slidesToShow: 1, slidesToScroll: 1 }}
+        ],
+        autoplay: true,
+        autoplaySpeed: 5000,
+        arrows: true
     });
-    var lastGender = 0;
-    $('.gender-button').on('click', function(e){
-        var genderid = $(e.target).data('genderid');
-        if(lastGender == genderid){
-            $(e.target).removeClass('mixitup-control-active');
-            mixer.filter('all');
-            lastGender = 0;
-        }else{
-            lastGender = genderid;
-        }
-    });
-
 
     $('.actor-card').on('mouseover', function(e){
         var target = $(e.target);
@@ -65,25 +63,10 @@ $(document).ready(function () {
                 $.ajax({
                     url: '/home/getSounds/'+$(e.target).data('actorid')+'/'+$('#lang-id').val(),
                     type: "get",
-                    beforeSend: function () {
-                        // target.find('.actor-overlay')
-                        //     .append($('<div/>').attr({'class':'spinner'})
-                        //         .append($('<div/>').attr({'class':'r1'}))
-                        //         .append($('<div/>').attr({'class':'r2'}))
-                        //         .append($('<div/>').attr({'class':'r3'}))
-                        //         .append($('<div/>').attr({'class':'r4'}))
-                        //         .append($('<div/>').attr({'class':'r5'}))
-                        //     )
-                    },
+                    beforeSend: function () {},
                     success: function (data) {
                         var response = JSON.parse(data)
                         if(response){
-                            // $('#userdetails').removeClass('d-none');
-                            // $('#avatar').html('');
-                            // $('#avatar').append($('<img/>').attr({'src': url+"/assets/images/users/"+response.userdata.avatar, 'class':"w-100"}));
-                            // $('#name').text(response.userdata.name);
-                            // $('#email').text(response.userdata.email);
-                            // $('#phone').text(response.userdata.phone);
                             console.log(response);
 
                             if(response.status=='success'){
@@ -93,10 +76,16 @@ $(document).ready(function () {
 
                                 )
                                 response.sounds.forEach(sound => {
-                                    target.find('.actor-overlay').append(
-                                        // '<div><audio controls><source src="'+sound.filename+'" type="audio/mpeg"></audio></div>'
-                                        '<div><audio controls><source src="/uploads/voices/01_ava_max_kings_and_queens_myzuka - Copy.mp3" type="audio/mpeg"></audio></div>'
-                                    )
+                                    try {
+                                        var div = $('<div></div>').attr({'class':''});
+                                        var audio = $('<audio/>').attr({'data-title':sound.voiceCat, 'data-audioid':'voice-'+response.actor+'-'+sound.voice_category_id, 'controls':'controls'});
+                                        var source = $('<source/>').attr({'src': "/uploads/voices/"+sound.filename, 'type':'audio/mpeg'});
+                                        target.find('.actor-overlay').append(div.append(audio.append(source)))
+                                        audio.stylise();
+                                    }
+                                    catch(err) {
+                                        console.log(err.message);
+                                    }
                                 });
                             }
                         }
@@ -105,6 +94,9 @@ $(document).ready(function () {
             }
         }
     });
+
+
+    $('audio, video').stylise();
 
 
 });
