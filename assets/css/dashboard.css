@@ -137,8 +137,24 @@ a{
 #sortable li span i { margin-right: 4px;}
 
 
-
-
+/* Modal */
+.modal .close {
+   line-height: .8
+};
+.modal-header {
+   /* padding: 0.7rem 0.7rem; */
+   border-bottom: none;
+}
+.modal .modal-body {
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+}
+.modal-footer{
+   border-top: none;
+}
+.modal-footer a, .modal-footer button{
+   font-size: .95rem;
+}
 
 
 

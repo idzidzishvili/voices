@@ -60,6 +60,7 @@ class Home extends CI_Controller
 	public function aboutus()
 	{
 		$data['partners'] = $this->mainmodel->getPartners();
+		$data['aboutUs'] = $this->mainmodel->getAboutUs();
 		$this->load->view('about', $data);
 	}
 

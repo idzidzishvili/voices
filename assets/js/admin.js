@@ -16,4 +16,13 @@ $(function () {
       $('#delete-link').attr('href', '/admin/delete'+button.data('page')+'/'+button.data('id'))
    })
 
+   $('.summernote').summernote({
+      toolbar: [
+        // [groupName, [list of button]]
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['para', ['ul', 'ol', 'paragraph']],
+      ],
+      height: 200
+    });
+
 });

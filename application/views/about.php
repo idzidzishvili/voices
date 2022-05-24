@@ -1,52 +1,57 @@
 <?php $this->load->view('header'); ?>
 
-
-
-
 <section>
    <img src="<?= base_url('assets/images/studio.jpg') ?>" class="w-100">
 </section>
 
-
-
-
 <div class="container-fluid">
-
    <div class="row pt-5">
-      <div class="col-xs-12 col-sm-6 col-lg-3">
-         <img src="<?= base_url('assets/images/about_experience.jpg') ?>" class="w-100">
-         <div class="servie-description">
-
+       <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
+         <div class="about-service">
+            <img src="<?= base_url('assets/images/about_technical.png') ?>" class="w-100">
+            <div class="servie-description">
+               <h4 class="caps-<?= $this->lang->lang() ?>"><?= $aboutUs[1]->{'name_'.$this->lang->lang()} ?></h4>
+               <span></span>
+               <p><?= $aboutUs[1]->{'text_'.$this->lang->lang()} ?></p>
+            </div>
          </div>
       </div>
       <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
          <div class="about-service">
             <img src="<?= base_url('assets/images/about_technical.png') ?>" class="w-100">
             <div class="servie-description">
-               <h4 class="caps-<?= $this->lang->lang() ?>">რატომ გვენდობიან?</h4>
+               <h4 class="caps-<?= $this->lang->lang() ?>"><?= $aboutUs[2]->{'name_'.$this->lang->lang()} ?></h4>
                <span></span>
-               <p>ჩვენი კომპანიის მისიაა უმაღლესი ხარისხის აუდიო პროდუქციის შემუშავება და წარმოება. ჩვენი სერვისების არჩევისას, თქვენ ირჩევთ სიმშვიდეს და 100%-ით გარანტირებულ შედეგს. თქვენ დღე-ღამის ნებისმიერ მონაკვეთში შეგიძლიათ დაგვიკავშირდეთ ნომერზე (+995) 596 366 366. ინფორმაცია ჩვენი პარტნიორების შესახებ შეგიძლიათ იხილოთ "ჩვენი პარტნიორების" განყოფილებაში.</p>
+               <p><?= $aboutUs[2]->{'text_'.$this->lang->lang()} ?></p>
             </div>
          </div>
       </div>
-      <div class="col-xs-12 col-sm-6 col-lg-3">
-         <img src="<?= base_url('assets/images/about_trust.png') ?>" class="w-100">
-         <div class="servie-description">
-
+      <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
+         <div class="about-service">
+            <img src="<?= base_url('assets/images/about_technical.png') ?>" class="w-100">
+            <div class="servie-description">
+               <h4 class="caps-<?= $this->lang->lang() ?>"><?= $aboutUs[3]->{'name_'.$this->lang->lang()} ?></h4>
+               <span></span>
+               <p><?= $aboutUs[3]->{'text_'.$this->lang->lang()} ?></p>
+            </div>
          </div>
       </div>
-      <div class="col-xs-12 col-sm-6 col-lg-3">
-         <img src="<?= base_url('assets/images/about_choose.png') ?>" class="w-100">
-         <div class="servie-description">
-
+      <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
+         <div class="about-service">
+            <img src="<?= base_url('assets/images/about_technical.png') ?>" class="w-100">
+            <div class="servie-description">
+               <h4 class="caps-<?= $this->lang->lang() ?>"><?= $aboutUs[4]->{'name_'.$this->lang->lang()} ?></h4>
+               <span></span>
+               <p><?= $aboutUs[4]->{'text_'.$this->lang->lang()} ?></p>
+            </div>
          </div>
       </div>
    </div>
 
    <div class="row mb-2">
-      <div class="our-direction">
-         <div class="direction-title mb-3 font-italic caps-<?= $this->lang->lang() ?>">ჩვენი მიმართულება</div>
-         <p>ჩვენი მიმართულებებია: ვიდეოს გახმოვანება; აუდიო სარეკლამო რგოლის დამზადება; სარეკლამო ხმა, ქოლ ცენტრის ხმა, ავტომოპასუხისთვის ხმის ჩაწერა; ვოკალის ჩაწერა, ვოისოვერი, დუბლირება, რეკლამის ადაპტაცია, სახელმძღვანელოს გახმოვანება.</p>
+      <div class="our-direction w-100">
+         <div class="direction-title mb-3 font-italic caps-<?= $this->lang->lang() ?>"><?= $aboutUs[0]->{'name_'.$this->lang->lang()} ?></div>
+         <p><?= $aboutUs[0]->{'text_'.$this->lang->lang()} ?></p>
       </div>
    </div>
 

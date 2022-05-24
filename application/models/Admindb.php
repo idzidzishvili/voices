@@ -11,6 +11,12 @@ class Admindb extends CI_Model
 		return $this->db->query($q)->row();	
 	}
 
+	public function getAboutUsDetails(){
+		$q = "SELECT * FROM about";
+		return $this->db->query($q)->result();	
+	}
+
+
 	public function updateContact($address_ge, $address_en, $address_ru, $phone, $email, $location){
 		$this->db->where('id', 1)->update('contact', [
 			'address_ge'	=> $address_ge,
@@ -28,9 +34,27 @@ class Admindb extends CI_Model
 		return $this->db->query($q)->result();	
 	}
 
+	public function getPartner($id){
+		$q = "SELECT * FROM partners WHERE id=$id";
+		return $this->db->query($q)->row();	
+	}
 
+	public function addPartner($url, $filename){
+		$this->db->insert('partners', [
+			'url' => $url,
+			'img' => $filename,
+		]);
+		return $this->db->insert_id();
+	}
 
+	public function upatePartner($id, $array){
+		return $this->db->where('id', $id)->update('partners', $array);
+	}
 
+	public function deletePartner($id){
+		return $this->db->where('id', $id)->delete('partners');
+	}
+	
 
 
 

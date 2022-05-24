@@ -1,7 +1,7 @@
 <?php $this->load->view('admin/templates/header'); ?>
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
    <h3 class="h3">პარტნიორები</h3>
-   <a href="#" class="btn btn-success btn-sm"><i class="fa fa-plus mr-1"></i>დამატება</a>
+   <a href="<?= base_url('admin/addPartner')?>" class="btn btn-success btn-sm"><i class="fa fa-plus mr-1"></i>დამატება</a>
 </div>
 
 <div class="container-fluid ">

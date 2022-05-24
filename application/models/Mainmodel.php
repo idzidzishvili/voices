@@ -35,6 +35,11 @@ class Mainmodel extends CI_Model
 		return $this->db->query($query)->result();
 	}
 
+	public function getAboutUs()
+	{
+		$query = "SELECT * FROM about";
+		return $this->db->query($query)->result();
+	}
 
 
 	

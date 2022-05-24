@@ -82,6 +82,12 @@
                      </a>
                   </li>
                   <li class="nav-item">
+                     <a class="nav-link <?= $page=='aboutus'?'active':''?>" href="<?= base_url('admin/aboutus')?>">
+                        <span data-feather="layers"></span>
+                        ჩვენს შესახებ
+                     </a>
+                  </li>
+                  <li class="nav-item">
                      <a class="nav-link" href="#">
                         <span data-feather="layers"></span>
                         ფასის კალკულატორი
