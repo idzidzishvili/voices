@@ -11,6 +11,7 @@ class Home extends CI_Controller
 		parent::__construct();
 		$this->load->model(['actor', 'mainmodel']);
 		$this->lang->load('home');
+		$this->load->helper('form');
 		$langs = ['ge', 'en', 'ru'];
 		if(in_array($this->lang->lang(), $langs)) $this->siteLanguage = $this->lang->lang();
 		else $this->siteLanguage = 'ge';
@@ -42,20 +43,12 @@ class Home extends CI_Controller
 	}
 
 
-
-
-
-
-
-
-
-
-
-
 	public function services()
 	{
-		$this->load->view('services');
+		$data['services'] = $this->mainmodel->getServices();
+		$this->load->view('services', $data);
 	}
+
 
 	public function aboutus()
 	{
@@ -64,16 +57,20 @@ class Home extends CI_Controller
 		$this->load->view('about', $data);
 	}
 
+
 	public function blog()
 	{
 		$this->load->view('blog');
 	}
 
+
 	public function contact()
 	{
-		$this->load->view('contact');
+		$data['contact'] = $this->mainmodel->getContactDetails();
+		$this->load->view('contact', $data);
 	}
 
+	
 	public function send_mail() {       
 		$to_name = $this->input->post('name'); 
 		$to_phone = $this->input->post('phone');

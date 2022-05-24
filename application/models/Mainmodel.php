@@ -41,6 +41,16 @@ class Mainmodel extends CI_Model
 		return $this->db->query($query)->result();
 	}
 
+	public function getServices(){
+		$q = "SELECT * FROM services";
+		return $this->db->query($q)->result();	
+	}
+
+	public function getContactDetails(){
+		$q = "SELECT * FROM contact WHERE id=1";
+		return $this->db->query($q)->row();	
+	}
+
 
 	
 

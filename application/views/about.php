@@ -8,7 +8,7 @@
    <div class="row pt-5">
        <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
          <div class="about-service">
-            <img src="<?= base_url('assets/images/about_technical.png') ?>" class="w-100">
+            <img src="<?= base_url('assets/images/about/'.$aboutUs[1]->img) ?>" class="w-100">
             <div class="servie-description">
                <h4 class="caps-<?= $this->lang->lang() ?>"><?= $aboutUs[1]->{'name_'.$this->lang->lang()} ?></h4>
                <span></span>
@@ -18,7 +18,7 @@
       </div>
       <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
          <div class="about-service">
-            <img src="<?= base_url('assets/images/about_technical.png') ?>" class="w-100">
+            <img src="<?= base_url('assets/images/about/'.$aboutUs[2]->img) ?>" class="w-100">
             <div class="servie-description">
                <h4 class="caps-<?= $this->lang->lang() ?>"><?= $aboutUs[2]->{'name_'.$this->lang->lang()} ?></h4>
                <span></span>
@@ -28,7 +28,7 @@
       </div>
       <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
          <div class="about-service">
-            <img src="<?= base_url('assets/images/about_technical.png') ?>" class="w-100">
+            <img src="<?= base_url('assets/images/about/'.$aboutUs[3]->img) ?>" class="w-100">
             <div class="servie-description">
                <h4 class="caps-<?= $this->lang->lang() ?>"><?= $aboutUs[3]->{'name_'.$this->lang->lang()} ?></h4>
                <span></span>
@@ -38,7 +38,7 @@
       </div>
       <div class="col-xs-12 col-sm-6 col-lg-3 mb-4">
          <div class="about-service">
-            <img src="<?= base_url('assets/images/about_technical.png') ?>" class="w-100">
+            <img src="<?= base_url('assets/images/about/'.$aboutUs[4]->img) ?>" class="w-100">
             <div class="servie-description">
                <h4 class="caps-<?= $this->lang->lang() ?>"><?= $aboutUs[4]->{'name_'.$this->lang->lang()} ?></h4>
                <span></span>

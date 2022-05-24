@@ -34,12 +34,8 @@
 					</i>
                </div>
                <div class="service-box">
-                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>">სარეკლამო რგოლი</div>
-                  <div class="service-description">
-                     ხარისხიანი სარეკლამო რგოლი არის ერთ-ერთი საუკეთესო საშუალება, მიიპყროთ პოტენციური კლიენტების ყურადღება და 
-                     წარადგინოთ თქვენი პროდუქცია, ან მომსახურება. 
-                     იმისათვის, რომ შევქმნათ ხარისხიანი სარეკლამო აუდიო რგოლი, ჩვენ მხოლოდ თანამედროვე ტექნოლოგიებს ვიყენებთ. 
-                  </div>
+                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>"><?= $services[0]->{'name_'.$this->lang->lang()} ?></div>
+                  <div class="service-description"><?= $services[0]->{'text_'.$this->lang->lang()} ?></div>
                </div>
             </div>
 
@@ -59,12 +55,8 @@
                   </i>
                </div>
                <div class="service-box">
-                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>">სარეკლამო რგოლი</div>
-                  <div class="service-description">
-                     ხარისხიანი სარეკლამო რგოლი არის ერთ-ერთი საუკეთესო საშუალება, მიიპყროთ პოტენციური კლიენტების ყურადღება და
-                      წარადგინოთ თქვენი პროდუქცია, ან მომსახურება. 
-                     იმისათვის, რომ შევქმნათ ხარისხიანი სარეკლამო აუდიო რგოლი, ჩვენ მხოლოდ თანამედროვე ტექნოლოგიებს ვიყენებთ. -->
-                  </div>
+                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>"><?= $services[1]->{'name_'.$this->lang->lang()} ?></div>
+                  <div class="service-description"><?= $services[1]->{'text_'.$this->lang->lang()} ?></div>
                </div>
             </div>
 
@@ -80,12 +72,8 @@
                   </i>
                </div>
                <div class="service-box">
-                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>">სარეკლამო რგოლი</div>
-                  <div class="service-description">
-                     ხარისხიანი სარეკლამო რგოლი არის ერთ-ერთი საუკეთესო საშუალება, მიიპყროთ პოტენციური კლიენტების ყურადღება და
-                      წარადგინოთ თქვენი პროდუქცია, ან მომსახურება. 
-                     იმისათვის, რომ შევქმნათ ხარისხიანი სარეკლამო აუდიო რგოლი, ჩვენ მხოლოდ თანამედროვე ტექნოლოგიებს ვიყენებთ. -->
-                  </div>
+                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>"><?= $services[2]->{'name_'.$this->lang->lang()} ?></div>
+                  <div class="service-description"><?= $services[2]->{'text_'.$this->lang->lang()} ?></div>
                </div>
             </div>
 
@@ -99,12 +87,8 @@
                   </i>
                </div>
                <div class="service-box">
-                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>">სარეკლამო რგოლი</div>
-                  <div class="service-description">
-                     ხარისხიანი სარეკლამო რგოლი არის ერთ-ერთი საუკეთესო საშუალება, მიიპყროთ პოტენციური კლიენტების ყურადღება და
-                      წარადგინოთ თქვენი პროდუქცია, ან მომსახურება. 
-                     იმისათვის, რომ შევქმნათ ხარისხიანი სარეკლამო აუდიო რგოლი, ჩვენ მხოლოდ თანამედროვე ტექნოლოგიებს ვიყენებთ. -->
-                  </div>
+                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>"><?= $services[3]->{'name_'.$this->lang->lang()} ?></div>
+                  <div class="service-description"><?= $services[3]->{'text_'.$this->lang->lang()} ?></div>
                </div>
             </div>
 
@@ -119,12 +103,8 @@
                   </i>
                </div>
                <div class="service-box">
-                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>">სარეკლამო რგოლი</div>
-                  <div class="service-description">
-                     ხარისხიანი სარეკლამო რგოლი არის ერთ-ერთი საუკეთესო საშუალება, მიიპყროთ პოტენციური კლიენტების ყურადღება და
-                      წარადგინოთ თქვენი პროდუქცია, ან მომსახურება. 
-                     იმისათვის, რომ შევქმნათ ხარისხიანი სარეკლამო აუდიო რგოლი, ჩვენ მხოლოდ თანამედროვე ტექნოლოგიებს ვიყენებთ. -->
-                  </div>
+                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>"><?= $services[4]->{'name_'.$this->lang->lang()} ?></div>
+                  <div class="service-description"><?= $services[4]->{'text_'.$this->lang->lang()} ?></div>
                </div>
             </div>
 
@@ -148,12 +128,8 @@
                   </i>
                </div>
                <div class="service-box">
-                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>">სარეკლამო რგოლი</div>
-                  <div class="service-description">
-                     ხარისხიანი სარეკლამო რგოლი არის ერთ-ერთი საუკეთესო საშუალება, მიიპყროთ პოტენციური კლიენტების ყურადღება და
-                      წარადგინოთ თქვენი პროდუქცია, ან მომსახურება. 
-                     იმისათვის, რომ შევქმნათ ხარისხიანი სარეკლამო აუდიო რგოლი, ჩვენ მხოლოდ თანამედროვე ტექნოლოგიებს ვიყენებთ. -->
-                  </div>
+                  <div class="service-title fw-700 caps-<?= $this->lang->lang() ?>"><?= $services[5]->{'name_'.$this->lang->lang()} ?></div>
+                  <div class="service-description"><?= $services[5]->{'text_'.$this->lang->lang()} ?></div>
                </div>
             </div>
 
@@ -164,36 +140,36 @@
 
    <div class="row pt-5 ">
       <div class="center-title w-100 mb-4 mb-lg-5">
-         <h2 class="w-100 text-center caps-<?= $this->lang->lang() ?> steps-header">შეკვეთის პროცესი</h2>
+         <h2 class="w-100 text-center caps-<?= $this->lang->lang() ?> steps-header"><?= lang('orderProcess')?></h2>
       </div>
 
       <div class="order-steps">
          <div class="order-step">
             <span>01</span>
             <div class="step-description">
-               <h4 class="px-2">მომსახურების შეკვეთა</h4>
-               <p class="px-2">შეკვეთის დაწყებისთვის, ხმების ბაზიდან ვირჩევთ სასურველ ხმას და, საიტზე ჩაშენებული კალკულატორის საშუალებით, ვითვლით მომსახურების საფასურს.</p>
+               <h4 class="px-2"><?= $services[6]->{'name_'.$this->lang->lang()} ?></h4>
+               <p class="px-2"><?= $services[6]->{'text_'.$this->lang->lang()} ?></p>
             </div>
          </div>
          <div class="order-step">
             <span>02</span>
             <div class="step-description">
-               <h4 class="px-2">შეკვეთის გაგრძელება</h4>
-               <p class="px-2">ხმის ავტორის შერჩევის შემდეგ, შეკვეთის გაგრძელებისთვის, გამოგვიგზავნეთ ჩასაწერი ტექსტი, არჩეული ხმის ავტორის ნომერი და თქვენი ორგანიზაციის რეკვიზიტები ელ. ფოსტის მისამართზე info@voices.ge</p>
+               <h4 class="px-2"><?= $services[7]->{'name_'.$this->lang->lang()} ?></h4>
+               <p class="px-2"><?= $services[7]->{'text_'.$this->lang->lang()} ?></p>
             </div>
          </div>
          <div class="order-step">
             <span>03</span>
             <div class="step-description">
-               <h4 class="px-2">ინვოისი</h4>
-               <p class="px-2">ამის შემდეგ, ჩვენ დავუკავშირდებით ხმის ავტორს და დავიბარებთ ჩაწერაზე სტუდიაში. პარალელურად, თქვენ გამოგიგზავნით ინვოისს და ინფორმაციას, ჩაწერის ზუსტი დროის შესახებ.</p>
+               <h4 class="px-2"><?= $services[8]->{'name_'.$this->lang->lang()} ?></h4>
+               <p class="px-2"><?= $services[8]->{'text_'.$this->lang->lang()} ?></p>
             </div>
          </div>
          <div class="order-step">
             <span>04</span>
             <div class="step-description">
-               <h4 class="px-2">შეკვეთის დასრულება</h4>
-               <p class="px-2">მომსახურების საფასურის გადახდის შემდეგ, ჩვენ ვიწყებთ ჩაწერის პროცესს. დამუშავებულ აუდიო ფაილს შეკვეთიდან მაქსიმუმ ორი სამუშაო დღის ვადაში მიიღებთ.</p>
+               <h4 class="px-2"><?= $services[9]->{'name_'.$this->lang->lang()} ?></h4>
+               <p class="px-2"><?= $services[9]->{'text_'.$this->lang->lang()} ?></p>
             </div>
          </div>
       </div>

@@ -70,7 +70,7 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
+                     <a class="nav-link <?= $page=='services'?'active':''?>" href="<?= base_url('admin/services')?>">
                         <span data-feather="layers"></span>
                         სერვისები
                      </a>

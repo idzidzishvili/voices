@@ -4,7 +4,7 @@
 </div>
 
 <div class="container-fluid px-0">
-   <?= form_open_multipart(base_url('admin/about')) ?>
+   <?= form_open_multipart(base_url('admin/aboutus')) ?>
 
       <div class="form-group row mb-4">
          <div class="col-sm-4">
@@ -170,6 +170,52 @@
             </div>
          </div>
       </div>
+
+      <div class="form-group row">
+         <label class="col-sm-2 col-form-label">ჩვენი გამოცდილება</label>
+         <div class="col-xs-2 col-1">
+            <img src="<?= base_url('assets/images/about/'.$aboutUs[1]->img)?>" height="32">
+         </div>
+         <div class="col-xs-10 col-9">
+            <input type="file" class="form-control" name="our_experience_img">
+            <small class="text-danger"><?php echo form_error('our_experience_img'); ?></small>
+         </div>
+      </div>
+
+      <div class="form-group row">
+         <label class="col-sm-2 col-form-label">ტექნიკური ბაზა</label>
+         <div class="col-xs-2 col-1">
+            <img src="<?= base_url('assets/images/about/'.$aboutUs[2]->img)?>" height="32">
+         </div>
+         <div class="col-xs-10 col-9">
+            <input type="file" class="form-control" name="our_techbase_img">
+            <small class="text-danger"><?php echo form_error('our_techbase_img'); ?></small>
+         </div>
+      </div>
+
+      <div class="form-group row">
+         <label class="col-sm-2 col-form-label">რატომ გვენდობიან?</label>
+         <div class="col-xs-2 col-1">
+            <img src="<?= base_url('assets/images/about/'.$aboutUs[3]->img)?>" height="32">
+         </div>
+         <div class="col-xs-10 col-9">
+            <input type="file" class="form-control" name="trust_us_img">
+            <small class="text-danger"><?php echo form_error('trust_us_img'); ?></small>
+         </div>
+      </div>
+
+      <div class="form-group row">
+         <label class="col-sm-2 col-form-label">რატომ გვირჩევენ?</label>
+         <div class="col-xs-2 col-1">
+            <img src="<?= base_url('assets/images/about/'.$aboutUs[4]->img)?>" height="32">
+         </div>
+         <div class="col-xs-10 col-9">
+            <input type="file" class="form-control" name="choose_us_img" value="">
+            <small class="text-danger"><?php echo form_error('choose_us_img'); ?></small>
+         </div>
+      </div>
+
+      
       <button type="submit" class="btn btn-primary mb-3">შენახვა</button>
    <?= form_close() ?>
 </div>

@@ -54,7 +54,16 @@ class Admindb extends CI_Model
 	public function deletePartner($id){
 		return $this->db->where('id', $id)->delete('partners');
 	}
-	
+
+	public function updateAbout($array){
+		for($i=0; $i<=4; $i++)
+			$this->db->where('id', $i+1)->update('about', $array[$i]);
+	}
+
+   public function getServices(){
+		$q = "SELECT * FROM services";
+		return $this->db->query($q)->result();	
+	}
 
 
 

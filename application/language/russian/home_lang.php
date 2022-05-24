@@ -1,6 +1,4 @@
 <?php
-
-// Header & Footer
 $lang['site_title'] = "Voices";
 $lang['home'] = "Домой";
 $lang['aboutUs'] = "О нас";
@@ -11,9 +9,21 @@ $lang['ourSocials'] = "Наши социальные страницы";
 $lang['usefulLinks'] = "Полезные ссылки";
 $lang['pageNotFound'] = "Страница не найдена";
 $lang['back2Home'] = "Вернуться домой";
-
-// Home
 $lang['priceCalculator'] = "Калькулятор цен";
+$lang['callUs'] = "Позвоните нам";
+$lang['textUs'] = "Напишите нам";
+$lang['findUs'] = "Найти нам";
+$lang['send'] = "Oтправить";
+$lang['fullname']    = "Имя, фамилия";
+$lang['address']     = "Адрес";
+$lang['phone']       = "Телефон";
+$lang['orderProcess']  = "Процесс заказа";
+
+
+
+
+
+
 
 
 
