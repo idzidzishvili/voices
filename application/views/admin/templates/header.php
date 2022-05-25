@@ -46,7 +46,7 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
+                     <a class="nav-link <?= $page=='voice-categories'?'active':''?>" href="<?= base_url('admin/voiceCategories')?>">
                         <span data-feather="shopping-cart"></span>
                         ხმის კატეგორიები
                      </a>

@@ -6,14 +6,14 @@
 <div class="container-fluid ">
    <?= form_open_multipart(base_url('admin/editpartner/'.$id)) ?>
       <div class="form-group row">
-         <label class="col-sm-2 col-form-label">მისამართი ქართულად</label>
+         <label class="col-sm-2 col-form-label">მისამართი (Url)</label>
          <div class="col-sm-10">
             <input type="text" class="form-control" name="url" placeholder="Url" value="<?= $partner->url ?>">
             <small class="text-danger"><?php echo form_error('url'); ?></small>
          </div>
       </div>
       <div class="form-group row">
-         <label class="col-sm-2 col-form-label">მისამართი ინგლისურად</label>
+         <label class="col-sm-2 col-form-label">სურათი</label>
          <div class="col-xs-2 col-1">
             <?php if($partner->img): ?>
                <img src="<?= base_url('uploads/partners/'.$partner->img)?>" height="32">

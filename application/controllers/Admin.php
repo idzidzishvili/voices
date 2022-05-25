@@ -24,6 +24,7 @@ class Admin extends CI_Controller
 		$data['page'] = 'partners';
 		$this->load->view('admin/partners', $data);
 	}
+
 	public function addPartner()
 	{
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
@@ -90,6 +91,68 @@ class Admin extends CI_Controller
 			$this->Admindb->deletePartner($id);
 		}
 		redirect('admin/partners');
+	}
+
+
+	
+	public function voiceCategories()
+	{
+		$data['voiceCategories'] = $this->Admindb->getVoiceCategories();
+		$data['page'] = 'voice-categories';
+		$this->load->view('admin/voice-categories', $data);
+	}
+	
+	public function addVoiceCategory()
+	{
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+			$this->form_validation->set_rules('name_ge', 'დასახელება ქართულად', 'trim|required|max[100]');
+			$this->form_validation->set_rules('name_en', 'დასახელება ინგლისურად', 'trim|required|max[100]');
+			$this->form_validation->set_rules('name_ru', 'დასახელება რუსულად', 'trim|required|max[100]');
+
+			if ($this->form_validation->run()) {
+				if($this->Admindb->addVoiceCategory($this->input->post('name_ge', true), $this->input->post('name_en', true), $this->input->post('name_ru', true))){
+					redirect('admin/voiceCategories');
+					// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+					//array_push($oldFiles, $originalFileName);
+				} else {
+					// array_push($notUplFiles, $originalFileName);
+				}					
+			}
+		}
+		$data['page'] = 'voice-category-add';
+		$this->load->view('admin/voice-category-add', $data);
+	}
+
+	public function editVoiceCategory($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0 ) {
+			if(strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST'){
+				$this->form_validation->set_rules('name_ge', 'დასახელება ქართულად', 'trim|required|max[100]');
+				$this->form_validation->set_rules('name_en', 'დასახელება ინგლისურად', 'trim|required|max[100]');
+				$this->form_validation->set_rules('name_ru', 'დასახელება რუსულად', 'trim|required|max[100]');
+				if ($this->form_validation->run()) {					
+					if($this->Admindb->upateVoiceCategory($id, $this->input->post('name_ge', true), $this->input->post('name_en', true), $this->input->post('name_ru', true))){
+						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+						//array_push($oldFiles, $originalFileName);
+						return redirect('admin/voiceCategories');
+					} else {
+						// array_push($notUplFiles, $originalFileName);
+					}
+				}
+			}
+			$data['voiceCategory'] = $this->Admindb->getVoiceCategory($id);
+			$data['id'] = $id;
+			$data['page'] = 'voice-category-edit';
+			$this->load->view('admin/voice-category-edit', $data);
+		}
+	}
+
+	public function deleteVoiceCategory($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			$this->Admindb->deleteVoiceCategory($id);
+		}
+		redirect('admin/voiceCategories');
 	}
 
 

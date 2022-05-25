@@ -65,7 +65,28 @@ class Admindb extends CI_Model
 		return $this->db->query($q)->result();	
 	}
 
+	public function getVoiceCategories(){
+		$q = "SELECT * FROM voice_categories";
+		return $this->db->query($q)->result();	
+	}
 
+	public function getVoiceCategory($id){
+		$q = "SELECT * FROM voice_categories WHERE id=$id";
+		return $this->db->query($q)->row();	
+	}
+
+	public function addVoiceCategory($nameGe, $nameEn, $nameRu){
+		$this->db->insert('voice_categories', ['name_ge' => $nameGe, 'name_en' => $nameEn, 'name_ru' => $nameRu]);
+		return $this->db->insert_id();
+	}
+
+	public function upateVoiceCategory($id, $nameGe, $nameEn, $nameRu){
+		return $this->db->where('id', $id)->update('voice_categories', ['name_ge' => $nameGe, 'name_en' => $nameEn, 'name_ru' => $nameRu]);
+	}
+
+	public function deleteVoiceCategory($id){
+		return $this->db->where('id', $id)->delete('voice_categories');
+	}
 
 
 
