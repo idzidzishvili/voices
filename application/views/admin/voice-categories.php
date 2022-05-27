@@ -4,7 +4,7 @@
    <a href="<?= base_url('admin/addVoiceCategory')?>" class="btn btn-success btn-sm"><i class="fa fa-plus mr-1"></i>დამატება</a>
 </div>
 
-<div class="container-fluid ">
+<div class="container-fluid px-0">
    <div class="table-responsive">
       <table class="table table-sm">
          <thead>

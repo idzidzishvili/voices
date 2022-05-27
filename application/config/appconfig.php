@@ -1,9 +1,15 @@
 <?php
 $config['uploadFolder'] = 'uploads/';
 $config['fileUploadConfig'] = array(
-   'upload_path'     => $config['uploadFolder'],
    'max_size'        => 5120,
-   'allowed_types'   => 'jpg|jpeg|png|doc|docx|pdf',
+   'allowed_types'   => 'jpg|jpeg|png|JPG|JPEG|PNG',
+   'overwrite'       => TRUE,
+   'remove_spaces'   => TRUE
+);
+
+$config['voiceUploadConfig'] = array(
+   'max_size'        => 8192,
+   'allowed_types'   => 'mp3|wav|MP3|WAV',
    'overwrite'       => TRUE,
    'remove_spaces'   => TRUE
 );

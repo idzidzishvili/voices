@@ -12,8 +12,10 @@
 
    <main class="banner-slider">
       <?php foreach($sliders as $slider):?>
-         <section class="banner" style="background: url(assets/img/banner-1.jpg);">
-            <div class="banner-oly">
+         <section class="banner" >
+         <!-- style="background: url('assets/images/slider/<?= $slider->img_ru ?>');height:600px" -->
+            <img class="w-100" src="<?= base_url('assets/images/slider/'.$slider->{'img_'.$this->lang->lang()})?>">
+            <!-- <div class="banner-oly">
                <div class="container">
                   <div class="row">
                      <div class="col-lg-12">
@@ -27,13 +29,15 @@
                      </div>
                   </div>
                </div>
-            </div>
+            </div> -->
          </section>
       <?php endforeach;?>
+      
+     
    </main>
 
    
-   <section class="section show-part">
+   <section class="section show-part" id="voice-catalog">
       <div class="container container-w">
          <div class="row mb-4">
             <div class="col-lg-12 d-flex">
@@ -61,7 +65,7 @@
                   <div class="actor-card" data-actorid="<?= $actor->id?>">
                      <div class="actor-content">
                         <div class="actor-bg">
-                           <img src="<?= base_url('uploads/actors/'.$actor->image) ?>" alt="<?=$actor->name?>">
+                           <img src="<?= base_url('assets/images/actors/'.$actor->image) ?>" alt="<?=$actor->name?>">
                         </div>
                         <div class="actor-overlay">
                            <div class="spinner">
@@ -76,8 +80,8 @@
                      </div>
                      <div class="actor-meta">
                         <span class="pl-1">
-                           <!-- <?= 'V'.str_pad($actor->id, 3, "0", STR_PAD_LEFT) ?> -->
-                           <?= $actor->name?>
+                           <?= 'V'.str_pad($actor->id, 3, "0", STR_PAD_LEFT) ?>
+                           <!-- <?= $actor->name?> -->
                         </span>
                         <button class="bg-transparent border-0 ml-auto pr-1" type="button" data-toggle="modal" data-target="#priceCalcModal" data-actorprice="<?=$actor->langPrice?>">
                            <i class="fa fa-calculator"></i>

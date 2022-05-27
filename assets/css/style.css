@@ -112,16 +112,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 :root {
    --h1size: 50px;
    --h2size: 35px;
@@ -340,10 +330,29 @@ h6 {
    animation: b2top 2.5s linear infinite
 }
 
+main.banner-slider{
+   position: relative;
+}
+.scroll-to-voices{
+   position:absolute;
+   bottom: 10%;
+   height: 70px;
+   width: 100%;
+   justify-content: center;
+   -webkit-animation: b2top 2.5s linear infinite;
+   animation: b2top 2.5s linear infinite
+}
+#scroll2voices{
+   scroll-behavior: smooth;
+}
+#scroll2voices img{
+   height: 60px;
+}
+
 @-webkit-keyframes b2top {
    0% {
-      -webkit-transform: translateY(-30px);
-      transform: translateY(-30px)
+      -webkit-transform: translateY(-20px);
+      transform: translateY(-20px)
    }
 
    50% {
@@ -352,15 +361,15 @@ h6 {
    }
 
    100% {
-      -webkit-transform: translateY(-30px);
-      transform: translateY(-30px)
+      -webkit-transform: translateY(-20px);
+      transform: translateY(-20px)
    }
 }
 
 @keyframes b2top {
    0% {
-      -webkit-transform: translateY(-30px);
-      transform: translateY(-30px)
+      -webkit-transform: translateY(-20px);
+      transform: translateY(-20px)
    }
 
    50% {
@@ -369,8 +378,8 @@ h6 {
    }
 
    100% {
-      -webkit-transform: translateY(-30px);
-      transform: translateY(-30px)
+      -webkit-transform: translateY(-20px);
+      transform: translateY(-20px)
    }
 }
 
@@ -1010,7 +1019,7 @@ h6 {
       z-index: 3;
       width: 260px;
       height: 100vh;
-      overflow-y: scroll;
+      /* overflow-y: scroll; */
       overflow-x: hidden;
       background: #16151a;
       -webkit-box-orient: vertical;
@@ -1043,9 +1052,9 @@ h6 {
       color: #00a86b
    }
 
-   .navbar-list li {
+   /* .navbar-list li {
       border-bottom: 1px dashed #e8e8e8
-   }
+   } */
 
    .navbar-link {
       width: 100%;

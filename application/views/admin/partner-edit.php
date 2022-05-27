@@ -3,7 +3,7 @@
    <h3 class="h3">პარტნიორის რედაქტირება</h3>
 </div>
 
-<div class="container-fluid ">
+<div class="container-fluid px-0">
    <?= form_open_multipart(base_url('admin/editpartner/'.$id)) ?>
       <div class="form-group row">
          <label class="col-sm-2 col-form-label">მისამართი (Url)</label>
@@ -16,7 +16,7 @@
          <label class="col-sm-2 col-form-label">სურათი</label>
          <div class="col-xs-2 col-1">
             <?php if($partner->img): ?>
-               <img src="<?= base_url('uploads/partners/'.$partner->img)?>" height="32">
+               <img src="<?= base_url('assets/images/partners/'.$partner->img)?>" height="32">
             <?php endif; ?>
          </div>
          <div class="col-xs-10 col-9">

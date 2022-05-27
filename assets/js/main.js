@@ -54,7 +54,22 @@ $(document).ready(function () {
         arrows: true
     });
 
-    $('.actor-card').on('mouseover', function(e){
+
+    $('main.banner-slider').append(
+        $("<div>").attr({'class':'d-flex scroll-to-voices'})
+            .append($("<a>").attr({'href':'#voice-catalog', 'id':'scroll2voices'})
+                .append($("<img>").attr({'src':'assets/images/mouse-scroll.svg', 'class':'bouncing'}))
+            )
+    );
+
+    $(document).on('click', '#scroll2voices', function(e){
+        e.preventDefault();
+        var $voiceCatalog = $('#voice-catalog');
+        var vPos = $voiceCatalog.offset().top;       
+        $(window).scrollTop(vPos - 200);
+    });
+
+    $('.actor-card').on('mouseover', function(e){//mouseover
         var target = $(e.target);
         if(target.hasClass('actor-card')){
             // console.log($(e.target).data('actorid'));
@@ -79,7 +94,7 @@ $(document).ready(function () {
                                     try {
                                         var div = $('<div></div>').attr({'class':''});
                                         var audio = $('<audio/>').attr({'data-title':sound.voiceCat, 'data-audioid':'voice-'+response.actor+'-'+sound.voice_category_id, 'controls':'controls'});
-                                        var source = $('<source/>').attr({'src': "/uploads/voices/"+sound.filename, 'type':'audio/mpeg'});
+                                        var source = $('<source/>').attr({'src': "/assets/voices/"+sound.filename, 'type':'audio/mpeg'});
                                         target.find('.actor-overlay').append(div.append(audio.append(source)))
                                         audio.stylise();
                                     }

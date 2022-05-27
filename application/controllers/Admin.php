@@ -3,7 +3,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->model(['actor', 'Admindb']);
 		$this->load->helper('form');
@@ -17,6 +18,222 @@ class Admin extends CI_Controller
 		$data['page'] = 'actors';
 		$this->load->view('admin/actors', $data);
 	}
+
+	public function addActor()
+	{
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+			$this->form_validation->set_rules('name', 'სახელი, გვარი', 'trim|required');
+			$this->form_validation->set_rules('gender', 'სქესი', 'integer|required');
+			if (empty($_FILES['profileimage']['name']))
+				$this->form_validation->set_rules('profileimage', 'სურათი', 'required');
+			if ($this->form_validation->run()) {
+				if ($this->Admindb->addActor($this->input->post('name', true), $this->input->post('gender'), $_FILES['profileimage']['name'])) {
+					$config = $this->config->item('fileUploadConfig');
+					$config['upload_path'] = 'assets/images/actors/';
+					$this->load->library('upload');
+					$this->upload->initialize($config);
+					if ($this->upload->do_upload('profileimage')) {
+						redirect('admin/actors');
+						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+						//array_push($oldFiles, $originalFileName);
+					} else {
+						echo $this->upload->display_errors();
+						// array_push($notUplFiles, $originalFileName);
+					}
+				}
+			}
+		}
+		$data['page'] = 'actor-add';
+		$data['genders'] = $this->Admindb->getActorCategories();
+		$this->load->view('admin/actor-add', $data);
+	}
+
+	public function sortActors()
+	{
+		$actors = $_POST['actors'];
+		$arr = [];
+		for ($i = 0; $i < count($actors); $i++) {
+			array_push($arr, [
+				'id' => $actors[$i], // id (where condition)
+				'sort' => $i + 1 // update value (several)
+			]);
+		}
+		$this->Admindb->batchUpdateActors($arr);
+		redirect('admin/actors');
+	}
+
+	public function editActor($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			$voiceLanguages = $this->Admindb->getActorVoices($id);
+			$voiceCategories = $this->Admindb->getVoiceCategories();
+			if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+				$this->form_validation->set_rules('name', 'სახელი', 'trim|required');
+				$this->form_validation->set_rules('gender', 'სქესი', 'integer|required');
+
+				// Add voice language validation check if any of voices is present 
+				foreach ($voiceLanguages as $voiceLang) {
+					$hasFiles = false;
+					foreach ($voiceCategories as $voiceCat) {
+						if ($_FILES['voice']['name'][$voiceLang->id][$voiceCat->id]) {
+							$hasFiles = true;
+						}
+					}
+					if ($hasFiles) {
+						$this->form_validation->set_rules('voice_price[' . $voiceLang->id . ']', 'ხმის ფასი ' . $voiceLang->name_ge, 'integer|required|greater_than[0]');
+					}
+				}
+
+				if ($this->form_validation->run()) {
+					// Profile data update - get profile data and check for profile image
+					$editArr = [];
+					$editArr['name'] = $this->input->post('name', true);
+					$editArr['gender_id'] = $this->input->post('gender');
+					if ($_FILES['profileImage']['name'])
+						$editArr['image'] = $_FILES['profileImage']['name'];
+					$this->Admindb->updateActor($id, $editArr);
+					// if profile image is present load library and upload
+					if ($_FILES['profileImage']['name']) {
+						$config = $this->config->item('fileUploadConfig');
+						$config['upload_path'] = 'assets/images/actors/';
+						$this->load->library('upload', $config, 'profileImage');
+						$this->profileImage->initialize($config);
+						$this->profileImage->do_upload('profileImage');
+					}
+
+					// Voices upload
+					foreach ($voiceLanguages as $voiceLang) {
+						// update or insert voice language price if canged
+						if ($voiceLang->langPrice != $this->input->post('voice_price[' . $voiceLang->id . ']')) {
+							$this->Admindb->setVoicePrice($id, $voiceLang->id, $this->input->post('voice_price[' . $voiceLang->id . ']'));
+						}
+						// loop voices
+						foreach ($voiceCategories as $voiceCat) {
+							if (!empty($_FILES['voice']['name'][$voiceLang->id][$voiceCat->id])) {								
+								// Define new $_FILES array - $_FILES['voice_']
+								$_FILES['voice_']['name']     = $_FILES['voice']['name'][$voiceLang->id][$voiceCat->id];
+								$_FILES['voice_']['type']     = $_FILES['voice']['type'][$voiceLang->id][$voiceCat->id];
+								$_FILES['voice_']['tmp_name'] = $_FILES['voice']['tmp_name'][$voiceLang->id][$voiceCat->id];
+								$_FILES['voice_']['error']    = $_FILES['voice']['error'][$voiceLang->id][$voiceCat->id];
+								$_FILES['voice_']['size']     = $_FILES['voice']['size'][$voiceLang->id][$voiceCat->id];
+								// Set preference
+								$config = array();
+								$config = $this->config->item('voiceUploadConfig');
+								$config['upload_path'] = 'assets/voices/';
+								 //Load upload library
+								$this->load->library('upload', $config, 'voice');
+								//perform upload and insert in db
+								if ($this->voice->do_upload('voice_')) {
+									$this->Admindb->setActorVoice($id, $voiceLang->id, $voiceCat->id, $_FILES['voice']['name'][$voiceLang->id][$voiceCat->id]);
+								}
+							}
+						}
+					}
+					redirect('admin/editActor/' . $id);
+				}
+			}
+			$data['actor'] = $this->Admindb->getActor($id);
+			$data['genders'] = $this->Admindb->getActorCategories();
+			$data['actorVoices'] = $voiceLanguages;
+			$data['voiceCategories'] = $voiceCategories;
+			$data['id'] = $id;
+			$data['page'] = 'actor-edit';
+			$this->load->view('admin/actor-edit', $data);
+		} else {
+			redirect('admin/actors');
+		}
+	}
+
+
+
+
+
+
+	public function sliders()
+	{
+		$data['sliders'] = $this->Admindb->getSliders();
+		$data['page'] = 'slider';
+		$this->load->view('admin/sliders', $data);
+	}
+
+	public function addSlider()
+	{
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+			$this->form_validation->set_rules('name_ge', 'დასახელება', 'trim|required');
+			if (empty($_FILES['img_ge']['name']))
+				$this->form_validation->set_rules('img_ge', 'სურათი ქართულზე', 'required');
+			if (empty($_FILES['img_en']['name']))
+				$this->form_validation->set_rules('img_en', 'სურათი ინგლისურზე', 'required');
+			if (empty($_FILES['img_ru']['name']))
+				$this->form_validation->set_rules('img_ru', 'სურათი რუსულზე', 'required');
+			if ($this->form_validation->run()) {
+				if ($this->Admindb->addSlider($this->input->post('name_ge', true), $_FILES['img_ge']['name'], $_FILES['img_en']['name'], $_FILES['img_ru']['name'])) {
+					$config = $this->config->item('fileUploadConfig');
+					$config['upload_path'] = 'assets/images/slider/';
+					$this->load->library('upload');
+					$this->upload->initialize($config);
+					if ($this->upload->do_upload('img_ge') && $this->upload->do_upload('img_en') && $this->upload->do_upload('img_ru')) {
+						redirect('admin/sliders');
+						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+						//array_push($oldFiles, $originalFileName);
+					} else {
+						// array_push($notUplFiles, $originalFileName);
+					}
+				}
+			}
+		}
+		$data['page'] = 'slider-add';
+		$this->load->view('admin/slider-add', $data);
+	}
+
+	public function editSlider($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+				$this->form_validation->set_rules('name_ge', 'დასახელება', 'trim|required');
+				// if(empty($_FILES['partnerImage']['name']))
+				// 	$this->form_validation->set_rules('partnerImage', 'სურათი', 'required');
+				if ($this->form_validation->run()) {
+					$editArr = [];
+					$editArr['name_ge'] = $this->input->post('name_ge', true);
+					if ($_FILES['img_ge']['name'])
+						$editArr['img_ge'] = $_FILES['img_ge']['name'];
+					if ($_FILES['img_en']['name'])
+						$editArr['img_en'] = $_FILES['img_en']['name'];
+					if ($_FILES['img_ru']['name'])
+						$editArr['img_ru'] = $_FILES['img_ru']['name'];
+					if ($this->Admindb->upateSlider($id, $editArr)) {
+						$config = $this->config->item('fileUploadConfig');
+						$config['upload_path'] = 'assets/images/slider/';
+						$this->load->library('upload');
+						$this->upload->initialize($config);
+						if ($_FILES['img_ge']['name'])
+							$this->upload->do_upload('img_ge');
+						if ($_FILES['img_en']['name'])
+							$this->upload->do_upload('img_en');
+						if ($_FILES['img_ru']['name'])
+							$this->upload->do_upload('img_ru');
+						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+						//array_push($oldFiles, $originalFileName);
+						return redirect('admin/sliders');
+					}
+				}
+			}
+			$data['slider'] = $this->Admindb->getSlider($id);
+			$data['id'] = $id;
+			$data['page'] = 'slider-edit';
+			$this->load->view('admin/slider-edit', $data);
+		}
+	}
+
+	public function deleteSlider($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			$this->Admindb->deleteSlider($id);
+		}
+		redirect('admin/sliders');
+	}
+
 
 	public function partners()
 	{
@@ -32,9 +249,9 @@ class Admin extends CI_Controller
 			if (empty($_FILES['partnerImage']['name']))
 				$this->form_validation->set_rules('partnerImage', 'სურათი', 'required');
 			if ($this->form_validation->run()) {
-				if($this->Admindb->addPartner($this->input->post('url', true), $_FILES['partnerImage']['name'])){
+				if ($this->Admindb->addPartner($this->input->post('url', true), $_FILES['partnerImage']['name'])) {
 					$config = $this->config->item('fileUploadConfig');
-					$config['upload_path'] = $this->config->item('uploadFolder').'partners/';				
+					$config['upload_path'] = 'assets/images/partners/';
 					$this->load->library('upload');
 					$this->upload->initialize($config);
 					if ($this->upload->do_upload('partnerImage')) {
@@ -44,7 +261,7 @@ class Admin extends CI_Controller
 					} else {
 						// array_push($notUplFiles, $originalFileName);
 					}
-				}	
+				}
 			}
 		}
 		$data['page'] = 'partner-add';
@@ -53,28 +270,29 @@ class Admin extends CI_Controller
 
 	public function editPartner($id)
 	{
-		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0 ) {
-			if(strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST'){
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
 				$this->form_validation->set_rules('url', 'მისამართი', 'trim|required');
 				// if(empty($_FILES['partnerImage']['name']))
 				// 	$this->form_validation->set_rules('partnerImage', 'სურათი', 'required');
 				if ($this->form_validation->run()) {
 					$editArr = [];
 					$editArr['url'] = $this->input->post('url', true);
-					if($_FILES['partnerImage']['name'])
+					if ($_FILES['partnerImage']['name'])
 						$editArr['img'] = $_FILES['partnerImage']['name'];
-					if($this->Admindb->upatePartner($id, $editArr)){
+					if ($this->Admindb->updatePartner($id, $editArr)) {
 						$config = $this->config->item('fileUploadConfig');
-						$config['upload_path'] = $this->config->item('uploadFolder').'partners/';				
+						$config['upload_path'] = $this->config->item('uploadFolder') . 'partners/';
 						$this->load->library('upload');
 						$this->upload->initialize($config);
-						if ($this->upload->do_upload('partnerImage')) {
-							// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
-							//array_push($oldFiles, $originalFileName);
-							return redirect('admin/partners');
-						} else {
-							// array_push($notUplFiles, $originalFileName);
-						}
+						if ($_FILES['partnerImage']['name'])
+							$this->upload->do_upload('partnerImage');
+						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+						//array_push($oldFiles, $originalFileName);
+						return redirect('admin/partners');
+						// } else {
+						// 	// array_push($notUplFiles, $originalFileName);
+						// }
 					}
 				}
 			}
@@ -94,29 +312,89 @@ class Admin extends CI_Controller
 	}
 
 
-	
+	public function actorCategories()
+	{
+		$data['actorCategories'] = $this->Admindb->getActorCategories();
+		$data['page'] = 'actor-categories';
+		$this->load->view('admin/actor-categories', $data);
+	}
+
+	public function addActorCategory()
+	{
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+			$this->form_validation->set_rules('name_ge', 'დასახელება ქართულად', 'trim|required|max_length[100]');
+			$this->form_validation->set_rules('name_en', 'დასახელება ინგლისურად', 'trim|required|max_length[100]');
+			$this->form_validation->set_rules('name_ru', 'დასახელება რუსულად', 'trim|required|max_length[100]');
+
+			if ($this->form_validation->run()) {
+				if ($this->Admindb->addActorCategory($this->input->post('name_ge', true), $this->input->post('name_en', true), $this->input->post('name_ru', true))) {
+					redirect('admin/actorCategories');
+					// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+					//array_push($oldFiles, $originalFileName);
+				} else {
+					// array_push($notUplFiles, $originalFileName);
+				}
+			}
+		}
+		$data['page'] = 'actor-category-add';
+		$this->load->view('admin/actor-category-add', $data);
+	}
+
+	public function editActorCategory($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+				$this->form_validation->set_rules('name_ge', 'დასახელება ქართულად', 'trim|required|max_length[100]');
+				$this->form_validation->set_rules('name_en', 'დასახელება ინგლისურად', 'trim|required|max_length[100]');
+				$this->form_validation->set_rules('name_ru', 'დასახელება რუსულად', 'trim|required|max_length[100]');
+				if ($this->form_validation->run()) {
+					if ($this->Admindb->upateActorCategory($id, $this->input->post('name_ge', true), $this->input->post('name_en', true), $this->input->post('name_ru', true))) {
+						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+						//array_push($oldFiles, $originalFileName);
+						return redirect('admin/actorCategories');
+					} else {
+						// array_push($notUplFiles, $originalFileName);
+					}
+				}
+			}
+			$data['actorCategory'] = $this->Admindb->getActorCategory($id);
+			$data['id'] = $id;
+			$data['page'] = 'actor-category-edit';
+			$this->load->view('admin/actor-category-edit', $data);
+		}
+	}
+
+	public function deleteActorCategory($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			$this->Admindb->deleteActorCategory($id);
+		}
+		redirect('admin/actorCategories');
+	}
+
+
 	public function voiceCategories()
 	{
 		$data['voiceCategories'] = $this->Admindb->getVoiceCategories();
 		$data['page'] = 'voice-categories';
 		$this->load->view('admin/voice-categories', $data);
 	}
-	
+
 	public function addVoiceCategory()
 	{
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
-			$this->form_validation->set_rules('name_ge', 'დასახელება ქართულად', 'trim|required|max[100]');
-			$this->form_validation->set_rules('name_en', 'დასახელება ინგლისურად', 'trim|required|max[100]');
-			$this->form_validation->set_rules('name_ru', 'დასახელება რუსულად', 'trim|required|max[100]');
+			$this->form_validation->set_rules('name_ge', 'დასახელება ქართულად', 'trim|required|max_length[100]');
+			$this->form_validation->set_rules('name_en', 'დასახელება ინგლისურად', 'trim|required|max_length[100]');
+			$this->form_validation->set_rules('name_ru', 'დასახელება რუსულად', 'trim|required|max_length[100]');
 
 			if ($this->form_validation->run()) {
-				if($this->Admindb->addVoiceCategory($this->input->post('name_ge', true), $this->input->post('name_en', true), $this->input->post('name_ru', true))){
+				if ($this->Admindb->addVoiceCategory($this->input->post('name_ge', true), $this->input->post('name_en', true), $this->input->post('name_ru', true))) {
 					redirect('admin/voiceCategories');
 					// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
 					//array_push($oldFiles, $originalFileName);
 				} else {
 					// array_push($notUplFiles, $originalFileName);
-				}					
+				}
 			}
 		}
 		$data['page'] = 'voice-category-add';
@@ -125,13 +403,13 @@ class Admin extends CI_Controller
 
 	public function editVoiceCategory($id)
 	{
-		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0 ) {
-			if(strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST'){
-				$this->form_validation->set_rules('name_ge', 'დასახელება ქართულად', 'trim|required|max[100]');
-				$this->form_validation->set_rules('name_en', 'დასახელება ინგლისურად', 'trim|required|max[100]');
-				$this->form_validation->set_rules('name_ru', 'დასახელება რუსულად', 'trim|required|max[100]');
-				if ($this->form_validation->run()) {					
-					if($this->Admindb->upateVoiceCategory($id, $this->input->post('name_ge', true), $this->input->post('name_en', true), $this->input->post('name_ru', true))){
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+				$this->form_validation->set_rules('name_ge', 'დასახელება ქართულად', 'trim|required|max_length[100]');
+				$this->form_validation->set_rules('name_en', 'დასახელება ინგლისურად', 'trim|required|max_length[100]');
+				$this->form_validation->set_rules('name_ru', 'დასახელება რუსულად', 'trim|required|max_length[100]');
+				if ($this->form_validation->run()) {
+					if ($this->Admindb->upateVoiceCategory($id, $this->input->post('name_ge', true), $this->input->post('name_en', true), $this->input->post('name_ru', true))) {
 						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
 						//array_push($oldFiles, $originalFileName);
 						return redirect('admin/voiceCategories');
@@ -156,9 +434,72 @@ class Admin extends CI_Controller
 	}
 
 
+	public function voiceLanguages()
+	{
+		$data['voiceLanguages'] = $this->Admindb->getVoiceLanguages();
+		$data['page'] = 'voice-languages';
+		$this->load->view('admin/voice-languages', $data);
+	}
+
+	public function addVoiceLanguage()
+	{
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+			$this->form_validation->set_rules('name_ge', 'დასახელება ქართულად', 'trim|required|max_length[100]');
+			$this->form_validation->set_rules('name_en', 'დასახელება ინგლისურად', 'trim|required|max_length[100]');
+			$this->form_validation->set_rules('name_ru', 'დასახელება რუსულად', 'trim|required|max_length[100]');
+			$this->form_validation->set_rules('dom', 'მოკლედ (დომენი)', 'trim|required|exact_length[2]');
+			if ($this->form_validation->run()) {
+				if ($this->Admindb->addVoiceCategory($this->input->post('name_ge', true), $this->input->post('name_en', true), $this->input->post('name_ru', true), $this->input->post('dom', true))) {
+					redirect('admin/voiceLanguages');
+					// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+					//array_push($oldFiles, $originalFileName);
+				} else {
+					// array_push($notUplFiles, $originalFileName);
+				}
+			}
+		}
+		$data['page'] = 'voice-language-add';
+		$this->load->view('admin/voice-language-add', $data);
+	}
+
+	public function editVoiceLanguage($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+				$this->form_validation->set_rules('name_ge', 'დასახელება ქართულად', 'trim|required|max_length[100]');
+				$this->form_validation->set_rules('name_en', 'დასახელება ინგლისურად', 'trim|required|max_length[100]');
+				$this->form_validation->set_rules('name_ru', 'დასახელება რუსულად', 'trim|required|max_length[100]');
+				$this->form_validation->set_rules('dom', 'მოკლედ (დომენი)', 'trim|required|exact_length[2]');
+				if ($this->form_validation->run()) {
+					if ($this->Admindb->upateVoiceLanguage($id, $this->input->post('name_ge', true), $this->input->post('name_en', true), $this->input->post('name_ru', true), $this->input->post('dom', true))) {
+						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+						//array_push($oldFiles, $originalFileName);
+						return redirect('admin/voiceLanguages');
+					} else {
+						// array_push($notUplFiles, $originalFileName);
+					}
+				}
+			}
+			$data['voiceLanguage'] = $this->Admindb->getVoiceLanguage($id);
+			$data['id'] = $id;
+			$data['page'] = 'voice-language-edit';
+			$this->load->view('admin/voice-language-edit', $data);
+		}
+	}
+
+	public function deleteVoiceLanguage($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			$this->Admindb->deleteVoiceLanguage($id);
+		}
+		redirect('admin/voiceLanguages');
+	}
+
+
+
 	public function contact()
 	{
-		if(strtoupper($_SERVER["REQUEST_METHOD"])=='POST'){
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
 			$this->form_validation->set_rules('address_ge', 'მისამართი ქართულად', 'trim|required');
 			$this->form_validation->set_rules('address_en', 'მისამართი ინგლისურად', 'trim|required');
 			$this->form_validation->set_rules('address_ru', 'მისამართი რუსულად', 'trim|required');
@@ -168,14 +509,14 @@ class Admin extends CI_Controller
 
 			if ($this->form_validation->run()) {
 				$contact = $this->Admindb->updateContact(
-					$this->input->post('address_ge', true), 
-					$this->input->post('address_en', true), 
-					$this->input->post('address_ru', true), 
-					$this->input->post('phone', true), 
-					$this->input->post('email', true), 
+					$this->input->post('address_ge', true),
+					$this->input->post('address_en', true),
+					$this->input->post('address_ru', true),
+					$this->input->post('phone', true),
+					$this->input->post('email', true),
 					$this->input->post('location', true)
 				);
-				if($contact)
+				if ($contact)
 					$this->session->set_flashdata('alertMsg', array('status' => true, 'message' => 'კონტაქტი განახლდა წარმატებით'));
 				else
 					$this->session->set_flashdata('alertMsg', array('status' => false, 'message' => 'ვერ მოხერხდა მონაცემების განახლება'));
@@ -187,10 +528,10 @@ class Admin extends CI_Controller
 		$this->load->view('admin/contact', $data);
 	}
 
-	
+
 	public function aboutus()
 	{
-		if(strtoupper($_SERVER["REQUEST_METHOD"])=='POST'){
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
 			$this->form_validation->set_rules('our_experience_ge', 		'გამოცდილება ქართულად', 		  'trim|required');
 			$this->form_validation->set_rules('our_experience_txt_ge',  'გამოცდილება ტექსტი ქართულად',  'trim|required');
 			$this->form_validation->set_rules('our_experience_en', 		'გამოცდილება ინგლისურად', 		   'trim|required');
@@ -269,33 +610,33 @@ class Admin extends CI_Controller
 					'text_ru' => $this->input->post('choose_us_txt_ru', true),
 				];
 
-				if($_FILES['our_experience_img']['name'])
+				if ($_FILES['our_experience_img']['name'])
 					$editArr[1]['img'] = $_FILES['our_experience_img']['name'];
-				if($_FILES['our_techbase_img']['name'])
+				if ($_FILES['our_techbase_img']['name'])
 					$editArr[2]['img'] = $_FILES['our_techbase_img']['name'];
-				if($_FILES['trust_us_img']['name'])
+				if ($_FILES['trust_us_img']['name'])
 					$editArr[3]['img'] = $_FILES['trust_us_img']['name'];
-				if($_FILES['choose_us_img']['name'])
+				if ($_FILES['choose_us_img']['name'])
 					$editArr[4]['img'] = $_FILES['choose_us_img']['name'];
 
 				$this->Admindb->updateAbout($editArr);
 
 				$config = $this->config->item('fileUploadConfig');
-				$config['upload_path'] = 'assets/images/about/';				
+				$config['upload_path'] = 'assets/images/about/';
 				$this->load->library('upload');
 				$this->upload->initialize($config);
 
-				if($_FILES['our_experience_img']['name'])
+				if ($_FILES['our_experience_img']['name'])
 					$this->upload->do_upload('our_experience_img');
-				if($_FILES['our_techbase_img']['name'])
+				if ($_FILES['our_techbase_img']['name'])
 					$this->upload->do_upload('our_techbase_img');
-				if($_FILES['trust_us_img']['name'])
+				if ($_FILES['trust_us_img']['name'])
 					$this->upload->do_upload('trust_us_img');
-				if($_FILES['choose_us_img']['name'])
+				if ($_FILES['choose_us_img']['name'])
 					$this->upload->do_upload('choose_us_img');
 
 				return redirect('admin/aboutus');
-				
+
 
 				// if($contact)
 				// 	$this->session->set_flashdata('alertMsg', array('status' => true, 'message' => 'კონტაქტი განახლდა წარმატებით'));
@@ -311,7 +652,7 @@ class Admin extends CI_Controller
 
 	public function services()
 	{
-		if(strtoupper($_SERVER["REQUEST_METHOD"])=='POST'){
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
 			$this->form_validation->set_rules('ad_ge', 		'სარეკლამო რგოლი ქართულად', 		  'trim|required');
 			$this->form_validation->set_rules('ad_txt_ge',  'სარეკლამო რგოლი ტექსტი ქართულად',  'trim|required');
 			$this->form_validation->set_rules('ad_en', 		'სარეკლამო რგოლი ინგლისურად', 		   'trim|required');
@@ -480,8 +821,36 @@ class Admin extends CI_Controller
 	}
 
 
-	public function voicelanguages()
+	private function upload_files($path, $title, $files)
 	{
-		$this->load->view('admin/voicelanguages');
+		$config = array(
+			'upload_path'   => $path,
+			'max_size'      => 8192,
+			'allowed_types' => 'mp3|wav|MP3|WAV',
+			'overwrite'     => TRUE,
+			'remove_spaces' => TRUE
+		);
+
+		$this->load->library('upload', $config);
+
+		$voices = array();
+
+		foreach ($files['name'] as $key => $image) {
+			$_FILES['voices[]']['name'] = $files['name'][$key];
+			$_FILES['voices[]']['type'] = $files['type'][$key];
+			$_FILES['voices[]']['tmp_name'] = $files['tmp_name'][$key];
+			$_FILES['voices[]']['error'] = $files['error'][$key];
+			$_FILES['voices[]']['size'] = $files['size'][$key];
+
+			$this->upload->initialize($config);
+
+			if ($this->upload->do_upload('voices[]')) {
+				$this->upload->data();
+			} else {
+				return false;
+			}
+		}
+
+		return $voices;
 	}
 }

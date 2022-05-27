@@ -18,12 +18,12 @@
 
 <body class="body-<?=$this->lang->lang()?>">
 
-   <div class="preloader">
+   <!-- <div class="preloader">
       <div class="loader">
          <span></span>
          <span></span>
       </div>
-   </div>
+   </div> -->
 
 
    <div class="back2top-btn"><a href="index.html#"><i class="fal fa-long-arrow-alt-up"></i></a></div>

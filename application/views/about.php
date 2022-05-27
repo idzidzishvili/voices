@@ -61,7 +61,7 @@
       <div class="col-lg-12 ">
          <div class="sponsor-slider slider-arrow d-flex">
             <?php foreach($partners as $partner): ?>
-               <a href="<?= $partner->url ?>"><img src="<?= base_url('uploads/partners/'.$partner->img)?>" alt="sponsor-1" /></a>
+               <a href="<?= $partner->url ?>"><img src="<?= base_url('assets/images/partners/'.$partner->img)?>" alt="sponsor-1" /></a>
             <?php endforeach;?>
          </div>
       </div>

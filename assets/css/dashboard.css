@@ -1,5 +1,26 @@
+@font-face {
+   font-family: 'bpg_arial';
+   src: url('../fonts/bpg_arial_2009.ttf') format('truetype');
+   font-weight: normal;
+   font-style: normal;
+}
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+[type=text].form-control:focus,
+[type=password].form-control:focus,
+[type=email].form-control:focus,
+[type=tel].form-control:focus,
+[contenteditable].form-control:focus {
+   box-shadow: none
+}
 body {
    font-size: .875rem;
+   font-family: bpg_arial;
 }
 a{
    text-decoration: none;
@@ -11,7 +32,7 @@ a{
    vertical-align: text-bottom;
 }
 
-.table td{vertical-align: middle;}
+.table td, .table th{vertical-align: middle;}
 
 /*
   * Sidebar
@@ -133,8 +154,8 @@ a{
 #sortable li.red { border: solid red 1px;}
 #sortable li img{ height: 100%; width: 40px;}
 #sortable li a { padding-left: 8px; align-self: center;}
-#sortable li span { padding-left: 8px; align-self: center;margin-left: auto; font-size: .8rem; font-weight: 400;}
-#sortable li span i { margin-right: 4px;}
+#sortable li div { padding-left: 8px; align-self: center;margin-left: auto; font-size: .8rem; font-weight: 400;}
+#sortable li div i { margin-right: 4px;}
 
 
 /* Modal */
@@ -157,6 +178,17 @@ a{
 }
 
 
+input[type="file"].form-control{
+   padding: 0.2rem 0.2rem;
+}
+input[type="file"].form-control-sm {
+   padding: 0.1rem 0.2rem;
+}
+
+.alert ul{
+   margin-bottom:0;
+   padding-left: 1rem;
+}
 
 
 

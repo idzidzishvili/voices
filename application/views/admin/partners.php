@@ -4,7 +4,7 @@
    <a href="<?= base_url('admin/addPartner')?>" class="btn btn-success btn-sm"><i class="fa fa-plus mr-1"></i>დამატება</a>
 </div>
 
-<div class="container-fluid ">
+<div class="container-fluid px-0">
    <div class="table-responsive">
       <table class="table table-sm">
          <thead>
@@ -20,7 +20,7 @@
                <tr>
                   <th scope="row"><?= $i+1 ?></th>
                   <td><?= $partner->url ?></td>
-                  <td><img src="<?= base_url('uploads/partners/'.$partner->img) ?>" height="32"></td>
+                  <td><img src="<?= base_url('assets/images/partners/'.$partner->img) ?>" height="32"></td>
                   <td>
                      <a href="<?=base_url('admin/editpartner/'.$partner->id) ?>">
                         <i class="fa fa-pencil text-info mr-2"></i>

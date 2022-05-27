@@ -40,7 +40,7 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
+                     <a class="nav-link <?= $page=='actor-categories'?'active':''?>" href="<?= base_url('admin/actorCategories')?>">
                         <span data-feather="file"></span>
                         მსახიობის კატეგორიები
                      </a>
@@ -52,19 +52,19 @@
                      </a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
+                  <a class="nav-link <?= $page=='voice-languages'?'active':''?>" href="<?= base_url('admin/voiceLanguages')?>">
                         <span data-feather="users"></span>
                         ხმის ენები
                      </a>
                   </li>
-                  <li class="nav-item">
+                  <!-- <li class="nav-item">
                      <a class="nav-link" href="#">
                         <span data-feather="bar-chart-2"></span>
                         ბანერი
                      </a>
-                  </li>
+                  </li> -->
                   <li class="nav-item">
-                     <a class="nav-link" href="#">
+                     <a class="nav-link <?= $page=='slider'?'active':''?>" href="<?= base_url('admin/sliders')?>">
                         <span data-feather="layers"></span>
                         სლაიდერი
                      </a>

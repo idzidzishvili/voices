@@ -3,7 +3,7 @@
    <h3 class="h3">ხმის კატეგორიის დამატება</h3>
 </div>
 
-<div class="container-fluid ">
+<div class="container-fluid px-0">
    <?= form_open(base_url('admin/addVoiceCategory')) ?>
       <div class="form-group row">
          <label class="col-sm-2 col-form-label">დასახელება ქართულად</label>
