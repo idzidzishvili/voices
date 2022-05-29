@@ -31,7 +31,7 @@ class Actor extends CI_Model
 				LEFT JOIN actor_genders ON actors.gender_id=actor_genders.id
 				GROUP BY actors.id, langPrice
 				HAVING voicesQty>0
-				ORDER BY sort";
+				ORDER BY sort, id";
 		$actors = $this->db->query($q)->result();
 
 		$q = "SELECT voices.*, voice_categories.name_$lang as voicecat

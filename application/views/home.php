@@ -10,54 +10,41 @@
       </audio>
    </div>
 
-   <main class="banner-slider">
+   <main class="banner-slider" >
       <?php foreach($sliders as $slider):?>
          <section class="banner" >
-         <!-- style="background: url('assets/images/slider/<?= $slider->img_ru ?>');height:600px" -->
             <img class="w-100" src="<?= base_url('assets/images/slider/'.$slider->{'img_'.$this->lang->lang()})?>">
-            <!-- <div class="banner-oly">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-lg-12">
-                        <div class="banner-content">
-                           <h1>WE ARE FMRADIO STAY TUNE - 88.0</h1>
-                           <p>
-                              It is a long established fact that a reader will be distracted by the readable <br> content
-                              of a page when looking at its layout.
-                           </p><a href="index.html#" class="btn btn-inline"><i class="far fa-satellite-dish"></i><span>listen us live</span></a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div> -->
          </section>
       <?php endforeach;?>
-      
-     
    </main>
 
    
    <section class="section show-part" id="voice-catalog">
       <div class="container container-w">
-         <div class="row mb-4">
-            <div class="col-lg-12 d-flex">
-               <div class="lang-menu mr-3">                  
-                  <?php foreach($voiceLanguages as $voiceLang): ?>                       
-                        <a href="<?= site_url('?voicelang='.$voiceLang->dom)?>" class="<?= $voiceLanguageId==$voiceLang->id?'active':''?>" >
+         <div class="row mb-3">
+            <div class="col-lg-12 lang-gender-bar">               
+               <div class="lang-menu mr-lg-3 mb-3">
+                  <i class="fa fa-angle-left" id="scrollleft"></i>
+                  <div class="lang-items">
+                     <?php foreach($voiceLanguages as $voiceLang): ?>
+                        <a href="<?= site_url('?voicelang='.strtolower($voiceLang->dom))?>" class="<?= $voiceLanguageId==$voiceLang->id?'active':''?>" >
                            <span><?=$voiceLang->lang?></span>
-                        </a>                   
-                  <?php endforeach;?> 
+                        </a>
+                     <?php endforeach;?>
+                  </div>
+                  <i class="fa fa-angle-right" id="scrollright"></i>
                </div>
-               <div class="lang-menu controls ml-auto">                  
-                  <?php foreach($genders as $gender): ?>                       
+               <div class="controls ml-auto mb-3">
+                  <div class="gender-buttons">
+                     <?php foreach($genders as $gender): ?>
                         <button type="button" class="gender-button" data-mixitup-control data-genderid="<?= $gender->id ?>" data-filter=".gender<?= $gender->id ?>">
                            <?=$gender->gender?>
-                        </button>                   
-                  <?php endforeach;?> 
+                        </button>
+                     <?php endforeach;?> 
+                  </div>
                </div>
             </div>
          </div>
-
                
          <div class="row actors" id="mixitupcontainer">
             <?php foreach($actors as $actor): ?>
@@ -67,7 +54,7 @@
                         <div class="actor-bg">
                            <img src="<?= base_url('assets/images/actors/'.$actor->image) ?>" alt="<?=$actor->name?>">
                         </div>
-                        <div class="actor-overlay">
+                        <div class="actor-overlay spinning">
                            <div class="spinner">
                               <div class="r1"></div>
                               <div class="r2"></div>
@@ -75,7 +62,6 @@
                               <div class="r4"></div>
                               <div class="r5"></div>
                            </div>
-
                         </div>
                      </div>
                      <div class="actor-meta">

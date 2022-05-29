@@ -37,8 +37,7 @@ class Home extends CI_Controller
 		$data['currentLanguage'] = $this->siteLanguage;
 		$data['voiceLanguageId'] = $this->voiceLanguage;
 		$data['genders'] = $this->mainmodel->getGenders($this->siteLanguage);
-
-		// print_r($data);exit;
+		$data['contact'] = $this->mainmodel->getContactDetails();
 		$this->load->view('home', $data);
 	}
 

@@ -332,6 +332,7 @@ h6 {
 
 main.banner-slider{
    position: relative;
+   width: 100%;
 }
 .scroll-to-voices{
    position:absolute;
@@ -340,7 +341,7 @@ main.banner-slider{
    width: 100%;
    justify-content: center;
    -webkit-animation: b2top 2.5s linear infinite;
-   animation: b2top 2.5s linear infinite
+   animation: b2top 2.5s linear infinite;
 }
 #scroll2voices{
    scroll-behavior: smooth;
@@ -628,7 +629,7 @@ main.banner-slider{
 }
 
 .section {
-   padding: 50px 0 0
+   padding: 40px 0 0
 }
 
 .section-heading {
@@ -714,7 +715,7 @@ main.banner-slider{
    padding: 20px 0
 }
 
-.navbar-list a.social span {
+.navbar-list social a span {
    width: 32px;
    height: 32px;
    border-radius: 50%;
@@ -728,6 +729,16 @@ main.banner-slider{
 @media(max-width:991px) {
    .header-part {
       display: none
+   }
+   .navbar-list li.social{
+      display: inline-block;
+   }
+   .navbar-list li.lang{
+      margin-left: 10px;
+   }
+   .navbar-list li.lang a{
+      padding-right: 12px;
+      height: 32px;
    }
 }
 
@@ -764,6 +775,12 @@ main.banner-slider{
 .navbar-toggle,
 .slide-head {
    display: none
+}
+
+.slide-head img{
+   padding-left: 20px;
+   height: 48px;
+   width: 68px;
 }
 
 .navbar-list {
@@ -909,7 +926,7 @@ main.banner-slider{
    }
 
    .navbar-logo img {
-      width: 160px
+      width: 48px
    }
 
    .navbar-toggle {
@@ -921,7 +938,7 @@ main.banner-slider{
 
    .navbar-toggle i {
       color: #fff;
-      font-size: 18px;
+      font-size: 1.8rem;
       width: 38px;
       height: 38px;
       line-height: 38px;
@@ -956,9 +973,6 @@ main.banner-slider{
       justify-content: space-between
    }
 
-   .slide-head a img {
-      width: 150px
-   }
 
    .slide-head button {
       border: none;
@@ -3148,6 +3162,102 @@ div.actors>div {
    }
 }
 
+.lang-gender-bar {
+   display: flex;
+}
+.lang-gender-bar .lang-menu{
+   position: relative;padding-left:22px;padding-right:22px
+}
+.lang-gender-bar a,
+.lang-gender-bar button {
+   color: #fefefe;
+   background-color: #333;
+   min-width: 120px;
+   height: 45px;
+   padding-left: 5px;
+   padding-right: 5px;
+   display: inline-flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 4px;
+   border: none;
+   transition-duration: .3s;
+   font-size: .9rem;
+}
+.lang-gender-bar a.active,
+.lang-gender-bar a:hover,
+.lang-gender-bar button.mixitup-control-active,
+.lang-gender-bar button:hover {
+   background-color: #00cbff
+}
+.lang-gender-bar .controls{
+   display: flex;
+   flex-direction: row-reverse;
+}
+
+
+.lang-gender-bar .slick-slider{
+   width: 45%;
+   display: flex;
+   position: relative;
+   padding-left: 20px;
+   padding-right: 15px;
+}
+.lang-items>a{
+   margin-right: 5px;
+}
+.gender-buttons>button{
+   margin-right: 1px;
+}
+.lang-gender-bar .lang-menu>i{
+   border: none;
+   padding: 0;
+   border-radius: 50%;
+   color: #00cbff;
+   cursor: pointer;
+   position: absolute;
+   z-index: 2;
+   font-weight: 700;
+   font-size: 1.5rem;
+   top:12px;
+}
+.lang-menu #scrollleft{
+   left: 0;
+}
+.lang-menu #scrollright{
+   right: 0;
+}
+.lang-items{
+   display:flex; overflow-x:hidden; width:500px;
+}
+@media(max-width:992px){
+   .lang-gender-bar {
+      display: block;
+   }
+   .slick-slider{
+      width: 100%;
+   }
+   .lang-items{
+      width: 100%;
+   }
+}
+@media(max-width:575px) {
+   .gender-buttons button{
+      min-width: 100px;
+   }
+}
+@media(min-width:1170px) {
+   .lang-items{
+      width:625px;
+   }
+}
+@media(min-width:1235px) {
+   .lang-items{
+      width:745px;
+   }
+}
+
+
 .about-img {
    position: relative
 }
@@ -3239,31 +3349,6 @@ div.actors>div {
    background: #00a86b
 }
 
-.lang-menu {}
-
-.lang-menu a,
-.lang-menu button {
-   color: #fefefe;
-   background-color: #333;
-   min-width: 120px;
-   height: 45px;
-   padding-left: 5px;
-   padding-right: 5px;
-   display: inline-flex;
-   justify-content: center;
-   align-items: center;
-   border-radius: 4px;
-   border: none;
-   transition-duration: .3s;
-   font-size: .9rem;
-}
-
-.lang-menu a.active,
-.lang-menu a:hover,
-.lang-menu button.mixitup-control-active,
-.lang-menu button:hover {
-   background-color: #00cbff
-}
 
 @media(max-width:1199px) {
    .about-2 {
