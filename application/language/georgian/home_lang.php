@@ -1,4 +1,5 @@
 <?php
+$lang['findYourVoice'] = "იპოვე შენი ხმა";
 $lang['site_title'] = "Voices";
 $lang['home'] = "საწყისი";
 $lang['aboutUs'] = "ჩვენს შესახებ";
@@ -9,7 +10,10 @@ $lang['ourSocials'] = "სოციალური გვერდები";
 $lang['usefulLinks'] = "სასარგებლო ლინკები";
 $lang['pageNotFound'] = "გვერდი არ მოიძებნა";
 $lang['back2Home'] = "უკან დაბრუნება";
-$lang['priceCalculator'] = "ფასის გამომთვლელი";
+$lang['priceCalculator'] = "ფასის გამომთვლელი კალკულატორი";
+$lang['costStandard'] = "ერთ წუთამდე ქრონომეტრაჟის ტექსტის საფასური სტანდარტულია";
+$lang['longerThen6Min'] = "6 წუთზე მეტი ქრონომეტრაჟის ტექსტის ჩაწერის შემთხვევაში დაგვიკავშირდით პირადად.";
+$lang['wordsCount'] = "@words@ სიტყვა; @time@ წამი; ფასი: @price@₾";
 $lang['callUs'] = "დაგვირეკეთ";
 $lang['textUs'] = "მოგვწერეთ";
 $lang['findUs'] = "გვიპოვეთ";

@@ -73,14 +73,15 @@ $(document).ready(function () {
 	});
 
 
-	$('main.banner-slider').append(
-		$("<div>").attr({ 'class': 'd-flex scroll-to-voices' })
-			.append($("<a>").attr({ 'href': '#voice-catalog', 'id': 'scroll2voices' })
-				.append($("<img>").attr({ 'src': '../assets/images/mouse-scroll.svg', 'class': 'bouncing' }))
-			)
-	);
+	// append bouncing mouse
+	// $('main.banner-slider').append(
+	// 	$("<div>").attr({ 'class': 'd-flex scroll-to-voices' })
+	// 		.append($("<a>").attr({ 'href': '#voice-catalog', 'id': 'scroll2voices' })
+	// 			.append($("<img>").attr({ 'src': '../assets/images/mouse-scroll.svg', 'class': 'bouncing' }))
+	// 		)
+	// );
 
-
+	// Scroll down
 	$(document).on('click', '#scroll2voices', function (e) {
 		e.preventDefault();
 		var $voiceCatalog = $('#voice-catalog');
@@ -89,62 +90,20 @@ $(document).ready(function () {
 	});
 
 
-	$('.actor-overlay').on('mouseover', function (e) {//mouseover (desktop)
-		let target = $(e.target);
-		showVoices(target);
-	});
-
-	$('.actor-card').on('click', function (e) {//mouseover (mobile)
-		let target = $(e.target);
-		target = target.closest('.actor-card');
-		target = target.find('.actor-overlay');		
-		showVoices(target);
-	});
-
-	function showVoices(actorOverlay) {
-		if (actorOverlay.hasClass('spinning')) {
-			actorOverlay.removeClass('spinning');
-			let actorId = actorOverlay.closest('.actor-card').data('actorid');
-			let langId = $('#lang-id').val();
-					
-			$.ajax({
-				url: '/home/getSounds/'+actorId+'/'+langId,
-				type: "get",
-				beforeSend: function () { },
-				success: function (data) {
-					var response = JSON.parse(data)
-					if (response) {
-						if (response.status == 'success') {
-							actorOverlay.html('').css({'flex-direction':'column', 'padding': '0.5rem', 'padding-top': '1rem', 'justify-content': 'flex-start'});
-							response.sounds.forEach(sound => {
-								try {
-									var div = $('<div></div>').attr({ 'class': '' });
-									var audio = $('<audio/>').attr({ 'data-title': sound.voiceCat, 'data-audioid': 'voice-' + response.actor + '-' + sound.voice_category_id, 'controls': 'controls' });
-									var source = $('<source/>').attr({ 'src': "/assets/voices/" + sound.filename, 'type': 'audio/mpeg' });
-									actorOverlay.append(div.append(audio.append(source)))
-									audio.stylise();
-								}
-								catch (err) {
-									console.log(err.message);
-								}
-							});
-						}
-					}
-				}
-			});
-		}
-	}
+	
 
 });
 
 // price calculator modal
 $('#priceCalcModal').on('show.bs.modal', function (event) {
-	$('#actor-price').val('')
-	$('#voice-text').val('')
-	$('#chrono-results').html('')
-	var button = $(event.relatedTarget)
-	var price = button.data('actorprice')
-	$('#actor-price').val(price)
+	$('#actor-price').val('');
+	$('#voice-text').val('');
+	$('#chrono-results').html('');
+	var button = $(event.relatedTarget);
+	var price = button.data('actorprice');
+	$('#actor-price').val(price);
+	$('#actorImage').attr('src', '/assets/images/actors/'+ button.data('actorimage'));
+	$('#actor-vid').text(button.data('actorvid'));
 })
 
 

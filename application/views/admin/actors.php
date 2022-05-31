@@ -17,7 +17,7 @@
                   <!-- <span class="ui-icon ui-icon-arrowthick-2-n-s"></span> -->
                   <a href="<?= base_url('admin/editActor/'.$actor->id)?>" class="d-flex flex-column">
                      <span><?= $actor->name ?></span>
-                     <span><?= 'V'.str_pad($actor->id, 3, "0", STR_PAD_LEFT) ?></span>
+                     <span><?= $actor->vid ?></span>
                   </a>
                   <input type="hidden" name="actors[]" value="<?= $actor->id?>">
                   <div class="pr-1">

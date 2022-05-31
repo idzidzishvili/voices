@@ -220,10 +220,16 @@ class Admindb extends CI_Model
 		return $this->db->update_batch('actors', $data, 'id');
 	}
 
-	public function addActor($name, $gender, $image){
-		$this->db->insert('actors', ['name' => $name, 'gender_id' => $gender, 'image' => $image]);
+	public function addActor($name, $gender, $vid){
+		$this->db->insert('actors', ['name' => $name, 'gender_id' => $gender, 'vid' => $vid]);
 		$id = $this->db->insert_id();
-		return $this->db->where('id', $id)->update('actors', ['sort' => $id]);
+		$this->db->where('id', $id)->update('actors', ['sort' => $id]);
+		return $id;
+	}
+
+	public function updateFilename($id, $filename)
+	{
+		return $this->db->where('id', $id)->update('actors', ['image' => $filename]);
 	}
 
 	public function getActor($id){

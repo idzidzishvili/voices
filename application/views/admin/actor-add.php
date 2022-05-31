@@ -24,6 +24,13 @@
          </div>
       </div>
       <div class="form-group row">
+         <label class="col-sm-2 col-form-label">Voice ID</label>
+         <div class="col-sm-10">
+            <input type="text" class="form-control" name="vid" placeholder="Voice ID">
+            <small class="text-danger"><?php echo form_error('vid'); ?></small>
+         </div>
+      </div>
+      <div class="form-group row">
          <label class="col-sm-2 col-form-label">სურათი </label>
          <div class="col-sm-10">
             <input type="file" class="form-control" name="profileimage" value="">

@@ -40,7 +40,7 @@ class Actor extends CI_Model
 				WHERE voices.voice_language_id=$id";	
 		$voices = $this->db->query($q)->result();
 
-		$q = "SELECT actors.*,	GROUP_CONCAT(DISTINCT voice_languages.dom SEPARATOR ',') AS langs
+		$q = "SELECT actors.*,	GROUP_CONCAT(DISTINCT voice_languages.dom ORDER BY voice_languages.id SEPARATOR ',') AS langs
 				FROM actors 
 				LEFT JOIN voices ON voices.actor_id=actors.id
 				LEFT JOIN voice_languages ON voices.voice_language_id=voice_languages.id

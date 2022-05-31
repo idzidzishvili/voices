@@ -15,9 +15,16 @@
          <section class="banner" >
             <img class="w-100" src="<?= base_url('assets/images/slider/'.$slider->{'img_'.$this->lang->lang()})?>">
          </section>
-      <?php endforeach;?>
+      <?php endforeach;?>           
    </main>
 
+   <div class="position-relative d-none d-lg-block">
+      <div class="d-flex scroll-to-voices pr-2">
+         <a href="#voice-catalog" id="scroll2voices">
+            <img src= "<?= base_url('assets/images/mouse-scroll.svg')?>" class="bouncing">
+         </a>
+      </div> 
+   </div>
    
    <section class="section show-part" id="voice-catalog">
       <div class="container container-w">
@@ -69,9 +76,18 @@
                            <?= 'V'.str_pad($actor->id, 3, "0", STR_PAD_LEFT) ?>
                            <!-- <?= $actor->name?> -->
                         </span>
-                        <button class="bg-transparent border-0 ml-auto pr-1" type="button" data-toggle="modal" data-target="#priceCalcModal" data-actorprice="<?=$actor->langPrice?>">
-                           <i class="fa fa-calculator"></i>
-                        </button>
+                        <div class="ml-auto d-flex">
+                           <div class="lang-pills">
+                              <?php foreach(explode(',', $actor->diffLangs) as $lang): ?>
+                                 <a href="<?= site_url('?voicelang='.strtolower($lang))?>" class="lang-pill">
+                                    <?= strtoupper($lang) ?>
+                                 </a>
+                              <?php endforeach; ?>
+                           </div>
+                           <button class="bg-transparent border-0 pr-1" type="button" data-toggle="modal" data-target="#priceCalcModal" data-actorprice="<?=$actor->langPrice?>" data-actorvid="<?=$actor->vid?>" data-actorimage="<?=$actor->image?>">
+                              <i class="fa fa-calculator"></i>
+                           </button>
+                        </div>
                      </div>
                   </div>
                </div>
@@ -83,16 +99,24 @@
                <div class="modal-content">
                   <input type="hidden" id="actor-price">
                   <input type="hidden" id="lang-id" value="<?= $voiceLanguageId ?>">
-                  <div class="modal-header bg-primary py-3">
-                     <h5 class="modal-title text-white"><?= lang('priceCalculator') ?></h5>
-                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
+                  <div class="modal-header py-1">
+                     <div class="modal-header-controls">
+                        <h5 class="modal-title" id="actor-vid"></h5>
+                        <button type="button" class="ml-auto close " data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                     </div>
+                     <div class="modal-price-calc">
+                        <span class="caps-<?=$this->lang->lang()?> fw-600"><?= lang('priceCalculator') ?></span>
+                     </div>
                   </div>
-                  <div class="modal-body">                 
-                     <label for="voice-text" class="col-form-label w-100 text-center">ერთ წუთამდე ქრონომეტრაჟის ტექსტის საფასური სტანდარტულია:</label>
+                  <div class="modal-body w-100 d-flex flex-column">
+                     <img id="actorImage" class="align-self-center" width="150" src="">                 
+                     <label for="voice-text" class="col-form-label w-100 mb-2 text-center caps-<?=$this->lang->lang()?>">
+                        <span class="standart-price caps-<?=$this->lang->lang()?>"><?= lang('costStandard') ?></span>
+                     </label>
                      <textarea class="form-control mb-2" id="voice-text" rows="10"></textarea>
-                     <span id="chrono-results"></span>
+                     <span class="caps-<?=$this->lang->lang()?>" id="chrono-results"></span>
                   </div>
                   <div class="modal-footer">
                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -125,12 +149,12 @@
                }else if(time>=300 && time<=360){
                   sumPrice = parseInt(price) + parseInt(Math.round((time-300)*(price/1000) + price/200*60 + price/250*60 + price/333.33*60 + price/500*60));
                }else{
-                  sumPrice = '6 წუთზე მეტი ქრონომეტრაჟის ტექსტის ჩაწერის შემთხვევაში დაგვიკავშირდით პირადად.';
+                  sumPrice = '<?=lang("longerThen6Min")?>';
                }
                if (time>360){
                   document.getElementById("chrono-results").innerHTML = sumPrice
                }else{
-                  var t = '@words@ სიტყვა; @time@ წამი; ფასი: @price@₾';
+                  var t = '<?=lang("wordsCount")?>';
                   t = t.replace('@words@', words).replace('@time@', time).replace('@price@', sumPrice);
                   document.getElementById("chrono-results").innerHTML = t;
                }
@@ -150,6 +174,76 @@
                      lastGender = genderid;
                   }
                });
+            });
+
+            $('.actor-overlay').on('mouseover', function (e) {//mouseover (desktop)
+               let target = $(e.target);
+               showVoices(target);
+            });
+
+            $('.actor-card').on('click', function (e) {//mouseover (mobile)
+               let target = $(e.target);
+               target = target.closest('.actor-card');
+               target = target.find('.actor-overlay');		
+               showVoices(target);
+            });
+
+            function showVoices(actorOverlay) {
+               if (actorOverlay.hasClass('spinning')) {
+                  actorOverlay.removeClass('spinning');
+                  let actorId = actorOverlay.closest('.actor-card').data('actorid');
+                  let langId = $('#lang-id').val();
+                        
+                  $.ajax({
+                     url: '/home/getSounds/<?=$this->lang->lang()?>/'+actorId+'/'+langId,
+                     type: "get",
+                     beforeSend: function () { },
+                     success: function (data) {
+                        var response = JSON.parse(data)
+                        if (response) {
+                           if (response.status == 'success') {
+                              actorOverlay.html('').css({'flex-direction':'column', 'padding': '0.5rem', 'padding-top': '1rem', 'justify-content': 'flex-start'});
+                              response.sounds.forEach(sound => {
+                                 try {
+                                    var div = $('<div></div>').attr({ 'class': 'voice-<?=$this->lang->lang()?>' });
+                                    var audio = $('<audio/>').attr({ 'data-title': sound.voiceCat, 'data-audioid': 'voice-' + response.actor + '-' + sound.voice_category_id, 'controls': 'controls' });
+                                    var source = $('<source/>').attr({ 'src': "/assets/voices/" + sound.filename, 'type': 'audio/mpeg' });
+                                    actorOverlay.append(div.append(audio.append(source)))
+                                    audio.stylise();
+                                 }
+                                 catch (err) {
+                                    console.log(err.message);
+                                 }
+                              });
+                           }
+                        }
+                     }
+                  });
+               }
+            }
+
+            // intro audio
+            $(document).on('click', "#play-pause-button1", function () {
+               var audio = $("#sound").get(0);
+               $(this).toggleClass("active");
+               if ($(this).hasClass("active")) {
+                  $(this).html('<i class="far fa-pause"></i>');
+                  audio.play();
+               } else {
+                  $(this).html('<i class="far fa-play"></i>');
+                  audio.pause();
+               }
+            });
+            $(document).on('click', "#play-pause-button2", function () {
+               var audio = $("#sound").get(0);
+               $(this).toggleClass("active");
+               if ($(this).hasClass("active")) {
+                  $(this).html('<i class="far fa-pause"></i>');
+                  audio.play();
+               } else {
+                  $(this).html('<i class="far fa-play"></i>');
+                  audio.pause();
+               }
             });
 
          </script>

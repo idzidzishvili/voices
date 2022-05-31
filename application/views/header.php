@@ -6,8 +6,14 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="keywords" content="">
    <meta name="description" content="">
-   <title>Fmradio - FM Radio Bootstrap HTML5 Template</title>
-   <link rel="icon" href="assets/img/favicon.png">
+   <title>VOICES>GE :: <?= lang('findYourVoice') ?></title> 
+   <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url('assets/images/apple-touch-icon.png'); ?>">
+   <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url('assets/images/favicon-32x32.png'); ?>">
+   <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/images/favicon-16x16.png'); ?>">
+   <link rel="manifest" href="<?= base_url('assets/images/site.webmanifest'); ?>">
+   <link rel="mask-icon" href="<?= base_url('assets/images/safari-pinned-tab.svg'); ?>" color="#5bbad5">
+   <meta name="msapplication-TileColor" content="#da532c">
+   <meta name="theme-color" content="#ffffff">
    <link href="<?= base_url('assets/css/fontawesome-all.min.css'); ?>" rel="stylesheet" type="text/css" />
    <link href="<?= base_url('assets/css/slick.css'); ?>" rel="stylesheet" type="text/css" />
    <link href="<?= base_url('assets/css/venobox.min.css'); ?>" rel="stylesheet" type="text/css" />
@@ -35,7 +41,6 @@
                <div class="col-lg-6"><a class="header-logo" href="<?= site_url('/'); ?>"><img src="<?= base_url('assets/images/logo.png') ?>" alt="logo"></a></div>
                <div class="col-lg-6">
                   <div class="header-btn">
-                     <!-- <a class="btn btn-outline" href="sponsor.html"><i class="far fa-paper-plane"></i><span>Join As A Sponsor</span></a> -->
                      <?php echo anchor($this->lang->switch_uri('ge'), '<img src="'.base_url('assets/images/ka.png').'">', ['title' => 'Georgian', 'class' => 'lang-flag '.($this->lang->lang()=='ge'?'active':'')]); ?>                     
                      <?php echo anchor($this->lang->switch_uri('en'), '<img src="'.base_url('assets/images/en.png').'">', ['title' => 'English', 'class' => 'lang-flag '.($this->lang->lang()=='en'?'active':'')]); ?>                     
                      <?php echo anchor($this->lang->switch_uri('ru'), '<img src="'.base_url('assets/images/ru.png').'">', ['title' => 'Russian', 'class' => 'lang-flag '.($this->lang->lang()=='ru'?'active':'')]); ?>              
@@ -46,7 +51,6 @@
       </div>
    </header>
 
-
    <nav class="navbar-part">
       <div class="navbar-bg">
          <div class="container">
@@ -56,14 +60,14 @@
                   <div class="navbar-slide">
                      <div class="slide-head"><a href="index.html#"><img src="<?= base_url('assets/images/logo.png') ?>" height="48" width="48" alt="logo"></a><button class="cencel"><i class="fas fa-times"></i></button></div>
                      <ul class="navbar-list">
-                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('/')?>"><span><i class="far fa-home"></i> <?= lang('home') ?> </span></a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('services')?>"><span><i class="far fa-microphone"></i> <?= lang('services') ?> </span></a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('about-us')?>"><span><i class="far fa-microphone"></i> <?= lang('aboutUs') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('/')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-home"></i> <?= lang('home') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('services')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-headphones"></i> <?= lang('services') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('about-us')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-microphone"></i> <?= lang('aboutUs') ?> </span></a></li>
                         <li class="navbar-player">
-                           <div class="player"><button class="player-btn" id="play-pause-button"><i class="far fa-play"></i></button></div>
+                           <div class="player"><button class="player-btn" id="play-pause-button1"><i class="far fa-play"></i></button></div>
                         </li>
-                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('blog')?>"><span><i class="far fa-blog"></i> <?= lang('blog') ?> </span></a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('contact')?>"><span><i class="far fa-user-headset"></i> <?= lang('contact') ?></span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('blog')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-blog"></i> <?= lang('blog') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('contact')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-phone"></i> <?= lang('contact') ?></span></a></li>
                         <li class="navbar-item social">
                            <a class="navbar-link" href="https://www.facebook.com/Voicesge-106627137411297"><span><i class="fab fa-facebook-f"></i></span></a>
                         </li>
@@ -79,10 +83,21 @@
                            <?php echo anchor($this->lang->switch_uri('ru'), '<img src="'.base_url('assets/images/ru.png').'">', ['title' => 'Russian', 'class' => 'lang-flag '.($this->lang->lang()=='ru'?'active':'')]); ?>
                         </li>
                      </ul>
-                     <!-- <div class="navbar-btn"><a class="btn btn-outline" href="sponsor.html"><i class="far fa-paper-plane"></i><span>Join As A Sponsor</span></a></div> -->
                   </div>
                </div>
             </div>
          </div>
       </div>
    </nav>
+
+   <div class="bottom-player">
+      <div class="player">
+         <button class="player-btn" id="play-pause-button2"><i class="far fa-play"></i></button>
+      </div>
+   </div>
+
+   <div class="audio-part">
+      <audio id="sound">
+         <source src="<?= base_url('assets/audio/audio.mp3')?>" type="audio/mpeg">
+      </audio>
+   </div>

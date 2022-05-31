@@ -45,6 +45,7 @@ class Home extends CI_Controller
 	public function services()
 	{
 		$data['services'] = $this->mainmodel->getServices();
+		$data['contact'] = $this->mainmodel->getContactDetails();
 		$this->load->view('services', $data);
 	}
 
@@ -53,13 +54,15 @@ class Home extends CI_Controller
 	{
 		$data['partners'] = $this->mainmodel->getPartners();
 		$data['aboutUs'] = $this->mainmodel->getAboutUs();
+		$data['contact'] = $this->mainmodel->getContactDetails();
 		$this->load->view('about', $data);
 	}
 
 
 	public function blog()
 	{
-		$this->load->view('blog');
+		$data['contact'] = $this->mainmodel->getContactDetails();
+		$this->load->view('blog', $data);
 	}
 
 
@@ -90,10 +93,11 @@ class Home extends CI_Controller
 	} 	
 
 
-	public function getSounds($actor, $voiceLang){
-		$sounds = $this->actor->getActorSoundByLangid($actor, $voiceLang, $this->lang->lang());
+	public function getSounds($lang, $actor, $voiceLang){
+		if(!in_array($lang, ['ge', 'en', 'ru'])) $lang = 'ge';
+		$sounds = $this->actor->getActorSoundByLangid($actor, $voiceLang, $lang);
 		if($sounds)
-			echo json_encode(['status' => 'success', 'actor' => $actor, 'sounds' => $sounds ]);
+			echo json_encode(['status' => 'success', 'actor' => $actor, 'sounds' => $sounds, 'lang' =>  $this->lang->lang()]);
 		else
 			echo json_encode(['status' => 'error' ]);
 		return;
@@ -103,7 +107,9 @@ class Home extends CI_Controller
 
 	public function test()
 	{
-		$this->load->view('test');
+		echo site_url();
+		echo '<br>';
+		echo base_url();
 		
 	}
 

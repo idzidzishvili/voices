@@ -99,6 +99,12 @@
                         კონტაქტი
                      </a>
                   </li>
+                  <li class="nav-item">
+                     <a class="nav-link <?= $page=='info-audio'?'active':''?>" href="<?= base_url('admin/infoaudio')?>">
+                        <span data-feather="layers"></span>
+                        ინფო აუდიო
+                     </a>
+                  </li>
                </ul>               
             </div>
          </nav>

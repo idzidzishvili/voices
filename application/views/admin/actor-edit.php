@@ -18,7 +18,7 @@
    <div class="row mb-4 mt-4">
       <div class="col-12 col-md-3 col-lg-2 mb-3">
          <?php if ($actor->image) : ?>
-            <img src="<?= base_url('assets/images/actors/' . $actor->image) ?>" height="150">
+            <img src="<?= base_url('assets/images/actors/' . $actor->image) ?>" height="180">
          <?php endif; ?>
       </div>
 
@@ -26,13 +26,13 @@
          <div class="row mb-3">
             <label class="col-sm-2 col-form-label">სახელი, გვარი</label>
             <div class="col-sm-10">
-               <input type="text" class="form-control" name="name" value="<?= $actor->name ?>">
+               <input type="text" class="form-control form-control-sm" name="name" value="<?= $actor->name ?>">
             </div>
          </div>
          <div class="row mb-3">
             <label class="col-sm-2 col-form-label">სქესი</label>
             <div class="col-sm-10">
-               <select class="form-control" name="gender">
+               <select class="form-control form-control-sm" name="gender">
                   <?php foreach ($genders as $gender) : ?>
                      <option value="<?= $gender->id ?>" <?= $actor->gender_id == $gender->id ? 'selected' : '' ?>><?= $gender->name_ge ?></option>
                   <?php endforeach; ?>
@@ -41,9 +41,16 @@
             </div>
          </div>
          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Voice ID</label>
+            <div class="col-sm-10">
+               <input type="text" class="form-control form-control-sm" name="vid" value="<?= $actor->vid ?>">
+               <small class="text-danger"><?php echo form_error('vid'); ?></small>
+            </div>
+         </div>
+         <div class="row mb-3">
             <label class="col-sm-2 col-form-label">სურათი</label>
             <div class="col-sm-10">
-               <input type="file" class="form-control" name="profileImage" value="">
+               <input type="file" class="form-control form-control-sm" name="profileImage" value="">
             </div>
          </div>
       </div>
@@ -80,9 +87,6 @@
             </div>
          </div>
       <?php endforeach; ?>
-      <!-- <input type="file" class="form-control form-control-sm" name="xxx[0]">
-      <input type="file" class="form-control form-control-sm" name="xxx[1]">
-      <input type="file" class="form-control form-control-sm" name="xxx[2]"> -->
    </div>
 
    <div class="row px-2">

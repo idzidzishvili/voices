@@ -24,15 +24,20 @@ class Admin extends CI_Controller
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
 			$this->form_validation->set_rules('name', 'სახელი, გვარი', 'trim|required');
 			$this->form_validation->set_rules('gender', 'სქესი', 'integer|required');
+			$this->form_validation->set_rules('vid', 'Voice ID', 'required|max_length[10]|is_unique[actors.vid]');
 			if (empty($_FILES['profileimage']['name']))
 				$this->form_validation->set_rules('profileimage', 'სურათი', 'required');
 			if ($this->form_validation->run()) {
-				if ($this->Admindb->addActor($this->input->post('name', true), $this->input->post('gender'), $_FILES['profileimage']['name'])) {
+				$actorId = $this->Admindb->addActor($this->input->post('name', true), $this->input->post('gender'), $this->input->post('vid', true));
+				if ($actorId) {
 					$config = $this->config->item('fileUploadConfig');
 					$config['upload_path'] = 'assets/images/actors/';
+					$filename = 'actor' . str_pad($actorId, 4, "0", STR_PAD_LEFT) . '.' . pathinfo($_FILES['profileimage']['name'], PATHINFO_EXTENSION);
+					$config['file_name'] = $filename;
 					$this->load->library('upload');
 					$this->upload->initialize($config);
 					if ($this->upload->do_upload('profileimage')) {
+						$this->Admindb->updateFilename($actorId, $filename);
 						redirect('admin/actors');
 						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
 						//array_push($oldFiles, $originalFileName);
@@ -70,6 +75,7 @@ class Admin extends CI_Controller
 			if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
 				$this->form_validation->set_rules('name', 'სახელი', 'trim|required');
 				$this->form_validation->set_rules('gender', 'სქესი', 'integer|required');
+				$this->form_validation->set_rules('vid', 'Voice ID', 'required|max_length[10]');
 
 				// Add voice language validation check if any of voices is present 
 				foreach ($voiceLanguages as $voiceLang) {
@@ -88,17 +94,19 @@ class Admin extends CI_Controller
 					// Profile data update - get profile data and check for profile image
 					$editArr = [];
 					$editArr['name'] = $this->input->post('name', true);
-					$editArr['gender_id'] = $this->input->post('gender');
-					if ($_FILES['profileImage']['name'])
-						$editArr['image'] = $_FILES['profileImage']['name'];
+					$editArr['vid'] = $this->input->post('vid', true);
+					$editArr['gender_id'] = $this->input->post('gender');					
 					$this->Admindb->updateActor($id, $editArr);
 					// if profile image is present load library and upload
 					if ($_FILES['profileImage']['name']) {
 						$config = $this->config->item('fileUploadConfig');
 						$config['upload_path'] = 'assets/images/actors/';
+						$filename = 'actor' . str_pad($id, 4, "0", STR_PAD_LEFT) . '.' . pathinfo($_FILES['profileImage']['name'], PATHINFO_EXTENSION);
+						$config['file_name'] = $filename;
 						$this->load->library('upload', $config, 'profileImage');
 						$this->profileImage->initialize($config);
 						$this->profileImage->do_upload('profileImage');
+						$this->Admindb->updateFilename($id, $filename);
 					}
 
 					// Voices upload
@@ -821,36 +829,28 @@ class Admin extends CI_Controller
 	}
 
 
-	private function upload_files($path, $title, $files)
+	public function infoaudio()
 	{
-		$config = array(
-			'upload_path'   => $path,
-			'max_size'      => 8192,
-			'allowed_types' => 'mp3|wav|MP3|WAV',
-			'overwrite'     => TRUE,
-			'remove_spaces' => TRUE
-		);
-
-		$this->load->library('upload', $config);
-
-		$voices = array();
-
-		foreach ($files['name'] as $key => $image) {
-			$_FILES['voices[]']['name'] = $files['name'][$key];
-			$_FILES['voices[]']['type'] = $files['type'][$key];
-			$_FILES['voices[]']['tmp_name'] = $files['tmp_name'][$key];
-			$_FILES['voices[]']['error'] = $files['error'][$key];
-			$_FILES['voices[]']['size'] = $files['size'][$key];
-
-			$this->upload->initialize($config);
-
-			if ($this->upload->do_upload('voices[]')) {
-				$this->upload->data();
-			} else {
-				return false;
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+			if($_FILES['infoaudio']['name']){
+				$config = $this->config->item('fileUploadConfig');
+				$config['upload_path'] = 'assets/audio/';
+				$config['max_size'] = 5120;
+				$config['allowed_types'] = 'mp3';
+				$config['overwrite'] = TRUE;
+				$config['file_name'] = 'audio.mp3';
+				$this->load->library('upload');
+				$this->upload->initialize($config);
+				$this->upload->do_upload('infoaudio');
+				redirect('admin/infoaudio');
 			}
 		}
 
-		return $voices;
+		$data['page'] = 'info-audio';
+		$this->load->view('admin/info-audio', $data);
+		
 	}
+
+
+	
 }
