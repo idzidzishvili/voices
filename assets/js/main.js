@@ -23,6 +23,7 @@ $(window).on("scroll", function () {
 
 $(document).ready(function () {
 	$('.venobox').venobox();
+	$("body").on("contextmenu", "img", function(e){return false;});
 
 	// main page slider
 	$('.banner-slider').slick({
@@ -94,57 +95,10 @@ $(document).ready(function () {
 
 });
 
-// price calculator modal
-$('#priceCalcModal').on('show.bs.modal', function (event) {
-	$('#actor-price').val('');
-	$('#voice-text').val('');
-	$('#chrono-results').html('');
-	var button = $(event.relatedTarget);
-	var price = button.data('actorprice');
-	$('#actor-price').val(price);
-	$('#actorImage').attr('src', '/assets/images/actors/'+ button.data('actorimage'));
-	$('#actor-vid').text(button.data('actorvid'));
-})
-
-
 
 function get_numbers(input) {
 	return input.match(/[0-9]+/g);
 }
-
-
-// $('#voice-text').bind('input propertychange', function() {
-//     var price = 250;
-//     //console.log(price);
-//     var words = this.value.trim().match(/(\s+)/g).length;
-//     if(this.value.length) {words++;}
-//     var sumPrice;
-//     time = (words/2);
-
-//     if(time<60){
-//         sumPrice = price;
-//     }else if(time>=60 && time<120){
-//         sumPrice = price + Math.round((time-60)*(price/200));
-//     }else if(time>=120 && time<180){
-//         sumPrice = price + Math.round((time-120)*(price/250) + price/200*60);
-//     }else if(time>=180 && time<240){
-//         sumPrice = price + Math.round((time-180)*(price/333.33) + price/200*60 + price/250*60);
-//     }else if(time>=240 && time<300){
-//         sumPrice = price + Math.round((time-240)*(price/500) + price/200*60 + price/250*60 + price/333.33*60);
-//     }else if(time>=300 && time<=360){
-//         sumPrice = price + Math.round((time-300)*(price/1000) + price/200*60 + price/250*60 + price/333.33*60 + price/500*60);
-//     }else{
-//         sumPrice = '6 წუთზე მეტი ქრონომეტრაჟის ტექსტის ჩაწერის შემთხვევაში დაგვიკავშირდით პირადად.';
-//     }
-//     if (time>360){
-//         $('#chrono-results').html(sumPrice);
-//     }else{
-//         var t = '@words@ სიტყვა; @time@ წამი; ფასი: @price@₾';
-//         t = t.replace('@words@', words).replace('@time@', time).replace('@price@', sumPrice);
-//         $('#chrono-results').text(t);
-//     }
-
-// });
 
 
 

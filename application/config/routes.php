@@ -41,9 +41,10 @@ $route['home/add-application'] = 'home/addApplication';
 
 $route['^(ge|en|ru)/services'] = "home/services";
 $route['^(ge|en|ru)/about-us'] = "home/aboutus";
-$route['^(ge|en|ru)/blog']     = "home/blog";
+$route['^(ge|en|ru)/blogs']    = "home/blogs";
+$route['^(ge|en|ru)/blog/(:any)/(:any)'] = "home/blog/$1/$2";
 $route['^(ge|en|ru)/contact']  = "home/contact";
-$route['^(ge|en|ru)/test']  = "home/test";
+$route['^(ge|en|ru)/sendmail']  = "home/sendmail";
 
 
 

@@ -105,6 +105,12 @@
                         ინფო აუდიო
                      </a>
                   </li>
+                  <li class="nav-item">
+                     <a class="nav-link <?= $page=='blog'?'active':''?>" href="<?= base_url('admin/blogs')?>">
+                        <span data-feather="layers"></span>
+                        ბლოგი
+                     </a>
+                  </li>
                </ul>               
             </div>
          </nav>

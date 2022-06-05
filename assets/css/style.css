@@ -313,6 +313,21 @@ h6 {
    font-weight: var(--rweight)
 }
 
+body::-webkit-scrollbar {
+   width: 10px;
+}
+body::-webkit-scrollbar-track {
+   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+body::-webkit-scrollbar-thumb {
+   background-color: #00cbff;
+   outline: 1px solid #00cbff;
+}
+body{
+scrollbar-color: #00cbff;
+scrollbar-width: thin
+}
+
 .back2top-btn {
    position: fixed;
    bottom: 20px;
@@ -343,12 +358,12 @@ main.banner-slider{
 .scroll-to-voices{
    position: absolute;
    bottom: 10%;
-   height: 70px;
+   height: 100px;
    width: 100%;
    justify-content: center;
    -webkit-animation: b2top 2.5s linear infinite;
    animation: b2top 2.5s linear infinite;
-   max-width: 1450px;
+   /* max-width: 1450px; */
    left: 0;
    right: 0;
    margin-left: auto;
@@ -357,6 +372,7 @@ main.banner-slider{
 #scroll2voices{
    scroll-behavior: smooth;
    margin-left: auto;
+   padding-right: 40px;
 }
 #scroll2voices img{
    height: 60px;
@@ -555,7 +571,7 @@ main.banner-slider{
    font-size: 14px;
    font-weight: 500;
    padding: 14px 35px;
-   border-radius: 50px;
+   border-radius: 5px;
    text-transform: uppercase;
    text-shadow: 2px 3px 8px rgba(0, 0, 0, .1);
    -webkit-box-shadow: 0 8px 25px 0 rgba(72, 69, 90, .1);
@@ -607,6 +623,10 @@ main.banner-slider{
    border-color: #00a86b;
    -webkit-box-shadow: 0 25px 60px 0 rgba(0, 0, 0, .1);
    box-shadow: 0 25px 60px 0 rgba(0, 0, 0, .1)
+}
+
+.btn-sm {
+   padding: 0.6rem 0.8rem;
 }
 
 .icon i {
@@ -2345,7 +2365,6 @@ div.actors>div {
 .blog-det-banner {
    position: relative;
    border-radius: 10px;
-   margin-bottom: 50px
 }
 
 .blog-det-banner img {
@@ -3125,7 +3144,7 @@ div.actors>div {
 
 .banner-slider .slick-dots {
    position: absolute;
-   bottom: 20px;
+   bottom: 40px;
    left: 40px
 }
 
@@ -3144,8 +3163,8 @@ div.actors>div {
 }
 
 .banner-slider .slick-active button {
-   background: #00a86b !important;
-   border: 1px solid #00a86b !important
+   background: #00cbff !important;/*00a86b*/
+   border: 1px solid #00cbff !important 
 }
 
 .banner-slider .bannerprev {
@@ -3205,14 +3224,14 @@ div.actors>div {
 .lang-gender-bar .lang-menu{
    position: relative;padding-left:22px;padding-right:22px
 }
-.lang-gender-bar a,
+.lang-gender-bar span,
 .lang-gender-bar button {
    color: #fefefe;
    background-color: #333;
    min-width: 120px;
    height: 45px;
-   padding-left: 5px;
-   padding-right: 5px;
+   padding-left: 8px;
+   padding-right: 8px;
    display: inline-flex;
    justify-content: center;
    align-items: center;
@@ -3221,8 +3240,8 @@ div.actors>div {
    transition-duration: .3s;
    font-size: .9rem;
 }
-.lang-gender-bar a.active,
-.lang-gender-bar a:hover,
+.lang-gender-bar span.active,
+.lang-gender-bar span:hover,
 .lang-gender-bar button.mixitup-control-active,
 .lang-gender-bar button:hover {
    background-color: #00cbff
@@ -3290,7 +3309,7 @@ div.actors>div {
 }
 @media(min-width:1235px) {
    .lang-items{
-      width:745px;
+      width:777px;
    }
 }
 
@@ -4027,17 +4046,16 @@ div.actors>div {
 }
 
 .form-group {
-   margin: 0 50px 50px;
    position: relative
 }
 
 .form-group:focus-within input,
 .form-group:focus-within textarea {
-   border: 2px solid #00a86b
+   border: 1px solid #00cbff
 }
 
 .form-group:focus-within i {
-   background: #00a86b;
+   background: #00cbff;
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent
 }
@@ -4048,39 +4066,7 @@ div.actors>div {
    border: none;
    outline: none;
    background: 0 0;
-   border: 2px solid #aaa
-}
-
-.form-group input::-webkit-input-placeholder,
-.form-group textarea::-webkit-input-placeholder {
-   font-size: 14px;
-   font-weight: 500;
-   font-style: italic;
-   text-transform: uppercase
-}
-
-.form-group input:-ms-input-placeholder,
-.form-group textarea:-ms-input-placeholder {
-   font-size: 14px;
-   font-weight: 500;
-   font-style: italic;
-   text-transform: uppercase
-}
-
-.form-group input::-ms-input-placeholder,
-.form-group textarea::-ms-input-placeholder {
-   font-size: 14px;
-   font-weight: 500;
-   font-style: italic;
-   text-transform: uppercase
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-   font-size: 14px;
-   font-weight: 500;
-   font-style: italic;
-   text-transform: uppercase
+   border: 1px solid #ced4da;
 }
 
 .form-group input {
@@ -4088,7 +4074,6 @@ div.actors>div {
    padding-left: 20px;
    padding-right: 50px;
    border-radius: 10px;
-   color: #00a86b
 }
 
 .form-group textarea {
@@ -4097,7 +4082,6 @@ div.actors>div {
    padding-left: 20px;
    padding-right: 50px;
    border-radius: 10px;
-   color: #00a86b
 }
 
 .form-group i {
@@ -4198,7 +4182,7 @@ div.actors>div {
    width: 50px;
    height: 50px;
    border-radius: 100%;
-   background: #00a86b;
+   background: #00cbff;
    -webkit-animation: loader 1.5s linear infinite;
    animation: loader 1.5s linear infinite
 }
@@ -4992,7 +4976,7 @@ div.actors>div {
    font-size:.7rem;
    font-weight: 600;
 }
-#priceCalcModal textarea{
+#priceCalcModal #price-calculator textarea{
    padding: 15px 20px;
    font-size: 14px;
    width: 100%;
@@ -5005,6 +4989,21 @@ div.actors>div {
 #priceCalcModal #chrono-results{
    font-weight: 600;
    font-size: .9rem;
+   text-align: center;
+}
+#priceCalcModal .modal-footer {
+   padding: 0.6rem 1rem;
+}
+
+#information-form input{
+   border-radius: 0.25rem;
+   padding: 0.375rem 0.75rem;
+   color: #495057;
+   height: 40px;
+   line-height: 1;
+}
+#information-form .form-group label{
+   margin-bottom: .25rem;
 }
 .voice-ge p{
    font-family: Mark GEO CAPS;

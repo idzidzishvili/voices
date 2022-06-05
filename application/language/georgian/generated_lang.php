@@ -3,4 +3,4 @@
           defined('BASEPATH') OR exit('No direct script access allowed');
           $lang = array();
 
-$lang['upload_invalid_filetype'] = "upload_invalid_filetype";
+$lang['db_error_heading'] = "db_error_heading";

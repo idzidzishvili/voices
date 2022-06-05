@@ -2,7 +2,7 @@
 $lang['findYourVoice'] = "Find voice for you";
 $lang['site_title'] = "Voices";
 $lang['home'] = "Home";
-$lang['aboutUs'] = "About Us";
+$lang['aboutUs'] = "About";
 $lang['contact'] = "Contact";
 $lang['services'] = "Services";
 $lang['blog'] = "Blog";
@@ -18,11 +18,12 @@ $lang['callUs'] = "Call us";
 $lang['textUs'] = "Write us";
 $lang['findUs'] = "Find us";
 $lang['send'] = "Send";
-$lang['fullName']    = "Full Name";
-$lang['address']     = "Address";
-$lang['phone']       = "Phone";
-$lang['orderProcess']  = "Order Process";
-
-
-
-
+$lang['fullName'] = "Full Name";
+$lang['address'] = "Address";
+$lang['phone'] = "Phone";
+$lang['orderProcess'] = "Order Process";
+$lang['infoForm'] = "Information form";
+$lang['companyName'] = "Company name";
+$lang['orderDetails'] = "Order details";
+$lang['next'] = "Next";
+$lang['email_sent'] = "Email sent";

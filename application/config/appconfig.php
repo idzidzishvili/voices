@@ -2,7 +2,7 @@
 $config['uploadFolder'] = 'uploads/';
 $config['fileUploadConfig'] = array(
    'max_size'        => 5120,
-   'allowed_types'   => 'jpg|jpeg|png|JPG|JPEG|PNG',
+   'allowed_types'   => 'jpg|jpeg|png|JPG|JPEG|PNG|WebP|webp',
    'overwrite'       => TRUE,
    'remove_spaces'   => TRUE
 );

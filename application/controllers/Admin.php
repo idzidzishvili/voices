@@ -111,7 +111,7 @@ class Admin extends CI_Controller
 
 					// Voices upload
 					foreach ($voiceLanguages as $voiceLang) {
-						// update or insert voice language price if canged
+						// update or insert voice language price if changed
 						if ($voiceLang->langPrice != $this->input->post('voice_price[' . $voiceLang->id . ']')) {
 							$this->Admindb->setVoicePrice($id, $voiceLang->id, $this->input->post('voice_price[' . $voiceLang->id . ']'));
 						}
@@ -119,7 +119,8 @@ class Admin extends CI_Controller
 						foreach ($voiceCategories as $voiceCat) {
 							if (!empty($_FILES['voice']['name'][$voiceLang->id][$voiceCat->id])) {								
 								// Define new $_FILES array - $_FILES['voice_']
-								$_FILES['voice_']['name']     = $_FILES['voice']['name'][$voiceLang->id][$voiceCat->id];
+								$filename = 'VOICE'.str_pad($id, 5, "0", STR_PAD_LEFT).str_pad($voiceLang->id, 2, "0", STR_PAD_LEFT).str_pad($voiceCat->id, 2, "0", STR_PAD_LEFT).'.'. pathinfo($_FILES['voice']['name'][$voiceLang->id][$voiceCat->id], PATHINFO_EXTENSION);
+								$_FILES['voice_']['name']     = $filename;// $_FILES['voice']['name'][$voiceLang->id][$voiceCat->id];
 								$_FILES['voice_']['type']     = $_FILES['voice']['type'][$voiceLang->id][$voiceCat->id];
 								$_FILES['voice_']['tmp_name'] = $_FILES['voice']['tmp_name'][$voiceLang->id][$voiceCat->id];
 								$_FILES['voice_']['error']    = $_FILES['voice']['error'][$voiceLang->id][$voiceCat->id];
@@ -128,11 +129,12 @@ class Admin extends CI_Controller
 								$config = array();
 								$config = $this->config->item('voiceUploadConfig');
 								$config['upload_path'] = 'assets/voices/';
+								// $config['file_name'] = 'assetsvoices';
 								 //Load upload library
 								$this->load->library('upload', $config, 'voice');
 								//perform upload and insert in db
 								if ($this->voice->do_upload('voice_')) {
-									$this->Admindb->setActorVoice($id, $voiceLang->id, $voiceCat->id, $_FILES['voice']['name'][$voiceLang->id][$voiceCat->id]);
+								$this->Admindb->setActorVoice($id, $voiceLang->id, $voiceCat->id, $filename /*$_FILES['voice']['name'][$voiceLang->id][$voiceCat->id]*/);
 								}
 							}
 						}
@@ -845,10 +847,127 @@ class Admin extends CI_Controller
 				redirect('admin/infoaudio');
 			}
 		}
-
 		$data['page'] = 'info-audio';
-		$this->load->view('admin/info-audio', $data);
-		
+		$this->load->view('admin/info-audio', $data);		
+	}
+
+
+	public function blogs()
+	{
+		$data['blogs'] = $this->Admindb->getBlogs();
+		$data['page'] = 'blog';
+		$this->load->view('admin/blogs', $data);
+	}
+
+	public function addBlog()
+	{
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+			$this->form_validation->set_rules('title_ge', 'სათაური ქართულად', 'trim|required|max_length[250]');
+			$this->form_validation->set_rules('title_en', 'სათაური ინგლისურად', 'trim|required|max_length[250]');
+			$this->form_validation->set_rules('title_ru', 'სათაური რუსულად', 'trim|required|max_length[250]');
+			$this->form_validation->set_rules('text_ge', 'ტექსტი ქართულად', 'required');
+			$this->form_validation->set_rules('text_en', 'ტექსტი ინგლისურად', 'required');
+			$this->form_validation->set_rules('text_ru', 'ტექსტი რუსულად', 'required');
+			$this->form_validation->set_rules('tags_ge', 'ტეგები ქართულად', 'trim|required|max_length[250]');
+			$this->form_validation->set_rules('tags_en', 'ტეგები ინგლისურად', 'trim|required|max_length[250]');
+			$this->form_validation->set_rules('tags_ru', 'ტეგები რუსულად', 'trim|required|max_length[250]');
+			if (empty($_FILES['image1']['name']))
+				$this->form_validation->set_rules('image1', 'სურათი', 'required');
+
+			if ($this->form_validation->run()) {
+				$id = $this->Admindb->addBlog(
+					$this->input->post('title_ge', true),
+					$this->input->post('title_en', true),
+					$this->input->post('title_ru', true),
+					$this->input->post('text_ge', true),
+					$this->input->post('text_en', true),
+					$this->input->post('text_ru', true),
+					$this->input->post('tags_ge', true),
+					$this->input->post('tags_en', true),
+					$this->input->post('tags_ru', true)
+				);
+				if ($id) {
+					$filename = 'blog'.str_pad($id, 4, "0", STR_PAD_LEFT).'.'. pathinfo($_FILES['image1']['name'], PATHINFO_EXTENSION);
+					$config = $this->config->item('fileUploadConfig');
+					$config['upload_path'] ='assets/images/blogs/';
+					$config['file_name'] = $filename;
+					$this->load->library('upload');
+					$this->upload->initialize($config);
+					if ($this->upload->do_upload('image1')) {
+						$this->Admindb->setBlogImage($id, $_FILES['image1']['name']);
+						redirect('admin/blogs');
+						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+						//array_push($oldFiles, $originalFileName);
+					} else {
+						// array_push($notUplFiles, $originalFileName);
+					}
+				}
+			}
+		}
+		$data['page'] = 'blog-add';
+		$this->load->view('admin/blog-add', $data);
+	}
+
+	public function editBlog($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+				$this->form_validation->set_rules('title_ge', 'სათაური ქართულად', 'trim|required|max_length[250]');
+				$this->form_validation->set_rules('title_en', 'სათაური ინგლისურად', 'trim|required|max_length[250]');
+				$this->form_validation->set_rules('title_ru', 'სათაური რუსულად', 'trim|required|max_length[250]');
+				$this->form_validation->set_rules('text_ge', 'ტექსტი ქართულად', 'required');
+				$this->form_validation->set_rules('text_en', 'ტექსტი ინგლისურად', 'required');
+				$this->form_validation->set_rules('text_ru', 'ტექსტი რუსულად', 'required');
+				$this->form_validation->set_rules('tags_ge', 'ტეგები ქართულად', 'trim|required|max_length[250]');
+				$this->form_validation->set_rules('tags_en', 'ტეგები ინგლისურად', 'trim|required|max_length[250]');
+				$this->form_validation->set_rules('tags_ru', 'ტეგები რუსულად', 'trim|required|max_length[250]');
+				if ($this->form_validation->run()) {
+					$this->Admindb->updateBlog(
+							$id,
+							$this->input->post('title_ge', true),
+							$this->input->post('title_en', true),
+							$this->input->post('title_ru', true),
+							$this->input->post('text_ge', true),
+							$this->input->post('text_en', true),
+							$this->input->post('text_ru', true),
+							$this->input->post('tags_ge', true),
+							$this->input->post('tags_en', true),
+							$this->input->post('tags_ru', true)
+					);
+					// if image present
+					if ($_FILES['image1']['name']){
+						$filename = 'blog'.str_pad($id, 4, "0", STR_PAD_LEFT).'.'. pathinfo($_FILES['image1']['name'], PATHINFO_EXTENSION);
+						$config = $this->config->item('fileUploadConfig');
+						$config['upload_path'] ='assets/images/blogs/';
+						$config['file_name'] = $filename;
+						$this->load->library('upload');
+						$this->upload->initialize($config);						
+						if($this->upload->do_upload('image1')){
+							$this->Admindb->setBlogImage($id, $_FILES['image1']['name']);
+						}
+					}
+					// {
+						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
+						//array_push($oldFiles, $originalFileName);
+					return redirect('admin/blogs');
+					// } else {
+						// array_push($notUplFiles, $originalFileName);
+					// }
+				}
+			}
+			$data['blogDetails'] = $this->Admindb->getBlogDetails($id);
+			$data['id'] = $id;
+			$data['page'] = 'blog-edit';
+			$this->load->view('admin/blog-edit', $data);
+		}
+	}
+
+	public function deleteblog($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			$this->Admindb->deleteBlog($id);
+		}
+		redirect('admin/blogs');
 	}
 
 

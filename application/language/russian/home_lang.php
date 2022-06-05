@@ -1,10 +1,10 @@
 <?php
 $lang['findYourVoice'] = "Найдите голос для себя";
 $lang['site_title'] = "Voices";
-$lang['home'] = "Домой";
+$lang['home'] = "ГЛАВНАЯ";
 $lang['aboutUs'] = "О нас";
-$lang['contact'] = "Контакт";
-$lang['services'] = "Услуги";
+$lang['contact'] = "КОНТАКТЫ";
+$lang['services'] = "СЕРВИСЫ";
 $lang['blog'] = "Блог";
 $lang['ourSocials'] = "Наши социальные страницы";
 $lang['usefulLinks'] = "Полезные ссылки";
@@ -22,7 +22,8 @@ $lang['fullName']    = "Имя, фамилия";
 $lang['address']     = "Адрес";
 $lang['phone']       = "Телефон";
 $lang['orderProcess']  = "Процесс заказа";
-
-
-
-
+$lang['infoForm'] = "Информационная форма";
+$lang['companyName'] = "Название компании";
+$lang['orderDetails'] = "Детали заказа";
+$lang['next'] = "Далее";
+$lang['email_sent'] = "Email отправлено";

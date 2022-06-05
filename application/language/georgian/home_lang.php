@@ -1,8 +1,8 @@
 <?php
 $lang['findYourVoice'] = "იპოვე შენი ხმა";
 $lang['site_title'] = "Voices";
-$lang['home'] = "საწყისი";
-$lang['aboutUs'] = "ჩვენს შესახებ";
+$lang['home'] = "მთავარი";
+$lang['aboutUs'] = "ჩვენ შესახებ";
 $lang['contact'] = "კონტაქტი";
 $lang['services'] = "სერვისები";
 $lang['blog'] = "ბლოგი";
@@ -18,11 +18,12 @@ $lang['callUs'] = "დაგვირეკეთ";
 $lang['textUs'] = "მოგვწერეთ";
 $lang['findUs'] = "გვიპოვეთ";
 $lang['send'] = "გაგზავნა";
-$lang['fullName']    = "Full Name";
-$lang['address']     = "მისამართი";
-$lang['phone']       = "ტელეფონი";
+$lang['fullName'] = "სახელი, გვარი";
+$lang['address'] = "მისამართი";
+$lang['phone'] = "ტელეფონი";
 $lang['orderProcess'] = "შეკვეთის პროცესი";
-
-
-
-
+$lang['infoForm'] = "საინფორმაციო ფორმა";
+$lang['companyName'] = "კომპანიის სახელი";
+$lang['orderDetails'] = "შეკვეთის დეტალები";
+$lang['next'] = "შემდეგი";
+$lang['email_sent'] = "Email გაგზავნილია";

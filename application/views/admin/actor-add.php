@@ -33,7 +33,7 @@
       <div class="form-group row">
          <label class="col-sm-2 col-form-label">სურათი </label>
          <div class="col-sm-10">
-            <input type="file" class="form-control" name="profileimage" value="">
+            <input type="file" class="form-control" name="profileimage" accept=".jpg, .jpeg, .png, .webp">
             <small class="text-danger"><?php echo form_error('profileimage'); ?></small>
          </div>
       </div>

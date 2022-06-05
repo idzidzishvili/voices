@@ -50,4 +50,38 @@ class Mainmodel extends CI_Model
 		return $this->db->query($q)->row();	
 	}
 
+	public function getBlogs(){
+		$q = "SELECT * FROM blogs";
+		return $this->db->query($q)->result();
+	}
+
+
+	public function getBlogDetails($id){
+		$lang = $this->lang->lang();
+
+		$q1 = "SELECT title_$lang as title, text_$lang as txt, image1, ytlink, create_dt FROM blogs WHERE id=$id";
+		$blog = $this->db->query($q1)->row();
+
+		$q2 = "SELECT blog_id, tag
+				FROM blog_tags
+				Where tag_language='$lang' AND blog_id=$id";
+		$tags = $this->db->query($q2)->result();
+		return ['blog' => $blog, 'tags' => $tags];
+	}
+	
+	public function getBlogsByTag($tag){
+		$tag = $this->db->escape_str($tag);
+		$q = "SELECT distinct blog_id FROM blog_tags WHERE tag='$tag'";
+		
+		$res = $this->db->query($q)->result();
+		if(!$res) return false;
+		
+		$blogIds = [];
+		foreach ($res as $r) array_push($blogIds, $r->blog_id);
+			
+		$q = "SELECT * FROM blogs WHERE id in (".implode(', ', $blogIds).")";
+		return  $this->db->query($q)->result();
+	}
+
+
 }

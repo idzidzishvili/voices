@@ -286,5 +286,70 @@ class Admindb extends CI_Model
 		}
 	}
 
+	public function getBlogs(){
+		$q = "SELECT * FROM blogs";
+		return $this->db->query($q)->result();
+	}
+
+	public function addBlog($titleGe, $titleEn, $titleRu, $textGe, $textEn, $textRu, $tagsGe, $tagsEn, $tagsRu){
+		$this->db->insert('blogs', ['title_ge' => $titleGe, 'title_en' => $titleEn, 'title_ru' => $titleRu, 'text_ge' => $textGe, 'text_en' => $textEn, 'text_ru' => $textRu]);
+		$id = $this->db->insert_id();
+
+		$data = [];
+		foreach(explode(',', $tagsGe) as $tag)
+			array_push($data, ['blog_id' => $id, 'tag' => trim($tag), 'tag_language' => 'ge']);
+		foreach(explode(',', $tagsEn) as $tag)
+			array_push($data, ['blog_id' => $id, 'tag' => trim($tag), 'tag_language' => 'en']);
+		foreach(explode(',', $tagsRu) as $tag)
+			array_push($data, ['blog_id' => $id, 'tag' => trim($tag), 'tag_language' => 'ru']);
+		$this->db->insert_batch('blog_tags', $data); 
+
+		return $id;
+	}
+
+	public function setBlogImage($id, $imageName){
+		$this->db->where('id', $id)->update('blogs', ['image1' => $imageName]);
+	}
+
+
+	public function getBlogDetails($id){
+		$q1 = "SELECT tag_language, GROUP_CONCAT(tag SEPARATOR ', ') AS tags
+				FROM blog_tags
+				Where blog_id=$id			
+				GROUP BY tag_language";
+		$tags = $this->db->query($q1)->result();
+
+		$q = "SELECT * FROM blogs WHERE id=$id";
+		$blogDetails = $this->db->query($q)->row();
+
+		foreach($tags as $tag)
+			$blogDetails->{'tags_'.$tag->tag_language} = $tag->tags;
+
+		return $blogDetails;
+	}
+
+
+	public function updateBlog($id, $titleGe, $titleEn, $titleRu, $textGe, $textEn, $textRu, $tagsGe, $tagsEn, $tagsRu){
+		$this->db->where('id', $id)->update('blogs', ['title_ge' => $titleGe, 'title_en' => $titleEn, 'title_ru' => $titleRu, 'text_ge' => $textGe, 'text_en' => $textEn, 'text_ru' => $textRu]);
+
+		$this->db->where('blog_id', $id)->delete('blog_tags');
+
+		$data = [];
+		foreach(explode(',', $tagsGe) as $tag)
+			array_push($data, ['blog_id' => $id, 'tag' => trim($tag), 'tag_language' => 'ge']);
+		foreach(explode(',', $tagsEn) as $tag)
+			array_push($data, ['blog_id' => $id, 'tag' => trim($tag), 'tag_language' => 'en']);
+		foreach(explode(',', $tagsRu) as $tag)
+			array_push($data, ['blog_id' => $id, 'tag' => trim($tag), 'tag_language' => 'ru']);
+		$this->db->insert_batch('blog_tags', $data);
+	}
+
+	public function deleteBlog($id){
+		$this->db->where('id', $id)->delete('blogs');
+	}
+
+
+
+
 
 }

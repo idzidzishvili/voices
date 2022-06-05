@@ -14,6 +14,16 @@
    <link rel="mask-icon" href="<?= base_url('assets/images/safari-pinned-tab.svg'); ?>" color="#5bbad5">
    <meta name="msapplication-TileColor" content="#da532c">
    <meta name="theme-color" content="#ffffff">
+
+   <?php if(isset($fbLink)): ?>
+      <meta property="og:url"         content="<?= $fbLink ?>" />
+      <meta property="og:type"        content="website" />
+      <meta property="og:title"       content="Your Website Title" />
+      <meta property="og:description" content="Your description" />
+      <meta property="og:image"       content="<?= base_url('assets/images/blogs/' . $blog['blog']->image1) ?>" />
+   <?php endif;?>
+
+
    <link href="<?= base_url('assets/css/fontawesome-all.min.css'); ?>" rel="stylesheet" type="text/css" />
    <link href="<?= base_url('assets/css/slick.css'); ?>" rel="stylesheet" type="text/css" />
    <link href="<?= base_url('assets/css/venobox.min.css'); ?>" rel="stylesheet" type="text/css" />
@@ -24,12 +34,12 @@
 
 <body class="body-<?=$this->lang->lang()?>">
 
-   <div class="preloader">
+   <!-- <div class="preloader">
       <div class="loader">
          <span></span>
          <span></span>
       </div>
-   </div>
+   </div> -->
 
 
    <div class="back2top-btn"><a href="<?= site_url('/'); ?>"><i class="fal fa-long-arrow-alt-up"></i></a></div>
@@ -66,7 +76,7 @@
                         <li class="navbar-player">
                            <div class="player"><button class="player-btn" id="play-pause-button1"><i class="far fa-play"></i></button></div>
                         </li>
-                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('blog')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-blog"></i> <?= lang('blog') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('blogs')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-blog"></i> <?= lang('blog') ?> </span></a></li>
                         <li class="navbar-item"><a class="navbar-link" href="<?=site_url('contact')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-phone"></i> <?= lang('contact') ?></span></a></li>
                         <li class="navbar-item social">
                            <a class="navbar-link" href="https://www.facebook.com/Voicesge-106627137411297"><span><i class="fab fa-facebook-f"></i></span></a>

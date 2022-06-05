@@ -50,7 +50,7 @@
          <div class="row mb-3">
             <label class="col-sm-2 col-form-label">სურათი</label>
             <div class="col-sm-10">
-               <input type="file" class="form-control form-control-sm" name="profileImage" value="">
+               <input type="file" class="form-control form-control-sm" name="profileImage" accept=".jpg, .jpeg, .png, .webp">
             </div>
          </div>
       </div>

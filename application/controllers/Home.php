@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Home extends CI_Controller
@@ -11,7 +11,6 @@ class Home extends CI_Controller
 		parent::__construct();
 		$this->load->model(['actor', 'mainmodel']);
 		$this->lang->load('home');
-		$this->load->helper('form');
 		$langs = ['ge', 'en', 'ru'];
 		if(in_array($this->lang->lang(), $langs)) $this->siteLanguage = $this->lang->lang();
 		else $this->siteLanguage = 'ge';
@@ -57,12 +56,47 @@ class Home extends CI_Controller
 		$data['contact'] = $this->mainmodel->getContactDetails();
 		$this->load->view('about', $data);
 	}
-
-
-	public function blog()
+	
+	
+	public function blogs()
 	{
+		$blogs = null;
+		if($this->input->get('tag')){
+			$blogs = $this->mainmodel->getBlogsByTag($this->input->get('tag'));
+			if(!$blogs){
+				return redirect(site_url('blogs'));
+			}
+		}else{
+			$blogs = $this->mainmodel->getBlogs();
+		}
+
+		foreach($blogs as $blog){
+			if($this->lang->lang()=='ge')
+				$blog->slug = preg_replace('!\s+!', '-', preg_replace('/[^ა-ჰ0-9\s]/', '', strtolower($blog->{'title_'.$this->lang->lang()})));
+			if($this->lang->lang()=='en')
+				$blog->slug = preg_replace('!\s+!', '-', preg_replace('/[^a-zA-Z0-9\s]/', '', strtolower($blog->{'title_'.$this->lang->lang()})));
+			if($this->lang->lang()=='ru')
+				$blog->slug =  preg_replace('!\s+!', '-', preg_replace('/[^\w_]+/u', '-', trim($blog->{'title_'.$this->lang->lang()})));//'/[^\w_]+/u'
+		}
+
 		$data['contact'] = $this->mainmodel->getContactDetails();
-		$this->load->view('blog', $data);
+		$data['blogs'] = $blogs;		
+		$this->load->view('blogs', $data);
+	}
+
+	public function blog($lang, $id)//(?)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			$data['blog'] = $this->mainmodel->getBlogDetails($id);
+			if($data['blog']['blog']){
+				$data['contact'] = $this->mainmodel->getContactDetails();
+				$data['fbLink'] = base_url($this->uri->uri_string);
+
+				// print_r($data['fbLink']);exit;
+				return $this->load->view('blog', $data);	
+			}
+		}
+		redirect(site_url('blogs'));
 	}
 
 
@@ -91,6 +125,45 @@ class Home extends CI_Controller
 		$this->session->setFlashdata('msg', $msg);
 		$this->load->view('contact', compact('msg')); 
 	} 	
+
+	public function sendmail(){ //home page - ajax
+		$this->load->helper(['email', 'form']);
+		$this->load->library(['form_validation', 'email']);
+		$this->form_validation->set_rules('msg', 'სახელი', 				 'required');
+		$this->form_validation->set_rules('vid', 	 'ტელეფონის ნომერი', 'required');
+		$this->form_validation->set_rules('fullname', 	 'სურათი', 				 'required');
+		$this->form_validation->set_rules('phone', 'პაროლი', 				'required');
+		$this->form_validation->set_rules('email', 'პაროლი', 				'required');
+		$this->form_validation->set_rules('companyname', 'პაროლი', 				'required');
+		$this->form_validation->set_rules('orderdetails', 'პაროლი', 				'');
+	
+		if ($this->form_validation->run()) {
+			$this->email->from("info@voices.ge", 'Voices.Ge'); 
+			$this->email->to("ilia.dzidzishvili@gmail.com");
+			$this->email->subject('Voices.Ge :: შეტყობინება'); 
+			$this->email->message(
+				'სახელი გვარი: '.$this->input->post('fullname').', '.
+				' ტელეფონი: '.$this->input->post('phone').', '.
+				' Email: '.$this->input->post('email').', '.
+				' კომპანია: '.$this->input->post('companyname').', '.
+				' შეკვეთის დეტალები: '.$this->input->post('orderdetails').', '.
+				' VID: '.$this->input->post('vid').', '.
+				'  შეტყობინება: '.$this->input->post('msg').
+				''
+			);  
+			//Send mail 
+			if($this->email->send()) {
+				echo json_encode(["status" => "success", "csrf_token" => $this->security->get_csrf_hash()]);
+				return;
+			}else {
+				echo json_encode(["status" => "error", "csrf_token" => $this->security->get_csrf_hash()]);
+				return;				
+			}		
+		}else{
+			echo json_encode(["msg" => validation_errors(), "csrf_token" => $this->security->get_csrf_hash()]);
+		}
+
+	}
 
 
 	public function getSounds($lang, $actor, $voiceLang){

@@ -34,8 +34,8 @@
                   <i class="fa fa-angle-left" id="scrollleft"></i>
                   <div class="lang-items">
                      <?php foreach($voiceLanguages as $voiceLang): ?>
-                        <a href="<?= site_url('?voicelang='.strtolower($voiceLang->dom))?>" class="<?= $voiceLanguageId==$voiceLang->id?'active':''?>" >
-                           <span><?=$voiceLang->lang?></span>
+                        <a href="<?= site_url('?voicelang='.strtolower($voiceLang->dom))?>">
+                           <span class="caps-<?=$this->lang->lang()?> <?= $voiceLanguageId==$voiceLang->id?'active':''?>"><?=$voiceLang->lang?></span>
                         </a>
                      <?php endforeach;?>
                   </div>
@@ -44,7 +44,7 @@
                <div class="controls ml-auto mb-3">
                   <div class="gender-buttons">
                      <?php foreach($genders as $gender): ?>
-                        <button type="button" class="gender-button" data-mixitup-control data-genderid="<?= $gender->id ?>" data-filter=".gender<?= $gender->id ?>">
+                        <button type="button" class="gender-button caps-<?=$this->lang->lang()?>" data-mixitup-control data-genderid="<?= $gender->id ?>" data-filter=".gender<?= $gender->id ?>">
                            <?=$gender->gender?>
                         </button>
                      <?php endforeach;?> 
@@ -59,15 +59,11 @@
                   <div class="actor-card" data-actorid="<?= $actor->id?>">
                      <div class="actor-content">
                         <div class="actor-bg">
-                           <img src="<?= base_url('assets/images/actors/'.$actor->image) ?>" alt="<?=$actor->name?>">
+                           <img src="<?= base_url('assets/images/actors/'.$actor->image) ?>" alt="<?=$actor->vid?>">
                         </div>
                         <div class="actor-overlay spinning">
                            <div class="spinner">
-                              <div class="r1"></div>
-                              <div class="r2"></div>
-                              <div class="r3"></div>
-                              <div class="r4"></div>
-                              <div class="r5"></div>
+                              <div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div><div class="r5"></div>
                            </div>
                         </div>
                      </div>
@@ -79,9 +75,7 @@
                         <div class="ml-auto d-flex">
                            <div class="lang-pills">
                               <?php foreach(explode(',', $actor->diffLangs) as $lang): ?>
-                                 <a href="<?= site_url('?voicelang='.strtolower($lang))?>" class="lang-pill">
-                                    <?= strtoupper($lang) ?>
-                                 </a>
+                                 <a href="<?= site_url('?voicelang='.strtolower($lang))?>" class="lang-pill"><?= strtoupper($lang) ?></a>
                               <?php endforeach; ?>
                            </div>
                            <button class="bg-transparent border-0 pr-1" type="button" data-toggle="modal" data-target="#priceCalcModal" data-actorprice="<?=$actor->langPrice?>" data-actorvid="<?=$actor->vid?>" data-actorimage="<?=$actor->image?>">
@@ -96,9 +90,12 @@
 
          <div class="modal fade" id="priceCalcModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
+               <form id="email-form">
                <div class="modal-content">
                   <input type="hidden" id="actor-price">
+                  <input type="hidden" id="vid">
                   <input type="hidden" id="lang-id" value="<?= $voiceLanguageId ?>">
+                  <input type="hidden" name="csrf_token" id="csrf_token" value="<?= $this->security->get_csrf_hash() ?>">
                   <div class="modal-header py-1">
                      <div class="modal-header-controls">
                         <h5 class="modal-title" id="actor-vid"></h5>
@@ -111,23 +108,65 @@
                      </div>
                   </div>
                   <div class="modal-body w-100 d-flex flex-column">
-                     <img id="actorImage" class="align-self-center" width="150" src="">                 
-                     <label for="voice-text" class="col-form-label w-100 mb-2 text-center caps-<?=$this->lang->lang()?>">
-                        <span class="standart-price caps-<?=$this->lang->lang()?>"><?= lang('costStandard') ?></span>
-                     </label>
-                     <textarea class="form-control mb-2" id="voice-text" rows="10"></textarea>
-                     <span class="caps-<?=$this->lang->lang()?>" id="chrono-results"></span>
+                     <div id="price-calculator" class="">
+                        <img id="actorImage" class="align-self-center" width="150" src="">
+                        <label for="voice-text" class="col-form-label w-100 mb-2 text-center caps-<?=$this->lang->lang()?>">
+                           <span class="standart-price caps-<?=$this->lang->lang()?>"><?= lang('costStandard') ?></span>
+                        </label>
+                        <textarea class="form-control mb-2" id="voice-text" rows="10"></textarea>
+                        <span class="caps-<?=$this->lang->lang()?>" id="chrono-results"></span>
+                     </div>
+                     <div id="information-form" class="d-none">
+                        <div class="form-group">
+                           <label for="fullname"><?= lang('fullName') ?><span class="text-danger">*</span></label>
+                           <input type="text" class="form-control" id="fullname" placeholder="<?= lang('fullName') ?>">
+                        </div>
+                        <div class="form-group">
+                           <label for="phone"><?= lang('phone') ?><span class="text-danger">*</span></label>
+                           <input type="text" class="form-control" id="phone" placeholder="<?= lang('phone') ?>">
+                        </div>
+                        <div class="form-group">
+                           <label for="email">Email<span class="text-danger">*</span></label>
+                           <input type="email" class="form-control" id="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                           <label for="companyname"><?= lang('companyName') ?><span class="text-danger">*</span></label>
+                           <input type="text" class="form-control" id="companyname" placeholder="<?= lang('companyName') ?>">
+                        </div>
+                        <div class="form-group">
+                           <label for="orderdetails"><?= lang('orderDetails') ?></label>
+                           <textarea class="form-control" id="orderdetails" rows="10"></textarea>
+                        </div>
+                     </div>
                   </div>
                   <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                     <button type="button" class="btn btn-primary">Send message2</button>
+                     <button type="button" class="btn btn-primary btn-sm" id="send-voice"></button>
                   </div>
                </div>
+               </form>
             </div>
          </div>
 
 
          <script>
+            var stage = 1;
+            // price calculator modal
+            $('#priceCalcModal').on('show.bs.modal', function (event) {
+               $('.modal-price-calc>span').text('<?= lang('priceCalculator') ?>');
+               $('#price-calculator').attr('class', 'd-flex flex-column');
+               $('#information-form').attr('class', 'd-none');
+               document.querySelector('#send-voice').innerText = '<?= lang('next') ?>';
+               $('#actor-price, #voice-text, #vid, #fullname, #phone, #email, #companyname, #orderdetails').val('');
+               $('#chrono-results').html('');
+               var button = $(event.relatedTarget);
+               var price = button.data('actorprice');
+               $('#actor-price').val(price);
+               $('#actorImage').attr('src', '/assets/images/actors/'+ button.data('actorimage'));
+               $('#actor-vid').text(button.data('actorvid'));
+               $('#vid').val(button.data('actorvid'));
+            })
+
+            //price calculation
             var voiceText = document.getElementById("voice-text");
             voiceText.addEventListener("keydown", function(e) {
                var price = document.getElementById("actor-price").value;
@@ -157,6 +196,38 @@
                   var t = '<?=lang("wordsCount")?>';
                   t = t.replace('@words@', words).replace('@time@', time).replace('@price@', sumPrice);
                   document.getElementById("chrono-results").innerHTML = t;
+               }
+            });
+
+            $(document).on('click', '#send-voice', function(){
+               console.log(stage);
+               if(stage==1){
+                  if(!$('#voice-text').val().trim()){$('#voice-text').focus();return false;}
+                  $('#price-calculator').attr('class', 'd-none');
+                  $('#information-form').removeClass('d-none');
+                  $('.modal-price-calc>span').text('<?= lang('infoForm') ?>');
+                  document.querySelector('#send-voice').innerText = '<?= lang('send') ?>';
+                  stage=2;
+               }else{
+                  if(!$('#fullname').val().trim()){$('#fullname').focus();return false;}
+                  if(!$('#phone').val().trim()){$('#phone').focus();return false;}
+                  if(!$('#email').val().trim()){$('#email').focus();return false;}
+                  if(!$('#companyname').val().trim()){$('#companyname').focus();return false;}                  
+                  $.ajax({
+                     url: '<?=site_url("sendmail/")?>',
+                     type: "post",
+                     dataType : "json",
+                     data: {'msg': $('#voice-text').val(), 'vid': $('#vid').val(), 'fullname': $('#fullname').val(), 'phone': $('#phone').val(), 'email': $('#email').val(),
+                         'companyname': $('#companyname').val(), 'orderdetails': $('#orderdetails').val(), 'csrf_token': $('#csrf_token').val()},
+                     beforeSend: function () { },
+                     success: function (response) {
+                        if (response && response.status == 'success') {
+                           $('#csrf_token').val(response.csrf_token);
+                           $('#priceCalcModal').modal('hide');
+                        }
+                     }
+                  });
+                  stage=1;
                }
             });
 
@@ -225,14 +296,22 @@
             // intro audio
             $(document).on('click', "#play-pause-button1", function () {
                var audio = $("#sound").get(0);
-               $(this).toggleClass("active");
-               if ($(this).hasClass("active")) {
-                  $(this).html('<i class="far fa-pause"></i>');
+               var control = $(this);
+               control.toggleClass("active");
+               if (control.hasClass("active")) {
+                  control.html('<i class="far fa-pause"></i>');
                   audio.play();
                } else {
-                  $(this).html('<i class="far fa-play"></i>');
+                  control.html('<i class="far fa-play"></i>');
                   audio.pause();
                }
+               audio.addEventListener("ended", function(){
+                  // audio.pause();
+                  audio.currentTime = 0;
+                  control.html('<i class="far fa-play"></i>');
+                  control.toggleClass("active");
+                  console.log("ended");
+               });
             });
             $(document).on('click', "#play-pause-button2", function () {
                var audio = $("#sound").get(0);
@@ -244,6 +323,12 @@
                   $(this).html('<i class="far fa-play"></i>');
                   audio.pause();
                }
+               audio.addEventListener("ended", function(){
+                  console.log("ended");
+                  audio.pause();
+                  audio.currentTime = 0;
+                  control.html('<i class="far fa-play"></i>');
+               });
             });
 
          </script>
