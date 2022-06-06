@@ -45,7 +45,10 @@ $route['^(ge|en|ru)/blogs']    = "home/blogs";
 $route['^(ge|en|ru)/blog/(:any)/(:any)'] = "home/blog/$1/$2";
 $route['^(ge|en|ru)/contact']  = "home/contact";
 $route['^(ge|en|ru)/sendmail']  = "home/sendmail";
+$route['^(ge|en|ru)/send_mail']  = "home/send_mail";
 
+$route['^(ge|en|ru)/login']  = "home/login";
+$route['^(ge|en|ru)/logout']  = "home/logout";
 
 
 // example: '/en/about' -> use controller 'about'

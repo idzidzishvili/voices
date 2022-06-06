@@ -32,7 +32,7 @@
             <div class="col-lg-12 lang-gender-bar">               
                <div class="lang-menu mr-lg-3 mb-3">
                   <i class="fa fa-angle-left" id="scrollleft"></i>
-                  <div class="lang-items">
+                  <div class="lang-items lang-items-<?=$this->lang->lang()?>">
                      <?php foreach($voiceLanguages as $voiceLang): ?>
                         <a href="<?= site_url('?voicelang='.strtolower($voiceLang->dom))?>">
                            <span class="caps-<?=$this->lang->lang()?> <?= $voiceLanguageId==$voiceLang->id?'active':''?>"><?=$voiceLang->lang?></span>
@@ -199,6 +199,7 @@
                }
             });
 
+            // send offer
             $(document).on('click', '#send-voice', function(){
                console.log(stage);
                if(stage==1){
@@ -293,43 +294,7 @@
                }
             }
 
-            // intro audio
-            $(document).on('click', "#play-pause-button1", function () {
-               var audio = $("#sound").get(0);
-               var control = $(this);
-               control.toggleClass("active");
-               if (control.hasClass("active")) {
-                  control.html('<i class="far fa-pause"></i>');
-                  audio.play();
-               } else {
-                  control.html('<i class="far fa-play"></i>');
-                  audio.pause();
-               }
-               audio.addEventListener("ended", function(){
-                  // audio.pause();
-                  audio.currentTime = 0;
-                  control.html('<i class="far fa-play"></i>');
-                  control.toggleClass("active");
-                  console.log("ended");
-               });
-            });
-            $(document).on('click', "#play-pause-button2", function () {
-               var audio = $("#sound").get(0);
-               $(this).toggleClass("active");
-               if ($(this).hasClass("active")) {
-                  $(this).html('<i class="far fa-pause"></i>');
-                  audio.play();
-               } else {
-                  $(this).html('<i class="far fa-play"></i>');
-                  audio.pause();
-               }
-               audio.addEventListener("ended", function(){
-                  console.log("ended");
-                  audio.pause();
-                  audio.currentTime = 0;
-                  control.html('<i class="far fa-play"></i>');
-               });
-            });
+            
 
          </script>
  

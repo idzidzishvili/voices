@@ -6,6 +6,7 @@ class Admin extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		if (!$this->session->userdata('logged_in')) redirect('login');
 		$this->load->model(['actor', 'Admindb']);
 		$this->load->helper('form');
 		$this->load->library(['form_validation', 'pagination']);
@@ -871,6 +872,7 @@ class Admin extends CI_Controller
 			$this->form_validation->set_rules('tags_ge', 'ტეგები ქართულად', 'trim|required|max_length[250]');
 			$this->form_validation->set_rules('tags_en', 'ტეგები ინგლისურად', 'trim|required|max_length[250]');
 			$this->form_validation->set_rules('tags_ru', 'ტეგები რუსულად', 'trim|required|max_length[250]');
+			$this->form_validation->set_rules('ytlink', 'Youtube ლინკი', 'trim|max_length[250]');
 			if (empty($_FILES['image1']['name']))
 				$this->form_validation->set_rules('image1', 'სურათი', 'required');
 
@@ -884,7 +886,8 @@ class Admin extends CI_Controller
 					$this->input->post('text_ru', true),
 					$this->input->post('tags_ge', true),
 					$this->input->post('tags_en', true),
-					$this->input->post('tags_ru', true)
+					$this->input->post('tags_ru', true),
+					$this->input->post('ytlink', true)
 				);
 				if ($id) {
 					$filename = 'blog'.str_pad($id, 4, "0", STR_PAD_LEFT).'.'. pathinfo($_FILES['image1']['name'], PATHINFO_EXTENSION);
@@ -894,7 +897,7 @@ class Admin extends CI_Controller
 					$this->load->library('upload');
 					$this->upload->initialize($config);
 					if ($this->upload->do_upload('image1')) {
-						$this->Admindb->setBlogImage($id, $_FILES['image1']['name']);
+						$this->Admindb->setBlogImage($id, $filename);
 						redirect('admin/blogs');
 						// array_push($newFiles, ['order_id' => $orderId, 'fileinfo_id' => $uplFile->id, 'filename' => $filename . '.' . $ext]);
 						//array_push($oldFiles, $originalFileName);
@@ -921,6 +924,7 @@ class Admin extends CI_Controller
 				$this->form_validation->set_rules('tags_ge', 'ტეგები ქართულად', 'trim|required|max_length[250]');
 				$this->form_validation->set_rules('tags_en', 'ტეგები ინგლისურად', 'trim|required|max_length[250]');
 				$this->form_validation->set_rules('tags_ru', 'ტეგები რუსულად', 'trim|required|max_length[250]');
+				$this->form_validation->set_rules('ytlink', 'Youtube ლინკი', 'trim|max_length[250]');
 				if ($this->form_validation->run()) {
 					$this->Admindb->updateBlog(
 							$id,
@@ -932,7 +936,8 @@ class Admin extends CI_Controller
 							$this->input->post('text_ru', true),
 							$this->input->post('tags_ge', true),
 							$this->input->post('tags_en', true),
-							$this->input->post('tags_ru', true)
+							$this->input->post('tags_ru', true),
+							$this->input->post('ytlink', true)
 					);
 					// if image present
 					if ($_FILES['image1']['name']){
@@ -943,7 +948,7 @@ class Admin extends CI_Controller
 						$this->load->library('upload');
 						$this->upload->initialize($config);						
 						if($this->upload->do_upload('image1')){
-							$this->Admindb->setBlogImage($id, $_FILES['image1']['name']);
+							$this->Admindb->setBlogImage($id, $filename);
 						}
 					}
 					// {
@@ -970,6 +975,8 @@ class Admin extends CI_Controller
 		redirect('admin/blogs');
 	}
 
+
+	
 
 	
 }

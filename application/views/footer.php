@@ -26,7 +26,7 @@
             </div>
             <div class="col-lg-3">
                <div class="footer-heading">
-                  <h3>important links</h3>
+                  <h3><?= lang('links') ?></h3>
                </div>
                <ul class="footer-link">
                   <li><a href="<?=site_url('services')?>"><i class="fas fa-angle-right"></i><?= lang('services') ?></a></li>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-lg-4 col-md-6">
                <div class="footer-heading">
-                  <h3>contact us</h3>
+                  <h3><?= lang('contact') ?></h3>
                </div>
                <ul class="footer-address">
                   <li><i class="far fa-map-marker-alt"></i>

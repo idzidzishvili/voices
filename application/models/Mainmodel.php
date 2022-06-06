@@ -69,6 +69,7 @@ class Mainmodel extends CI_Model
 		return ['blog' => $blog, 'tags' => $tags];
 	}
 	
+	
 	public function getBlogsByTag($tag){
 		$tag = $this->db->escape_str($tag);
 		$q = "SELECT distinct blog_id FROM blog_tags WHERE tag='$tag'";
@@ -80,6 +81,12 @@ class Mainmodel extends CI_Model
 		foreach ($res as $r) array_push($blogIds, $r->blog_id);
 			
 		$q = "SELECT * FROM blogs WHERE id in (".implode(', ', $blogIds).")";
+		return  $this->db->query($q)->result();
+	}
+
+
+	public function getLast3Blogs($id){
+		$q = "SELECT * FROM blogs WHERE id <> $id order by create_dt desc limit 3";
 		return  $this->db->query($q)->result();
 	}
 

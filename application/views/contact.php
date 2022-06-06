@@ -33,7 +33,7 @@
          <img src="<?= base_url('assets/images/email.svg')?>" class="w-100">
       </div>
       <div class="col-xs-12 col-lg-9">
-         <?= form_open(base_url('home/send_mail'))?>
+         <?= form_open(site_url('send_mail'))?>
             <div class="form-row">
                <div class="col-lg-4 mb-4">
                   <input type="text" class="form-control" name="name" placeholder="<?=lang('fullName')?>">
@@ -50,7 +50,7 @@
             </div>
             <div class="form-row mb-4">
                <div class="col-12">
-                  <textarea placeholder="" name="status" class="form-control" rows="10"></textarea>
+                  <textarea placeholder="" name="message" class="form-control" rows="10"></textarea>
                   <i class="far fa-pen"></i>
                </div>
             </div>

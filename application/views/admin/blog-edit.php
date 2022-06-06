@@ -89,6 +89,14 @@
          </div>
       </div>
 
+      <div class="form-group row">
+         <label class="col-sm-2 col-form-label">Youtube ლინკი</label>
+         <div class="col-sm-10">
+            <input type="text" class="form-control" name="ytlink" value="<?= $blogDetails->ytlink ?>">
+            <small class="text-danger"><?php echo form_error('ytlink'); ?></small>
+         </div>
+      </div>
+
       <button type="submit" class="btn btn-primary mb-3">შენახვა</button>
    <?= form_close() ?>
 </div>

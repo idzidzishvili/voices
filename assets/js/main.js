@@ -67,10 +67,10 @@ $(document).ready(function () {
 	// });
 
 	$('#scrollleft').click(function(){
-		$("div.lang-items").animate({scrollLeft: $("div.lang-items").scrollLeft() + 124}, 500);
+		$("div.lang-items").animate({scrollLeft: $("div.lang-items").scrollLeft() - 124}, 500);
 	});
 	$('#scrollright').click(function(){
-		$("div.lang-items").animate({scrollLeft: $("div.lang-items").scrollLeft() - 124}, 500);
+		$("div.lang-items").animate({scrollLeft: $("div.lang-items").scrollLeft() + 124}, 500);
 	});
 
 
@@ -90,6 +90,44 @@ $(document).ready(function () {
 		$(window).scrollTop(vPos - 200);
 	});
 
+
+	// intro audio
+	$(document).on('click', "#play-pause-button1", function () {
+		var audio = $("#sound").get(0);
+		var control = $(this);
+		control.toggleClass("active");
+		if (control.hasClass("active")) {
+			control.html('<i class="far fa-pause"></i>');
+			audio.play();
+		} else {
+			control.html('<i class="far fa-play"></i>');
+			audio.pause();
+		}
+		audio.addEventListener("ended", function(){
+			// audio.pause();
+			audio.currentTime = 0;
+			control.html('<i class="far fa-play"></i>');
+			control.toggleClass("active");
+			console.log("ended");
+		});
+	});
+	$(document).on('click', "#play-pause-button2", function () {
+		var audio = $("#sound").get(0);
+		$(this).toggleClass("active");
+		if ($(this).hasClass("active")) {
+			$(this).html('<i class="far fa-pause"></i>');
+			audio.play();
+		} else {
+			$(this).html('<i class="far fa-play"></i>');
+			audio.pause();
+		}
+		audio.addEventListener("ended", function(){
+			console.log("ended");
+			audio.pause();
+			audio.currentTime = 0;
+			control.html('<i class="far fa-play"></i>');
+		});
+	});
 
 	
 

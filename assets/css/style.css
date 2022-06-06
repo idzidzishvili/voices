@@ -268,7 +268,7 @@ h3,
 h4,
 h5,
 h6 {
-   color: var(--heading);
+   color: #676767;
    margin-bottom: 0
 }
 
@@ -2041,7 +2041,7 @@ div.actors>div {
    margin-bottom: 48px;
    text-transform: capitalize;
    position: relative;
-   color: #00a86b
+   color: #00cbff
 }
 
 .blog-filter h3::before {
@@ -2052,7 +2052,7 @@ div.actors>div {
    width: 40px;
    height: 3px;
    border-radius: 30px;
-   background: #00a86b
+   background: #00cbff
 }
 
 .blog-filter h3::after {
@@ -2063,7 +2063,7 @@ div.actors>div {
    width: 4px;
    height: 4px;
    border-radius: 30px;
-   background: #00a86b
+   background: #00cbff
 }
 
 .blog-suggest {
@@ -2119,7 +2119,7 @@ div.actors>div {
 }
 
 .suggest-title h4 a:hover {
-   color: #00a86b
+   color: #00cbff
 }
 
 .suggest-meta {
@@ -2251,8 +2251,8 @@ div.actors>div {
 
 .blog-tag li a:hover {
    color: #fff;
-   background: #00a86b;
-   border: 1px solid #00a86b
+   background: #00cbff;
+   border: 1px solid #00cbff
 }
 
 .blog-icon {
@@ -2270,14 +2270,14 @@ div.actors>div {
    line-height: 45px;
    text-align: center;
    border-radius: 10px;
-   color: #00a86b;
+   color: #00cbff;
    background: #fff;
    text-shadow: 2px 3px 8px rgba(0, 0, 0, .1)
 }
 
 .blog-icon li a i:hover {
    color: #fff;
-   background: #00a86b
+   background: #00cbff
 }
 
 .blog-banner a img {
@@ -2572,8 +2572,8 @@ div.actors>div {
 
 .blog-det-tag li a:hover {
    color: #fff;
-   background: #00a86b;
-   border-color: #00a86b
+   background: #00cbff;
+   border-color: #00cbff
 }
 
 .blog-det-share {
@@ -2608,14 +2608,14 @@ div.actors>div {
    line-height: 40px;
    text-align: center;
    border-radius: 10px;
-   color: #00a86b;
+   color: #00cbff;
    background: #fff;
    text-shadow: 2px 3px 8px rgba(0, 0, 0, .1)
 }
 
 .blog-det-share li a i:hover {
    color: #fff;
-   background: #00a86b
+   background: #00cbff
 }
 
 .blog-det-author {
@@ -3306,10 +3306,22 @@ div.actors>div {
    .lang-items{
       width:625px;
    }
+   .lang-items-ge{
+      width:652px;
+   }
+   .lang-items-ru{
+      width:662px;
+   }
 }
-@media(min-width:1235px) {
-   .lang-items{
+@media(min-width:1245px) {
+   .lang-items-ge{
       width:777px;
+   }
+   .lang-items-en{
+      width:748px;
+   }
+   .lang-items-ru{
+      width:787px;
    }
 }
 
@@ -4070,10 +4082,10 @@ div.actors>div {
 }
 
 .form-group input {
-   height: 60px;
+   height: 48px;
    padding-left: 20px;
    padding-right: 50px;
-   border-radius: 10px;
+   border-radius: 5px;
 }
 
 .form-group textarea {
@@ -4086,7 +4098,7 @@ div.actors>div {
 
 .form-group i {
    position: absolute;
-   top: 21px;
+   top: 14px;
    right: 20px;
    font-size: 18px;
    color: #777
@@ -4266,14 +4278,13 @@ div.actors>div {
 .login .login-box {
    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
    padding: 20px 30px;
-   border-top: 3px solid #00a86b;
-   border-radius: 15px;
+   border-top: 3px solid #00cbff;
    background: #222227
 }
 
 .login .login-box h3 {
    font-weight: 700;
-   color: #00a86b
+   color: #f4fbf9;
 }
 
 .login .login-box p {
@@ -4304,20 +4315,20 @@ div.actors>div {
 
 .login .custom-control-input:checked~.custom-control-label::before {
    color: #fff;
-   border-color: #00a86b;
-   background-color: #00a86b
+   border-color: #00cbff;
+   background-color: #00cbff
 }
 
 .login .login-btn {
-   padding: 12px 20px;
-   border: 2px solid #00a86b;
-   background-color: #00a86b;
-   color: #fff;
-   margin-top: 16px;
-   margin-bottom: 14px;
-   border-radius: 10px;
-   width: 100%;
-   transition: all .5s ease-in-out
+   padding: 8px 20px;
+    border: 2px solid #00cbff;
+    background-color: #00cbff;
+    color: #fff;
+    margin-top: 16px;
+    margin-bottom: 14px;
+    border-radius: 4px;
+    width: 100%;
+    transition: all .5s ease-in-out;
 }
 
 .login .login-btn:hover {
@@ -5016,3 +5027,13 @@ div.actors>div {
    font-family: 'Segoe UI';
    text-transform: uppercase;
 }
+
+
+.blog-det-meta .fb_iframe_widget {
+   display: flex;
+}
+.IN-widget svg {
+    padding-bottom: 3px;
+    padding-left: 1px;
+}
+

@@ -70,17 +70,11 @@ class Home extends CI_Controller
 			$blogs = $this->mainmodel->getBlogs();
 		}
 
-		foreach($blogs as $blog){
-			if($this->lang->lang()=='ge')
-				$blog->slug = preg_replace('!\s+!', '-', preg_replace('/[^ა-ჰ0-9\s]/', '', strtolower($blog->{'title_'.$this->lang->lang()})));
-			if($this->lang->lang()=='en')
-				$blog->slug = preg_replace('!\s+!', '-', preg_replace('/[^a-zA-Z0-9\s]/', '', strtolower($blog->{'title_'.$this->lang->lang()})));
-			if($this->lang->lang()=='ru')
-				$blog->slug =  preg_replace('!\s+!', '-', preg_replace('/[^\w_]+/u', '-', trim($blog->{'title_'.$this->lang->lang()})));//'/[^\w_]+/u'
-		}
+		$blogs = $this->addSlugs($blogs);		
 
 		$data['contact'] = $this->mainmodel->getContactDetails();
-		$data['blogs'] = $blogs;		
+		$data['blogs'] = $blogs;
+		// print_r($blogs);exit;
 		$this->load->view('blogs', $data);
 	}
 
@@ -89,6 +83,7 @@ class Home extends CI_Controller
 		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
 			$data['blog'] = $this->mainmodel->getBlogDetails($id);
 			if($data['blog']['blog']){
+				$data['last3blogs'] = $this->addSlugs($this->mainmodel->getLast3Blogs($id));
 				$data['contact'] = $this->mainmodel->getContactDetails();
 				$data['fbLink'] = base_url($this->uri->uri_string);
 
@@ -102,6 +97,8 @@ class Home extends CI_Controller
 
 	public function contact()
 	{
+		$this->load->helper(['email', 'form']);
+		$this->load->library(['form_validation', 'email']);
 		$data['contact'] = $this->mainmodel->getContactDetails();
 		$this->load->view('contact', $data);
 	}
@@ -110,20 +107,22 @@ class Home extends CI_Controller
 	public function send_mail() {       
 		$to_name = $this->input->post('name'); 
 		$to_phone = $this->input->post('phone');
-		$to_status = htmlspecialchars($this->input->post('status'));
+		$message = htmlspecialchars($this->input->post('message'));
 		$to_email = $this->input->post('email');
  
-		$this->email->from("info@voices.ge", 'Voices.Ge'); 
-		$this->email->to("info@voices.ge");
-		$this->email->subject('Voices.Ge :: შეტყობინება'); 
-		$this->email->message('სახელი გვარი: '.$to_name.' მობილურის ნომერი: '.$to_phone.'  ელექტრონული ფოსტა: '.$to_email.'  შეტყობინება: '.$to_status.'');  
-		//Send mail 
-		if($this->email->send()) 
-			$msg = "შეტყობინება წარატებით გაიგზავნა."; 
-		else 
-			$msg = "დაფიქსირდა შეცდომა. სცადეთ თავიდან";
-		$this->session->setFlashdata('msg', $msg);
-		$this->load->view('contact', compact('msg')); 
+		if(trim($message)){
+			$this->email->from("info@voices.ge", 'Voices.Ge'); 
+			$this->email->to("info@voices.ge");
+			$this->email->subject('Voices.Ge :: შეტყობინება'); 
+			$this->email->message('სახელი გვარი: '.$to_name.' მობილურის ნომერი: '.$to_phone.'  ელექტრონული ფოსტა: '.$to_email.'  შეტყობინება: '.$message.'');  
+			//Send mail 
+			if($this->email->send()) 
+				$msg = "შეტყობინება წარატებით გაიგზავნა."; 
+			else 
+				$msg = "დაფიქსირდა შეცდომა. სცადეთ თავიდან";
+			$this->session->setFlashdata('msg', $msg);
+		}
+		redirect(site_url('contact'));
 	} 	
 
 	public function sendmail(){ //home page - ajax
@@ -139,7 +138,7 @@ class Home extends CI_Controller
 	
 		if ($this->form_validation->run()) {
 			$this->email->from("info@voices.ge", 'Voices.Ge'); 
-			$this->email->to("ilia.dzidzishvili@gmail.com");
+			$this->email->to("info@voices.ge");
 			$this->email->subject('Voices.Ge :: შეტყობინება'); 
 			$this->email->message(
 				'სახელი გვარი: '.$this->input->post('fullname').', '.
@@ -178,12 +177,36 @@ class Home extends CI_Controller
 
 
 
-	public function test()
+	public function addSlugs($blogs)
 	{
-		echo site_url();
-		echo '<br>';
-		echo base_url();
-		
+		foreach($blogs as $blog){
+			if($this->lang->lang()=='ge')
+				$blog->slug = preg_replace('!\s+!', '-', preg_replace('/[^ა-ჰ0-9\s]/', '', strtolower($blog->{'title_'.$this->lang->lang()})));
+			if($this->lang->lang()=='en')
+				$blog->slug = preg_replace('!\s+!', '-', preg_replace('/[^a-zA-Z0-9\s]/', '', strtolower($blog->{'title_'.$this->lang->lang()})));
+			if($this->lang->lang()=='ru')
+				$blog->slug =  preg_replace('!\s+!', '-', preg_replace('/[^\w_]+/u', '-', trim($blog->{'title_'.$this->lang->lang()})));//'/[^\w_]+/u'
+		}
+		return $blogs;
+	}
+
+	public function login(){
+		$this->load->helper(['form']);
+		$this->load->library(['form_validation']);
+		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
+			$this->form_validation->set_rules('username', 'მომხმარებელი', 'trim|required|max_length[250]');
+			$this->form_validation->set_rules('password', 'პაროლი', 'trim|required|max_length[250]');
+			if(strtolower($this->input->post('username', true)) == 'root' &&  password_verify($this->input->post('password'), '$2y$10$xlBxno5BtMLC6vHLEHScqu5cJlNg6Kn5tJeaB1UgoKdCTSQGchrTS')){
+				$this->session->set_userdata(['user_name' => 'root', 'logged_in' => TRUE]);
+				redirect('admin/actors');
+			}
+		}
+		$this->load->view('admin/login');
+	}
+
+	public function logout(){	
+		$this->session->unset_userdata(['user_name', 'logged_in']);
+		redirect('/');
 	}
 
 }

@@ -291,8 +291,16 @@ class Admindb extends CI_Model
 		return $this->db->query($q)->result();
 	}
 
-	public function addBlog($titleGe, $titleEn, $titleRu, $textGe, $textEn, $textRu, $tagsGe, $tagsEn, $tagsRu){
-		$this->db->insert('blogs', ['title_ge' => $titleGe, 'title_en' => $titleEn, 'title_ru' => $titleRu, 'text_ge' => $textGe, 'text_en' => $textEn, 'text_ru' => $textRu]);
+	public function addBlog($titleGe, $titleEn, $titleRu, $textGe, $textEn, $textRu, $tagsGe, $tagsEn, $tagsRu, $ytlink){
+		$this->db->insert('blogs', [
+			'title_ge' => $titleGe, 
+			'title_en' => $titleEn, 
+			'title_ru' => $titleRu, 
+			'text_ge' => $textGe, 
+			'text_en' => $textEn, 
+			'text_ru' => $textRu,
+			'ytlink' => $ytlink
+		]);
 		$id = $this->db->insert_id();
 
 		$data = [];
@@ -329,8 +337,16 @@ class Admindb extends CI_Model
 	}
 
 
-	public function updateBlog($id, $titleGe, $titleEn, $titleRu, $textGe, $textEn, $textRu, $tagsGe, $tagsEn, $tagsRu){
-		$this->db->where('id', $id)->update('blogs', ['title_ge' => $titleGe, 'title_en' => $titleEn, 'title_ru' => $titleRu, 'text_ge' => $textGe, 'text_en' => $textEn, 'text_ru' => $textRu]);
+	public function updateBlog($id, $titleGe, $titleEn, $titleRu, $textGe, $textEn, $textRu, $tagsGe, $tagsEn, $tagsRu, $ytlink){
+		$this->db->where('id', $id)->update('blogs', [
+			'title_ge' => $titleGe, 
+			'title_en' => $titleEn, 
+			'title_ru' => $titleRu, 
+			'text_ge' => $textGe, 
+			'text_en' => $textEn, 
+			'text_ru' => $textRu,
+			'ytlink' => $ytlink
+		]);
 
 		$this->db->where('blog_id', $id)->delete('blog_tags');
 
