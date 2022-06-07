@@ -887,7 +887,7 @@ class Admin extends CI_Controller
 					$this->input->post('tags_ge', true),
 					$this->input->post('tags_en', true),
 					$this->input->post('tags_ru', true),
-					$this->input->post('ytlink', true)
+					$this->parse_ytlink($this->input->post('ytlink', true))
 				);
 				if ($id) {
 					$filename = 'blog'.str_pad($id, 4, "0", STR_PAD_LEFT).'.'. pathinfo($_FILES['image1']['name'], PATHINFO_EXTENSION);
@@ -937,7 +937,7 @@ class Admin extends CI_Controller
 							$this->input->post('tags_ge', true),
 							$this->input->post('tags_en', true),
 							$this->input->post('tags_ru', true),
-							$this->input->post('ytlink', true)
+							$this->parse_ytlink($this->input->post('ytlink', true))
 					);
 					// if image present
 					if ($_FILES['image1']['name']){
@@ -976,7 +976,12 @@ class Admin extends CI_Controller
 	}
 
 
-	
+	function parse_ytlink($link){
+		if(!$link) return null;
+		$link = str_replace('https://youtu.be/', '', $link);
+		$link = str_replace('https://www.youtube.com/watch?v=', '', $link);
+		return substr($link, 0, 11);
+	}
 
 	
 }

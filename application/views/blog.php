@@ -9,7 +9,7 @@
       <div class="col-lg-8">
          <div class="blog-det-banner">
             <?php if(isset($blog['blog']->ytlink)): ?>                  
-               <iframe src="<?=$blog['blog']->ytlink?>" width="100%" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+               <iframe width="100%" height="400" src="https://www.youtube.com/embed/<?=$blog['blog']->ytlink?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <?php else: ?>
                <img src="<?= base_url('assets/images/blogs/' . $blog['blog']->image1) ?>" alt="blog-details">
             <?php endif;?>
