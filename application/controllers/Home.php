@@ -128,13 +128,14 @@ class Home extends CI_Controller
 	public function sendmail(){ //home page - ajax
 		$this->load->helper(['email', 'form']);
 		$this->load->library(['form_validation', 'email']);
-		$this->form_validation->set_rules('msg', 'სახელი', 				 'required');
-		$this->form_validation->set_rules('vid', 	 'ტელეფონის ნომერი', 'required');
-		$this->form_validation->set_rules('fullname', 	 'სურათი', 				 'required');
-		$this->form_validation->set_rules('phone', 'პაროლი', 				'required');
-		$this->form_validation->set_rules('email', 'პაროლი', 				'required');
-		$this->form_validation->set_rules('companyname', 'პაროლი', 				'required');
-		$this->form_validation->set_rules('orderdetails', 'პაროლი', 				'');
+		$this->form_validation->set_rules('msg', 'msg', 'required');
+		$this->form_validation->set_rules('vid', 'vid', 'required');
+		$this->form_validation->set_rules('fullname', 'fullname', 'required');
+		$this->form_validation->set_rules('phone', 'phone', 'required');
+		$this->form_validation->set_rules('email', 'email', 'required');
+		$this->form_validation->set_rules('companyname', 'companyname', 'required');
+		$this->form_validation->set_rules('companyid', 'companyid', 'required');
+		$this->form_validation->set_rules('orderdetails', 'orderdetails', '');
 	
 		if ($this->form_validation->run()) {
 			$this->email->from("info@voices.ge", 'Voices.Ge'); 
@@ -144,7 +145,7 @@ class Home extends CI_Controller
 				'სახელი გვარი: '.$this->input->post('fullname').', '.
 				' ტელეფონი: '.$this->input->post('phone').', '.
 				' Email: '.$this->input->post('email').', '.
-				' კომპანია: '.$this->input->post('companyname').', '.
+				' კომპანია: '.$this->input->post('companyname').'('.$this->input->post('companyid').')'. ', '.
 				' შეკვეთის დეტალები: '.$this->input->post('orderdetails').', '.
 				' VID: '.$this->input->post('vid').', '.
 				'  შეტყობინება: '.$this->input->post('msg').

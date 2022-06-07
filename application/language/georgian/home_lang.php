@@ -24,6 +24,7 @@ $lang['phone'] = "ტელეფონი";
 $lang['orderProcess'] = "შეკვეთის პროცესი";
 $lang['infoForm'] = "საინფორმაციო ფორმა";
 $lang['companyName'] = "კომპანიის სახელი";
+$lang['companyId'] = "კომპანიის იდენტიფიკატორი";
 $lang['orderDetails'] = "შეკვეთის დეტალები";
 $lang['next'] = "შემდეგი";
 $lang['email_sent'] = "Email გაგზავნილია";

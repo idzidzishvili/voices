@@ -4089,10 +4089,8 @@ div.actors>div {
 }
 
 .form-group textarea {
-   height: 180px;
-   padding-top: 14px;
-   padding-left: 20px;
-   padding-right: 50px;
+   height: 145px;
+   padding: 15px;
    border-radius: 10px;
 }
 
@@ -5010,11 +5008,12 @@ div.actors>div {
    border-radius: 0.25rem;
    padding: 0.375rem 0.75rem;
    color: #495057;
-   height: 40px;
+   height: 38px;
    line-height: 1;
 }
 #information-form .form-group label{
    margin-bottom: .25rem;
+   font-size: 15px;
 }
 .voice-ge p{
    font-family: Mark GEO CAPS;

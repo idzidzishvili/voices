@@ -24,6 +24,7 @@ $lang['phone'] = "Phone";
 $lang['orderProcess'] = "Order Process";
 $lang['infoForm'] = "Information form";
 $lang['companyName'] = "Company name";
+$lang['companyId'] = "Company identifier";
 $lang['orderDetails'] = "Order details";
 $lang['next'] = "Next";
 $lang['email_sent'] = "Email sent";

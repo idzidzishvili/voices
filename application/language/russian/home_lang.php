@@ -24,6 +24,7 @@ $lang['phone'] = "Телефон";
 $lang['orderProcess']  = "Процесс заказа";
 $lang['infoForm'] = "Информационная форма";
 $lang['companyName'] = "Название компании";
+$lang['companyId'] = "Идентификатор компании";
 $lang['orderDetails'] = "Детали заказа";
 $lang['next'] = "Далее";
 $lang['email_sent'] = "Email отправлено";

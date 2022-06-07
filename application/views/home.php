@@ -134,6 +134,10 @@
                            <input type="text" class="form-control" id="companyname" placeholder="<?= lang('companyName') ?>">
                         </div>
                         <div class="form-group">
+                           <label for="companyid"><?= lang('companyId') ?><span class="text-danger">*</span></label>
+                           <input type="text" class="form-control" id="companyid" placeholder="<?= lang('companyId') ?>">
+                        </div>
+                        <div class="form-group mb-0">
                            <label for="orderdetails"><?= lang('orderDetails') ?></label>
                            <textarea class="form-control" id="orderdetails" rows="10"></textarea>
                         </div>
@@ -156,7 +160,7 @@
                $('#price-calculator').attr('class', 'd-flex flex-column');
                $('#information-form').attr('class', 'd-none');
                document.querySelector('#send-voice').innerText = '<?= lang('next') ?>';
-               $('#actor-price, #voice-text, #vid, #fullname, #phone, #email, #companyname, #orderdetails').val('');
+               $('#actor-price, #voice-text, #vid, #fullname, #phone, #email, #companyname, #companyid, #orderdetails').val('');
                $('#chrono-results').html('');
                var button = $(event.relatedTarget);
                var price = button.data('actorprice');
@@ -164,13 +168,14 @@
                $('#actorImage').attr('src', '/assets/images/actors/'+ button.data('actorimage'));
                $('#actor-vid').text(button.data('actorvid'));
                $('#vid').val(button.data('actorvid'));
+               stage = 1;
             })
 
             //price calculation
             var voiceText = document.getElementById("voice-text");
             voiceText.addEventListener("keydown", function(e) {
                var price = document.getElementById("actor-price").value;
-               var words = voiceText.value.trim().match(/(\s+)/g).length;
+               var words = voiceText.value.trim().length ? voiceText.value.trim().match(/(\s+)/g).length : 0;
                if(voiceText.value.length) {words++;}
                var sumPrice;
                var time = (words/2);
@@ -214,12 +219,13 @@
                   if(!$('#phone').val().trim()){$('#phone').focus();return false;}
                   if(!$('#email').val().trim()){$('#email').focus();return false;}
                   if(!$('#companyname').val().trim()){$('#companyname').focus();return false;}                  
+                  if(!$('#companyid').val().trim()){$('#companyid').focus();return false;}                  
                   $.ajax({
                      url: '<?=site_url("sendmail/")?>',
                      type: "post",
                      dataType : "json",
                      data: {'msg': $('#voice-text').val(), 'vid': $('#vid').val(), 'fullname': $('#fullname').val(), 'phone': $('#phone').val(), 'email': $('#email').val(),
-                         'companyname': $('#companyname').val(), 'orderdetails': $('#orderdetails').val(), 'csrf_token': $('#csrf_token').val()},
+                        'companyname': $('#companyname').val(), 'companyid': $('#companyid').val(), 'orderdetails': $('#orderdetails').val(), 'csrf_token': $('#csrf_token').val()},
                      beforeSend: function () { },
                      success: function (response) {
                         if (response && response.status == 'success') {
