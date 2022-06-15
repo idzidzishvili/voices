@@ -159,7 +159,7 @@
                $('.modal-price-calc>span').text('<?= lang('priceCalculator') ?>');
                $('#price-calculator').attr('class', 'd-flex flex-column');
                $('#information-form').attr('class', 'd-none');
-               document.querySelector('#send-voice').innerText = '<?= lang('next') ?>';
+               document.querySelector('#send-voice').innerText = '<?= lang('checkout') ?>';
                $('#actor-price, #voice-text, #vid, #fullname, #phone, #email, #companyname, #companyid, #orderdetails').val('');
                $('#chrono-results').html('');
                var button = $(event.relatedTarget);

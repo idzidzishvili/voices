@@ -16,12 +16,8 @@
          <div class="row">
             <div class="col-lg-5">
                <div class="footer-heading">
-                  <h3>download the app</h3>
-                  <p>
-                     We are a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
-                     The point of using Lorem Ipsum is that it has a more-or-less normal 
-                     distribution of letters as opposed to using content here content here making it look like readable english.
-                  </p>
+                  <h3>voicebank.ge</h3>
+                  <p><?= lang('footerText') ?></p>
                </div>
             </div>
             <div class="col-lg-3">
