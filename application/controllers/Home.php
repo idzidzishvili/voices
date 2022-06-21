@@ -111,9 +111,9 @@ class Home extends CI_Controller
 		$to_email = $this->input->post('email');
  
 		if(trim($message)){
-			$this->email->from("info@voices.ge", 'Voices.Ge'); 
-			$this->email->to("info@voices.ge");
-			$this->email->subject('Voices.Ge :: შეტყობინება'); 
+			$this->email->from("info@voicebank.ge", 'Voicebank.ge'); 
+			$this->email->to("info@voicebank.ge");
+			$this->email->subject('Voicebank.ge :: შეტყობინება'); 
 			$this->email->message('სახელი გვარი: '.$to_name.' მობილურის ნომერი: '.$to_phone.'  ელექტრონული ფოსტა: '.$to_email.'  შეტყობინება: '.$message.'');  
 			//Send mail 
 			if($this->email->send()) 
@@ -138,9 +138,9 @@ class Home extends CI_Controller
 		$this->form_validation->set_rules('orderdetails', 'orderdetails', '');
 	
 		if ($this->form_validation->run()) {
-			$this->email->from("info@voices.ge", 'Voices.Ge'); 
-			$this->email->to("info@voices.ge");
-			$this->email->subject('Voices.Ge :: შეტყობინება'); 
+			$this->email->from("info@voicebank.ge", 'Voicebank.ge'); 
+			$this->email->to("info@voicebank.ge");
+			$this->email->subject('Voicebank.ge :: შეტყობინება'); 
 			$this->email->message(
 				'სახელი გვარი: '.$this->input->post('fullname').', '.
 				' ტელეფონი: '.$this->input->post('phone').', '.

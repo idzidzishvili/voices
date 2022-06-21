@@ -911,7 +911,7 @@ main.banner-slider{
    top: 0;
    left: 0;
    width: 100%;
-   z-index: 3;
+   z-index: 2;
    background: #fff;
    -webkit-box-shadow: 0 7px 13px 0 rgba(0, 0, 0, .15);
    box-shadow: 0 7px 13px 0 rgba(0, 0, 0, .15)
@@ -1104,7 +1104,7 @@ main.banner-slider{
 
    .navbar-link {
       width: 100%;
-      padding: 12px 15px;
+      padding: 12px 19px;
       margin-right: 0;
       -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -1405,13 +1405,11 @@ main.banner-slider{
 
 .bottom-player {
    position: fixed;
-   bottom: 0;
+   top:142px;
    left: 0;
    width: 100%;
    height: 50px;
    z-index: 2;
-   -webkit-box-shadow: 0 -5px 15px 0 rgba(0, 0, 0, .1);
-   box-shadow: 0 -5px 15px 0 rgba(0, 0, 0, .1);
    display: none
 }
 
@@ -1430,7 +1428,8 @@ main.banner-slider{
 
 @media(max-width:991px) {
    .bottom-player {
-      display: block
+      display: flex;
+      justify-content: center;
    }
 }
 
@@ -3248,7 +3247,8 @@ div.actors>div {
 }
 .lang-gender-bar .controls{
    display: flex;
-   flex-direction: row-reverse;
+   /* flex-direction: row-reverse; */
+   justify-content: center;
 }
 
 
@@ -3294,12 +3294,32 @@ div.actors>div {
       width: 100%;
    }
    .lang-items{
-      width: 100%;
+      width: 250px;
+   }
+   .lang-gender-bar .lang-menu{
+      display: flex;
+      justify-content: space-around;
    }
 }
 @media(max-width:575px) {
    .gender-buttons button{
       min-width: 100px;
+   }
+}
+@media(min-width:575px) {
+   .lang-items{
+      width: 500px;
+   }
+}
+@media(min-width:735px) and (max-width:992px){
+   .lang-items{
+      width: 650px;
+   }
+   .lang-items-en{
+      width: 622px;
+   }
+   .lang-items-ru{
+      width: 660px;
    }
 }
 @media(min-width:1170px) {

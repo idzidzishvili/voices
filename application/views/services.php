@@ -1,18 +1,12 @@
 <?php $this->load->view('header'); ?>
 
-
-
-
 <section>
    <img src="<?= base_url('assets/images/studio.jpg')?>" class="w-100">   
 </section>
 
 <div class="container-fluid">
    <div class="row pt-5 mb-5">
-      <div class="col-lg-3 d-none d-lg-block ">
-         <img src="<?= base_url('assets/images/mic.png')?>" class="w-100">
-      </div>
-      <div class="col-xs-12 col-lg-9">
+      <div class="col-xl-10 offset-xl-1">
          <div class="row">
             <div class="col-xs-12 col-md-6 service">
                <div class="service-icon">
@@ -175,24 +169,6 @@
       </div>
    </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <?php $this->load->view('footer'); ?>

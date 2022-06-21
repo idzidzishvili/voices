@@ -1,13 +1,8 @@
 <?php $this->load->view('header'); ?>
 
-
-
-
 <section>
    <img src="<?= base_url('assets/images/studio.jpg')?>" class="w-100">   
 </section>
-
-
 
 <div class="container-fluid">
    <div class="row parallax">
@@ -29,10 +24,7 @@
    </div>
 
    <div class="row">
-      <div class="col-lg-3 d-none d-lg-block email-icon">
-         <img src="<?= base_url('assets/images/email.svg')?>" class="w-100">
-      </div>
-      <div class="col-xs-12 col-lg-9">
+      <div class="col-lg-10 offset-lg-1">
          <?= form_open(site_url('send_mail'))?>
             <div class="form-row">
                <div class="col-lg-4 mb-4">
@@ -54,7 +46,7 @@
                   <i class="far fa-pen"></i>
                </div>
             </div>
-            <div class="form-row mb-4">
+            <div class="form-row mb-4 justify-content-center">
                <button type="submit" class="btn btn-success"><?=lang('send')?></button>
             </div>
          <?= form_close()?>
@@ -65,23 +57,5 @@
       <iframe src="<?= $contact->location ?>" style="border:0;" allowfullscreen="" width="100%" height="550" frameborder="0"></iframe>
    </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <?php $this->load->view('footer'); ?>

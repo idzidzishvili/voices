@@ -6,7 +6,9 @@
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="keywords" content="">
    <meta name="description" content="">
-   <title>VOICES>GE :: <?= lang('findYourVoice') ?></title> 
+   <title>Voicebank.Ge :: <?= lang('findYourVoice') ?></title>
+   <meta name="description" content="www.voices.ge გთავაზობთ სარეკლამო რგოლების დამზადებას, სატელეფონო ავტომოპასუხისთვის ტექსტის შედგენას და ხმის ჩაწერას,  ვიდეორგოლების გახმოვანებას და  სხვადასხვა ენაზე ადაპტაციას, აუდიოწიგნის წარმოებას, სარეკლამო რგოლისათვის კრეატიული სცენარის შექმნას, სარეკლამო ტექსტების თარგმნას და ა.შ.">
+   <meta name="keywords" content="გახმოვანება, ხმის ჩაწერა, სარეკლამო რგოლი, ვიდეო გახმოვანება, დუბლირება, სარეკლამო რგოლის ადაპტაცია, ვიდეორგოლის ადაპტაცია, აუდიო რგოლი, ხმოვანი რეკლამა, ავტომოპასუხე, სატელეფონო ავტომოპასუხე, აუდიო წიგნი, კომერციული ტექსტი, სარეკლამო ტექსტი, თარგმანი, озвучка, запись голоса, рекламный ролик, озвучка видео, дублирование, адаптация рекламного ролика, адаптация видео ролика, аудио ролик, голосовая реклама, автоответчик, телефонный автоответчик, аудио книга, коммерческий текст, перевод рекламного текста, перевод, dubbing, voice recording, commercial, video dubbing, dubbing, commercial video adaptation, voice advertising, voice over, IVR, audio book, audiobook, advertising text, commercial text, translation">
    <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url('assets/images/apple-touch-icon.png'); ?>">
    <link rel="icon" type="image/png" sizes="32x32" href="<?= base_url('assets/images/favicon-32x32.png'); ?>">
    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url('assets/images/favicon-16x16.png'); ?>">
@@ -14,7 +16,6 @@
    <link rel="mask-icon" href="<?= base_url('assets/images/safari-pinned-tab.svg'); ?>" color="#5bbad5">
    <meta name="msapplication-TileColor" content="#da532c">
    <meta name="theme-color" content="#ffffff">
-
    <?php if(isset($fbLink)): ?>
       <meta property="og:url"         content="<?= $fbLink ?>" />
       <meta property="og:type"        content="website" />
@@ -22,8 +23,6 @@
       <meta property="og:description" content="Your description" />
       <meta property="og:image"       content="<?= base_url('assets/images/blogs/' . $blog['blog']->image1) ?>" />
    <?php endif;?>
-
-
    <link href="<?= base_url('assets/css/fontawesome-all.min.css'); ?>" rel="stylesheet" type="text/css" />
    <link href="<?= base_url('assets/css/slick.css'); ?>" rel="stylesheet" type="text/css" />
    <link href="<?= base_url('assets/css/venobox.min.css'); ?>" rel="stylesheet" type="text/css" />
@@ -35,10 +34,7 @@
 <body class="body-<?=$this->lang->lang()?>">
 
    <div class="preloader">
-      <div class="loader">
-         <span></span>
-         <span></span>
-      </div>
+      <div class="loader"><span></span><span></span></div>
    </div>
 
    <div class="back2top-btn"><a href="<?= site_url('/'); ?>"><i class="fal fa-long-arrow-alt-up"></i></a></div>

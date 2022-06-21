@@ -151,6 +151,7 @@
             </div>
          </div>
 
+         <div id="fb-root"></div>
 
          <script>
             var stage = 1;
@@ -179,7 +180,6 @@
                if(voiceText.value.length) {words++;}
                var sumPrice;
                var time = (words/2);
-               // console.log(words);
                if(time<60){
                   sumPrice = price;
                }else if(time>=60 && time<120){
@@ -206,7 +206,6 @@
 
             // send offer
             $(document).on('click', '#send-voice', function(){
-               console.log(stage);
                if(stage==1){
                   if(!$('#voice-text').val().trim()){$('#voice-text').focus();return false;}
                   $('#price-calculator').attr('class', 'd-none');
@@ -238,7 +237,6 @@
                }
             });
 
-            
             $(document).ready(function () {
                var mixer = mixitup('#mixitupcontainer', {selectors: {control: '[data-mixitup-control]'}});
                var lastGender = 0;
@@ -299,19 +297,28 @@
                   });
                }
             }
-
             
+            window.fbAsyncInit = function() {
+               FB.init({xfbml: true, version: 'v6.0'});
+            };
+            (function(d, s, id) {
+               var js, fjs = d.getElementsByTagName(s)[0];
+               if (d.getElementById(id)) return;
+               js = d.createElement(s); js.id = id;
+               js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+               fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
 
          </script>
- 
+
+         <div class="fb-customerchat"
+            attribution=install_email
+            page_id="106627137411297"
+            logged_in_greeting="გამარჯობათ, რით შემიძლია დაგეხმაროთ?"
+            logged_out_greeting="მოგესალმებათ voicebank.ge">
+         </div>
+
       </div>
    </section>
-
-
-
-
-
-
-
 
 <?php $this->load->view('footer');?>
