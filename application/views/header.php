@@ -67,11 +67,11 @@
                      <ul class="navbar-list">
                         <li class="navbar-item"><a class="navbar-link" href="<?=site_url('/')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-home"></i> <?= lang('home') ?> </span></a></li>
                         <li class="navbar-item"><a class="navbar-link" href="<?=site_url('services')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-headphones"></i> <?= lang('services') ?> </span></a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('about-us')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-microphone"></i> <?= lang('aboutUs') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('blogs')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-blog"></i> <?= lang('blog') ?> </span></a></li>
                         <li class="navbar-player">
                            <div class="player"><button class="player-btn" id="play-pause-button1"><i class="far fa-play"></i></button></div>
                         </li>
-                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('blogs')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-blog"></i> <?= lang('blog') ?> </span></a></li>
+                        <li class="navbar-item"><a class="navbar-link" href="<?=site_url('about-us')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-microphone"></i> <?= lang('aboutUs') ?> </span></a></li>
                         <li class="navbar-item"><a class="navbar-link" href="<?=site_url('contact')?>"><span class="caps-<?=$this->lang->lang()?>"><i class="far fa-phone"></i> <?= lang('contact') ?></span></a></li>
                         <li class="navbar-item social">
                            <a class="navbar-link" href="https://www.facebook.com/Voicesge-106627137411297"><span><i class="fab fa-facebook-f"></i></span></a>
