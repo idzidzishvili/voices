@@ -69,7 +69,8 @@
                      </div>
                      <div class="actor-meta">
                         <span class="pl-1">
-                           <?= 'V'.str_pad($actor->id, 3, "0", STR_PAD_LEFT) ?>
+                           <!-- <?= 'V'.str_pad($actor->id, 3, "0", STR_PAD_LEFT) ?> -->
+                           <?= $actor->vid ?>
                            <!-- <?= $actor->name?> -->
                         </span>
                         <div class="ml-auto d-flex">
