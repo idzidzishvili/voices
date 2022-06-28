@@ -835,18 +835,30 @@ class Admin extends CI_Controller
 	public function infoaudio()
 	{
 		if (strtoupper($_SERVER["REQUEST_METHOD"]) == 'POST') {
-			if($_FILES['infoaudio']['name']){
-				$config = $this->config->item('fileUploadConfig');
-				$config['upload_path'] = 'assets/audio/';
-				$config['max_size'] = 5120;
-				$config['allowed_types'] = 'mp3';
-				$config['overwrite'] = TRUE;
-				$config['file_name'] = 'audio.mp3';
+			$config = $this->config->item('fileUploadConfig');
+			$config['upload_path'] = 'assets/audio/';
+			$config['max_size'] = 5120;
+			$config['allowed_types'] = 'mp3';
+			$config['overwrite'] = TRUE;
+			if($_FILES['infoaudio_ge']['name']){
+				$config['file_name'] = 'audio_ge.mp3';
 				$this->load->library('upload');
 				$this->upload->initialize($config);
-				$this->upload->do_upload('infoaudio');
-				redirect('admin/infoaudio');
+				$this->upload->do_upload('infoaudio_ge');
 			}
+			if($_FILES['infoaudio_en']['name']){
+				$config['file_name'] = 'audio_en.mp3';
+				$this->load->library('upload');
+				$this->upload->initialize($config);
+				$this->upload->do_upload('infoaudio_en');
+			}
+			if($_FILES['infoaudio_ru']['name']){
+				$config['file_name'] = 'audio_ru.mp3';
+				$this->load->library('upload');
+				$this->upload->initialize($config);
+				$this->upload->do_upload('infoaudio_ru');
+			}
+			redirect('admin/infoaudio');
 		}
 		$data['page'] = 'info-audio';
 		$this->load->view('admin/info-audio', $data);		

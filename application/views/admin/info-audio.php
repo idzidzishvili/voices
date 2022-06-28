@@ -6,10 +6,24 @@
 <div class="container-fluid px-0">
    <?= form_open_multipart(base_url('admin/infoaudio')) ?>
       <div class="form-group row">
-         <label class="col-sm-2 col-form-label">ინფო აუდიო</label>
+         <label class="col-sm-2 col-form-label">ინფო აუდიო (GE)</label>
          <div class="col-sm-10">
-            <input type="file" class="form-control" name="infoaudio" accept=".mp3">
-            <small class="text-danger"><?php echo form_error('infoaudio'); ?></small>
+            <input type="file" class="form-control" name="infoaudio_ge" accept=".mp3">
+            <small class="text-danger"><?php echo form_error('infoaudio_ge'); ?></small>
+         </div>
+      </div>
+      <div class="form-group row">
+         <label class="col-sm-2 col-form-label">ინფო აუდიო (EN)</label>
+         <div class="col-sm-10">
+            <input type="file" class="form-control" name="infoaudio_en" accept=".mp3">
+            <small class="text-danger"><?php echo form_error('infoaudio_en'); ?></small>
+         </div>
+      </div>
+      <div class="form-group row">
+         <label class="col-sm-2 col-form-label">ინფო აუდიო (RU)</label>
+         <div class="col-sm-10">
+            <input type="file" class="form-control" name="infoaudio_ru" accept=".mp3">
+            <small class="text-danger"><?php echo form_error('infoaudio_ru'); ?></small>
          </div>
       </div>
       

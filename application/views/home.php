@@ -6,7 +6,7 @@
 
    <div class="audio-part">
       <audio id="sound">
-         <source src="<?= base_url('assets/audio/audio.mp3') ?>" type="audio/mpeg">
+         <source src="<?= base_url('assets/audio/audio_'.$this->lang->lang().'.mp3') ?>" type="audio/mpeg">
       </audio>
    </div>
 
