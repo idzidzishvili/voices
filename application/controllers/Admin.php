@@ -156,6 +156,14 @@ class Admin extends CI_Controller
 	}
 
 
+	public function deleteactor($id)
+	{
+		if (filter_var($id, FILTER_VALIDATE_INT) && $id > 0) {
+			$this->Admindb->deleteActor($id);
+		}
+		redirect('admin/actors');
+	}
+
 
 
 

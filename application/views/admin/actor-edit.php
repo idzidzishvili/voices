@@ -90,9 +90,10 @@
    </div>
 
    <div class="row px-2">
-      <button type="submit" class="btn btn-primary mb-2 ml-1 px-4">შენახვა</button>
+      <button type="submit" class="btn btn-primary mb-2 ml-1 px-4 mr-4">შენახვა</button>
+      <button type="button" class="btn btn-danger mb-2 ml-1 px-4" data-toggle="modal" data-target="#deleteModal" data-page="actor" data-id="<?= $id ?>">მსახიობის წაშლა</button>
    </div>
 </div>
 <?= form_close() ?>
-
+<?php $this->load->view('admin/confirm-delete'); ?>
 <?php $this->load->view('admin/templates/footer'); ?>

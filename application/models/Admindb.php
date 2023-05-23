@@ -157,6 +157,9 @@ class Admindb extends CI_Model
 		return $this->db->where('id', $id)->delete('voice_languages');
 	}
 
+	public function deleteActor($id){
+		return $this->db->where('id', $id)->delete('actors');
+	}
 
    public function getActors()
 	{
