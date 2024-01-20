@@ -359,15 +359,15 @@ main.banner-slider{
    position: absolute;
    bottom: 10%;
    height: 100px;
-   width: 100%;
+   width: 8%;
    justify-content: center;
    -webkit-animation: b2top 2.5s linear infinite;
    animation: b2top 2.5s linear infinite;
    /* max-width: 1450px; */
-   left: 0;
    right: 0;
    margin-left: auto;
    margin-right: auto;
+   z-index: 2;
 }
 #scroll2voices{
    scroll-behavior: smooth;
